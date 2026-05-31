@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     type,
     patients: patients ?? null,
     emergencies: emergencies ?? null,
-    fate ?? null,
+    fatigue: fatigue ?? null,
     memo: memo ?? '',
     garmin,
     updatedAt: new Date().toISOString(),
