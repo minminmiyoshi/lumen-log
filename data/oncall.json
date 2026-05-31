@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2026-05-31",
+    "type": "er_night",
+    "patients": 7,
+    "emergencies": null,
+    "fatigue": 3,
+    "memo": "",
+    "garmin": null,
+    "updatedAt": "2026-05-31T14:18:58.219Z"
+  },
+  {
+    "date": "2026-05-28",
+    "type": "er_night",
+    "patients": null,
+    "emergencies": null,
+    "fatigue": 3,
+    "memo": "",
+    "garmin": null,
+    "updatedAt": "2026-05-31T14:19:49.030Z"
+  },
+  {
+    "date": "2026-05-27",
+    "type": "er_night",
+    "patients": null,
+    "emergencies": null,
+    "fatigue": 3,
+    "memo": "",
+    "garmin": {
+      "sleep_duration_h": 4.42,
+      "deep_sleep_h": 0.87,
+      "rem_sleep_h": 0.53,
+      "hrv_last_night": null,
+      "hrv_weekly_avg": 30,
+      "resting_hr": 55,
+      "body_battery_max": null,
+      "body_battery_min": null,
+      "stress_avg": 24
+    },
+    "updatedAt": "2026-05-31T15:06:02.610Z"
+  }
+]
