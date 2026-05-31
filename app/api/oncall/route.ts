@@ -13,12 +13,9 @@ function readOncall() {
 
 function getGarminByDate(date: string) {
   try {
-    console.log('GARMIN_PATH:', GARMIN_PATH)
-    console.log('exists:', fs.existsSync(GARMIN_PATH))
-    console.log('looking for date:', date)
     const content = fs.readFileSync(GARMIN_PATH, 'utf-8')
-    const rows = parse(content, { columns: true, skip_empty_lines: true, bom: true })
-    const row = rows.find((r: Record<string, string>) => r.date === date)
+    const rows = parse(content, { columns: true, skip_empty_lines: true, bom: true }) as Record<string, string>[]
+    const row = rows.find((r) => r.date === date)
     if (!row) return null
     return {
       sleep_duration_h: parseFloat(row.sleep_duration_h) || null,
@@ -59,7 +56,7 @@ export async function POST(req: NextRequest) {
     type,
     patients: patients ?? null,
     emergencies: emergencies ?? null,
-    fatigue: fatigue ?? null,
+    fate ?? null,
     memo: memo ?? '',
     garmin,
     updatedAt: new Date().toISOString(),
