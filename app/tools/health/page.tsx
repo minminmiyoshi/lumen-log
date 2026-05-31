@@ -16,6 +16,7 @@ type GarminRow = {
   stress_avg: string;
   body_battery_max: string;
   body_battery_min: string;
+  hrv_status: string;
   steps: string;
 };
 
