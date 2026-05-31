@@ -1,0 +1,17 @@
+[
+  {
+    "ticker": "AAPL",
+    "shares": 10,
+    "avgCost": 150.0,
+    "currency": "USD",
+    "type": "us"
+  },
+  {
+    "ticker": "7203",
+    "shares": 100,
+    "avgCost": 2500.0,
+    "currency": "JPY",
+    "type": "jp",
+    "currentPrice": 3200
+  }
+]
