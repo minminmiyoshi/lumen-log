@@ -14,10 +14,15 @@ function getKV(): any {
 
 export async function GET() {
   try {
-    const kv = getKV()
-    const raw = await kv.get(KV_KEY)
-    const data = raw ? JSON.parse(raw) : []
-    return NextResponse.json(data)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ctx = (globalThis as any)[Symbol.for('__cloudflare-context__')]
+    return NextResponse.json({
+      hasCtx: !!ctx,
+      ctxKeys: ctx ? Object.keys(ctx) : [],
+      hasEnv: !!ctx?.env,
+      envKeys: ctx?.env ? Object.keys(ctx.env) : [],
+      hasKV: !!ctx?.env?.ONCALL_KV,
+    })
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 })
   }
