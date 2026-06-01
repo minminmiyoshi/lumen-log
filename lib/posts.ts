@@ -10,10 +10,13 @@ export type PostMeta = {
 
 export type Post = PostMeta & {
   content: string;
+  html: string;
 };
 
+type PostRecord = { slug: string; raw: string; html: string };
+
 export function getAllPosts(): PostMeta[] {
-  return (postsData as { slug: string; raw: string }[])
+  return (postsData as PostRecord[])
     .map(({ slug, raw }) => {
       const { data } = matter(raw);
       return {
@@ -27,9 +30,7 @@ export function getAllPosts(): PostMeta[] {
 }
 
 export function getPostBySlug(slug: string): Post {
-  const found = (postsData as { slug: string; raw: string }[]).find(
-    (p) => p.slug === slug
-  );
+  const found = (postsData as PostRecord[]).find((p) => p.slug === slug);
   if (!found) throw new Error(`Post not found: ${slug}`);
   const { data, content } = matter(found.raw);
   return {
@@ -38,5 +39,6 @@ export function getPostBySlug(slug: string): Post {
     date: data.date ?? "",
     tags: data.tags ?? [],
     content,
+    html: found.html,
   };
 }
