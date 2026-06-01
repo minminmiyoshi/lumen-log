@@ -9,6 +9,12 @@
   "observability": {
     "enabled": true
   },
+  "routes": [
+    {
+      "pattern": "lumen-log.com",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
