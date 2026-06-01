@@ -5,16 +5,16 @@ export const runtime = 'edge'
 const KV_KEY = 'oncall_data'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function getKV(): Promise<any> {
+function getKV(): any {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { getCloudflareContext } = await import('@opennextjs/cloudflare' as any)
-  const ctx = await getCloudflareContext({ async: true })
+  const ctx = (globalThis as any)[Symbol.for('__cloudflare-context__')]
+  if (!ctx?.env?.ONCALL_KV) throw new Error('ONCALL_KV not available in context')
   return ctx.env.ONCALL_KV
 }
 
 export async function GET() {
   try {
-    const kv = await getKV()
+    const kv = getKV()
     const raw = await kv.get(KV_KEY)
     const data = raw ? JSON.parse(raw) : []
     return NextResponse.json(data)
@@ -25,7 +25,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const kv = await getKV()
+    const kv = getKV()
     const body = await request.json()
     const { date, type, patients, emergencies, fatigue, memo } = body
 
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const kv = await getKV()
+    const kv = getKV()
     const { date } = await request.json()
     const raw = await kv.get(KV_KEY)
     const data: Record<string, unknown>[] = raw ? JSON.parse(raw) : []
