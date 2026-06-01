@@ -5,11 +5,7 @@ export const runtime = 'edge'
 const KV_KEY = 'oncall_data'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getKV(request: NextRequest): KVNamespace {
-  // @ts-expect-error: cloudflare env
-  const env = (request as any).cf?.env ?? process.env
-  if (env?.ONCALL_KV) return env.ONCALL_KV
-  // OpenNext / getRequestContext fallback
+function getKV(): any {
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { getRequestContext } = require('@cloudflare/next-on-pages')
@@ -19,14 +15,13 @@ function getKV(request: NextRequest): KVNamespace {
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const kv = getKV(request)
+    const kv = getKV()
     const raw = await kv.get(KV_KEY)
     const data = raw ? JSON.parse(raw) : []
     return NextResponse.json(data)
   } catch (e) {
-    console.error('KV GET error:', e)
     return NextResponse.json({ error: String(e) }, { status: 500 })
   }
 }
@@ -40,7 +35,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'date と type は必須です' }, { status: 400 })
     }
 
-    const kv = getKV(request)
+    const kv = getKV()
     const raw = await kv.get(KV_KEY)
     const data: Record<string, unknown>[] = raw ? JSON.parse(raw) : []
 
@@ -67,7 +62,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ok: true, entry })
   } catch (e) {
-    console.error('KV POST error:', e)
     return NextResponse.json({ error: String(e) }, { status: 500 })
   }
 }
@@ -75,14 +69,13 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     const { date } = await request.json()
-    const kv = getKV(request)
+    const kv = getKV()
     const raw = await kv.get(KV_KEY)
     const data: Record<string, unknown>[] = raw ? JSON.parse(raw) : []
     const filtered = data.filter((r) => r.date !== date)
     await kv.put(KV_KEY, JSON.stringify(filtered))
     return NextResponse.json({ ok: true })
   } catch (e) {
-    console.error('KV DELETE error:', e)
     return NextResponse.json({ error: String(e) }, { status: 500 })
   }
 }
