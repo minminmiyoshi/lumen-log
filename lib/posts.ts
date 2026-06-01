@@ -1,8 +1,5 @@
-import fs from "fs";
-import path from "path";
 import matter from "gray-matter";
-
-const postsDir = path.join(process.cwd(), "posts");
+import postsData from "../data/posts.json";
 
 export type PostMeta = {
   slug: string;
@@ -16,15 +13,9 @@ export type Post = PostMeta & {
 };
 
 export function getAllPosts(): PostMeta[] {
-  const files = fs.readdirSync(postsDir);
-
-  return files
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => {
-      const slug = f.replace(/\.mdx$/, "");
-      const raw = fs.readFileSync(path.join(postsDir, f), "utf-8");
+  return (postsData as { slug: string; raw: string }[])
+    .map(({ slug, raw }) => {
       const { data } = matter(raw);
-
       return {
         slug,
         title: data.title ?? "Untitled",
@@ -36,10 +27,11 @@ export function getAllPosts(): PostMeta[] {
 }
 
 export function getPostBySlug(slug: string): Post {
-  const filePath = path.join(postsDir, `${slug}.mdx`);
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
-
+  const found = (postsData as { slug: string; raw: string }[]).find(
+    (p) => p.slug === slug
+  );
+  if (!found) throw new Error(`Post not found: ${slug}`);
+  const { data, content } = matter(found.raw);
   return {
     slug,
     title: data.title ?? "Untitled",
