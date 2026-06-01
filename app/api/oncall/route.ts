@@ -4,11 +4,17 @@ export const runtime = 'edge'
 
 const KV_KEY = 'oncall_data'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function getKV(): Promise<any> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { getCloudflareContext } = await import('@opennextjs/cloudflare' as any)
+  const ctx = await getCloudflareContext({ async: true })
+  return ctx.env.ONCALL_KV
+}
+
 export async function GET() {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const kv = (globalThis as any).ONCALL_KV
-    if (!kv) throw new Error('ONCALL_KV not found')
+    const kv = await getKV()
     const raw = await kv.get(KV_KEY)
     const data = raw ? JSON.parse(raw) : []
     return NextResponse.json(data)
@@ -19,10 +25,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const kv = (globalThis as any).ONCALL_KV
-    if (!kv) throw new Error('ONCALL_KV not found')
-
+    const kv = await getKV()
     const body = await request.json()
     const { date, type, patients, emergencies, fatigue, memo } = body
 
@@ -62,10 +65,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const kv = (globalThis as any).ONCALL_KV
-    if (!kv) throw new Error('ONCALL_KV not found')
-
+    const kv = await getKV()
     const { date } = await request.json()
     const raw = await kv.get(KV_KEY)
     const data: Record<string, unknown>[] = raw ? JSON.parse(raw) : []
