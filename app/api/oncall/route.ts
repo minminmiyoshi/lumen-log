@@ -4,20 +4,11 @@ export const runtime = 'edge'
 
 const KV_KEY = 'oncall_data'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const process: { env: Record<string, any> }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getKV(env: any): any {
-  if (env?.ONCALL_KV) return env.ONCALL_KV
-  throw new Error('ONCALL_KV binding not available')
-}
-
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const env = (process as any).env
-    const kv = getKV(env)
+    const kv = (globalThis as any).ONCALL_KV
+    if (!kv) throw new Error('ONCALL_KV not found')
     const raw = await kv.get(KV_KEY)
     const data = raw ? JSON.parse(raw) : []
     return NextResponse.json(data)
@@ -29,8 +20,8 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const env = (process as any).env
-    const kv = getKV(env)
+    const kv = (globalThis as any).ONCALL_KV
+    if (!kv) throw new Error('ONCALL_KV not found')
 
     const body = await request.json()
     const { date, type, patients, emergencies, fatigue, memo } = body
@@ -72,8 +63,8 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const env = (process as any).env
-    const kv = getKV(env)
+    const kv = (globalThis as any).ONCALL_KV
+    if (!kv) throw new Error('ONCALL_KV not found')
 
     const { date } = await request.json()
     const raw = await kv.get(KV_KEY)
