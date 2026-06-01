@@ -1,83 +1,88 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
-import { parse } from 'csv-parse/sync'
 
-const ONCALL_PATH = path.join(process.cwd(), 'data/oncall.json')
-const GARMIN_PATH = '/Users/mytk/garmin_sync/output/garmin_master.csv'
+export const runtime = 'edge'
 
-function readOncall() {
-  if (!fs.existsSync(ONCALL_PATH)) return []
-  return JSON.parse(fs.readFileSync(ONCALL_PATH, 'utf-8'))
-}
+const KV_KEY = 'oncall_data'
 
-function getGarminByDate(date: string) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getKV(request: NextRequest): KVNamespace {
+  // @ts-expect-error: cloudflare env
+  const env = (request as any).cf?.env ?? process.env
+  if (env?.ONCALL_KV) return env.ONCALL_KV
+  // OpenNext / getRequestContext fallback
   try {
-    const content = fs.readFileSync(GARMIN_PATH, 'utf-8')
-    const rows = parse(content, { columns: true, skip_empty_lines: true, bom: true }) as Record<string, string>[]
-    const row = rows.find((r) => r.date === date)
-    if (!row) return null
-    return {
-      sleep_duration_h: parseFloat(row.sleep_duration_h) || null,
-      deep_sleep_h: parseFloat(row.deep_sleep_h) || null,
-      rem_sleep_h: parseFloat(row.rem_sleep_h) || null,
-      hrv_last_night: parseFloat(row.hrv_last_night) || null,
-      hrv_weekly_avg: parseFloat(row.hrv_weekly_avg) || null,
-      resting_hr: parseFloat(row.resting_hr) || null,
-      body_battery_max: parseFloat(row.body_battery_max) || null,
-      body_battery_min: parseFloat(row.body_battery_min) || null,
-      stress_avg: parseFloat(row.stress_avg) || null,
-    }
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { getRequestContext } = require('@cloudflare/next-on-pages')
+    return getRequestContext().env.ONCALL_KV
+  } catch {
+    throw new Error('ONCALL_KV binding not found')
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const kv = getKV(request)
+    const raw = await kv.get(KV_KEY)
+    const data = raw ? JSON.parse(raw) : []
+    return NextResponse.json(data)
   } catch (e) {
-    console.error('Garmin read error:', e)
-    return null
+    console.error('KV GET error:', e)
+    return NextResponse.json({ error: String(e) }, { status: 500 })
   }
 }
 
-export async function GET() {
-  const data = readOncall()
-  return NextResponse.json(data)
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json()
+    const { date, type, patients, emergencies, fatigue, memo } = body
+
+    if (!date || !type) {
+      return NextResponse.json({ error: 'date と type は必須です' }, { status: 400 })
+    }
+
+    const kv = getKV(request)
+    const raw = await kv.get(KV_KEY)
+    const data: Record<string, unknown>[] = raw ? JSON.parse(raw) : []
+
+    const entry = {
+      date,
+      type,
+      patients: patients ?? null,
+      emergencies: emergencies ?? null,
+      fatigue: fatigue ?? null,
+      memo: memo ?? '',
+      garmin: null,
+      updatedAt: new Date().toISOString(),
+    }
+
+    const existing = data.findIndex((r) => r.date === date)
+    if (existing >= 0) {
+      data[existing] = entry
+    } else {
+      data.push(entry)
+    }
+
+    data.sort((a, b) => (b.date as string).localeCompare(a.date as string))
+    await kv.put(KV_KEY, JSON.stringify(data))
+
+    return NextResponse.json({ ok: true, entry })
+  } catch (e) {
+    console.error('KV POST error:', e)
+    return NextResponse.json({ error: String(e) }, { status: 500 })
+  }
 }
 
-export async function POST(req: NextRequest) {
-  const body = await req.json()
-  const { date, type, patients, emergencies, fatigue, memo } = body
-
-  if (!date || !type) {
-    return NextResponse.json({ error: 'date と type は必須です' }, { status: 400 })
+export async function DELETE(request: NextRequest) {
+  try {
+    const { date } = await request.json()
+    const kv = getKV(request)
+    const raw = await kv.get(KV_KEY)
+    const data: Record<string, unknown>[] = raw ? JSON.parse(raw) : []
+    const filtered = data.filter((r) => r.date !== date)
+    await kv.put(KV_KEY, JSON.stringify(filtered))
+    return NextResponse.json({ ok: true })
+  } catch (e) {
+    console.error('KV DELETE error:', e)
+    return NextResponse.json({ error: String(e) }, { status: 500 })
   }
-
-  const garmin = getGarminByDate(date)
-  const data = readOncall()
-
-  const existing = data.findIndex((r: Record<string, unknown>) => r.date === date)
-  const entry = {
-    date,
-    type,
-    patients: patients ?? null,
-    emergencies: emergencies ?? null,
-    fatigue: fatigue ?? null,
-    memo: memo ?? '',
-    garmin,
-    updatedAt: new Date().toISOString(),
-  }
-
-  if (existing >= 0) {
-    data[existing] = entry
-  } else {
-    data.push(entry)
-  }
-
-  data.sort((a: Record<string, string>, b: Record<string, string>) => b.date.localeCompare(a.date))
-  fs.writeFileSync(ONCALL_PATH, JSON.stringify(data, null, 2))
-
-  return NextResponse.json({ ok: true, entry })
-}
-
-export async function DELETE(req: NextRequest) {
-  const { date } = await req.json()
-  const data = readOncall()
-  const filtered = data.filter((r: Record<string, unknown>) => r.date !== date)
-  fs.writeFileSync(ONCALL_PATH, JSON.stringify(filtered, null, 2))
-  return NextResponse.json({ ok: true })
 }
