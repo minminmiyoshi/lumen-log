@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export const runtime = 'edge'
-
 const KV_KEY = 'oncall_data'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
