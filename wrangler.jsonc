@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lumen-log",
+  "compatibility_date": "2026-05-31",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "ONCALL_KV",
+      "id": "a59c3c80a73340bd9a746fef30d9c574"
+    }
+  ]
+}
