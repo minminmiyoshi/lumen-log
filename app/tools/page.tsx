@@ -29,7 +29,7 @@ const tools: Tool[] = [
     title: "Asset Simulator",
     description: "積立・取り崩しシナリオを複数比較。FIRE到達時期の逆算もできる資産シミュレーター。",
     href: "/tools/simulator",
-    status: "coming",
+    status: "active",
     tag: "PLANNING",
   },
 ];

@@ -15,6 +15,9 @@ export default function Home() {
         <a href="/tools" style={{ color: "var(--indigo)", fontFamily: "sans-serif" }}>
           → ツール
         </a>
+        <a href="/tools/simulator" style={{ color: "var(--indigo)", fontFamily: "sans-serif", fontSize: "0.875rem" }}>
+          → FIREシミュレーター（新機能）
+        </a>
         <a href="/about" style={{ color: "var(--indigo)", fontFamily: "sans-serif" }}>
           → このサイトについて
         </a>
