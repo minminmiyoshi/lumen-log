@@ -228,7 +228,7 @@ export default function HealthPage() {
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <div>
                       <p style={{ fontFamily: "Palatino, serif", fontSize: "1rem", marginBottom: "4px" }}>
-                        {w.name || w.activity_type}
+                        {w.activity_type}
                       </p>
                       <p style={{ fontSize: "0.75rem", fontFamily: "sans-serif", color: muted }}>
                         {fmtDate(w.date)} · {val(w.duration_min).toFixed(0)}分
