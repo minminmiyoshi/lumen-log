@@ -1,26 +1,12 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import Papa from "papaparse";
-
-const GARMIN_CSV = path.join(process.env.HOME || "", "garmin_sync/output/garmin_master.csv");
-const SCALE_CSV  = path.join(process.env.HOME || "", "garmin_sync/output/scale_master.csv");
-const WORKOUT_CSV = path.join(process.env.HOME || "", "garmin_sync/output/workout_master.csv");
-
-function readCsv(filePath: string) {
-  try {
-    const content = fs.readFileSync(filePath, "utf-8");
-    const result = Papa.parse(content, { header: true, skipEmptyLines: true });
-    return result.data as Record<string, string>[];
-  } catch {
-    return [];
-  }
-}
+import healthData from "@/data/health.json";
 
 export async function GET() {
-  const garmin  = readCsv(GARMIN_CSV);
-  const scale   = readCsv(SCALE_CSV);
-  const workout = readCsv(WORKOUT_CSV);
+  const { garmin, scale, workout } = healthData as {
+    garmin:  Record<string, string>[];
+    scale:   Record<string, string>[];
+    workout: Record<string, string>[];
+  };
 
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - 30);
