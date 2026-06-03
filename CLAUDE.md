@@ -48,15 +48,27 @@
 
 ---
 
-## 記事公開フロー
+## ## 記事公開フロー
 
 ```bash
 
-# posts/*.mdx に追加して push するだけで公開
+# 1. postsにmdxファイルを追加
 
-cd ~/lumen-log && git add -A && git commit -m "post: 記事タイトル" && git push origin main
+# 2. posts.jsonを再生成（必須・忘れずに）
+
+cd ~/lumen-log && node scripts/build-posts.mjs
+
+# 3. ローカルで確認
+
+# [http://localhost:3000/blog](http://localhost:3000/blog)
+
+# 4. 問題なければpush
+
+git add -A && git commit -m "post: 記事タイトル" && git push origin main
 
 ```
+
+> ⚠️ `build-posts.mjs` を実行しないと記事が反映されない
 
 ---
 
