@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <main style={{ maxWidth: "680px", margin: "0 auto", padding: "5rem 1.5rem 8rem" }}>
+    <main style={{ maxWidth: "640px", margin: "0 auto", padding: "60px 24px 120px" }}>
 
       <h1 style={{
         fontFamily: "Palatino, serif",
