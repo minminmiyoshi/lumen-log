@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/posts";
+import { getAllPostsMeta } from "@/lib/mdx";
 
 export default function BlogPage() {
-  const posts = getAllPosts();
+  const posts = getAllPostsMeta();
 
   return (
     <main style={{ maxWidth: "640px", margin: "0 auto", padding: "60px 24px" }}>
@@ -24,23 +24,19 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 style={{ color: "var(--foreground)" }}
               >
-                <p
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "var(--muted)",
-                    marginBottom: "6px",
-                    fontFamily: "sans-serif",
-                  }}
-                >
-                  {post.date}
+                <p style={{
+                  fontSize: "0.8rem",
+                  color: "var(--muted)",
+                  marginBottom: "6px",
+                  fontFamily: "sans-serif",
+                }}>
+                  {post.date} · {post.readingTime}
                 </p>
-                <p
-                  style={{
-                    fontSize: "1.1rem",
-                    fontFamily: "Palatino, serif",
-                    marginBottom: "8px",
-                  }}
-                >
+                <p style={{
+                  fontSize: "1.1rem",
+                  fontFamily: "Palatino, serif",
+                  marginBottom: "8px",
+                }}>
                   {post.title}
                 </p>
                 <div style={{ display: "flex", gap: "8px" }}>

@@ -10,7 +10,7 @@ export type PostCategory =
 
 export type PostFrontmatter = {
   title: string
-  description: string
+  description?: string
   date: string              // ISO 8601: "2025-06-01"
   updated?: string          // 更新日（任意）
   category: PostCategory
