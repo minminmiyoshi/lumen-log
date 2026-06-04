@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+export const dynamic = "force-static"
 import { getAllPostsMeta } from "@/lib/mdx";
 
 export default function BlogPage() {
