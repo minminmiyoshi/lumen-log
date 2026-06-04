@@ -1,8 +1,5 @@
 import { notFound } from 'next/navigation'
-import { compileMDX } from 'next-mdx-remote/rsc'
 import { getPostBySlug, getAllPostSlugs } from '@/lib/mdx'
-import { MDX_OPTIONS } from '@/lib/mdx-options'
-import { MDX_COMPONENTS } from '@/app/components/mdx/MdxComponents'
 import Link from 'next/link'
 
 export async function generateStaticParams() {
@@ -20,12 +17,6 @@ export default async function PostPage({
   const post = getPostBySlug(slug)
   if (!post) notFound()
 
-  const { content } = await compileMDX({
-    source: post.content,
-    options: MDX_OPTIONS,
-    components: MDX_COMPONENTS,
-  })
-
   return (
     <main style={{ maxWidth: '640px', margin: '0 auto', padding: '60px 24px' }}>
       <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '8px', fontFamily: 'sans-serif' }}>
@@ -41,9 +32,10 @@ export default async function PostPage({
           </span>
         ))}
       </div>
-      <article style={{ lineHeight: 1.9, fontSize: '1rem' }}>
-        {content}
-      </article>
+      <article
+        style={{ lineHeight: 1.9, fontSize: '1rem' }}
+        dangerouslySetInnerHTML={{ __html: post.html ?? '' }}
+      />
       <div style={{ marginTop: '64px' }}>
         <Link href="/blog" style={{ fontSize: '0.875rem', color: 'var(--muted)', fontFamily: 'sans-serif' }}>
           ← ブログ一覧へ

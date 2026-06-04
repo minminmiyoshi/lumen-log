@@ -15,6 +15,7 @@ interface RawPost {
   published: boolean
   description?: string
   featured?: boolean
+  html?: string
 }
 
 function rawToPost(raw: RawPost): Post {
@@ -31,6 +32,7 @@ function rawToPost(raw: RawPost): Post {
     featured: raw.featured ?? false,
     readingTime: `${Math.ceil(rt.minutes)} min read`,
     readingTimeMinutes: Math.ceil(rt.minutes),
+    html: raw.html,
   }
 }
 

@@ -27,7 +27,8 @@ export type PostMeta = PostFrontmatter & {
 }
 
 export type Post = PostMeta & {
-  content: string           // MDXの生文字列（next-mdx-remoteで処理前）
+  content: string
+  html?: string           // MDXの生文字列（next-mdx-remoteで処理前）
 }
 
 // カテゴリのメタデータ
