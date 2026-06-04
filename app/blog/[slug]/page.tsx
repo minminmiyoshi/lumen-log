@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { compileMDX } from 'next-mdx-remote/rsc'
 import { getPostBySlug, getAllPostSlugs } from '@/lib/mdx'
 import { MDX_OPTIONS } from '@/lib/mdx-options'
 import { MDX_COMPONENTS } from '@/app/components/mdx/MdxComponents'
@@ -9,6 +9,8 @@ export async function generateStaticParams() {
   return getAllPostSlugs()
 }
 
+export const dynamic = 'force-static'
+
 export default async function PostPage({
   params,
 }: {
@@ -17,6 +19,12 @@ export default async function PostPage({
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) notFound()
+
+  const { content } = await compileMDX({
+    source: post.content,
+    options: MDX_OPTIONS,
+    components: MDX_COMPONENTS,
+  })
 
   return (
     <main style={{ maxWidth: '640px', margin: '0 auto', padding: '60px 24px' }}>
@@ -34,11 +42,7 @@ export default async function PostPage({
         ))}
       </div>
       <article style={{ lineHeight: 1.9, fontSize: '1rem' }}>
-        <MDXRemote
-          source={post.content}
-          options={MDX_OPTIONS}
-          components={MDX_COMPONENTS}
-        />
+        {content}
       </article>
       <div style={{ marginTop: '64px' }}>
         <Link href="/blog" style={{ fontSize: '0.875rem', color: 'var(--muted)', fontFamily: 'sans-serif' }}>
