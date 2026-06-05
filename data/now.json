@@ -1,0 +1,15 @@
+{
+  "updatedAt": "test\n",
+  "restingHr": {
+    "value": 58,
+    "delta": 0.8
+  },
+  "sleep": {
+    "value": 3.4,
+    "delta": -1.2
+  },
+  "weight": {
+    "value": 69.1,
+    "delta": 0.2
+  }
+}
