@@ -6,6 +6,9 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 export const metadata: Metadata = {
   title: "Lumen Log",
   description: "悶々とする救急医の、投資と資産と身体の記録",
+  verification: {
+    google: "ofLWHA1G4WgByzKoplxxt9k8xyAzXYO9ESRpI3IrnEA",
+  },
 };
 
 export default function RootLayout({
