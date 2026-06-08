@@ -25,7 +25,17 @@ export async function POST(request: NextRequest) {
   try {
     const kv = getKV()
     const body = await request.json()
-    const { date, type, patients, emergencies, fatigue, memo } = body
+    const {
+      date, type,
+      patients, emergencies,
+      ambulance, walkin,
+      fatigueIn, fatigueOut,
+      moodIn, moodOut,
+      sleepiness,
+      napMinutes,
+      workload,
+      memo,
+    } = body
 
     if (!date || !type) {
       return NextResponse.json({ error: 'date と type は必須です' }, { status: 400 })
@@ -39,7 +49,15 @@ export async function POST(request: NextRequest) {
       type,
       patients: patients ?? null,
       emergencies: emergencies ?? null,
-      fatigue: fatigue ?? null,
+      ambulance: ambulance ?? null,
+      walkin: walkin ?? null,
+      fatigueIn: fatigueIn ?? null,
+      fatigueOut: fatigueOut ?? null,
+      moodIn: moodIn ?? null,
+      moodOut: moodOut ?? null,
+      sleepiness: sleepiness ?? null,
+      napMinutes: napMinutes ?? null,
+      workload: workload ?? null,
       memo: memo ?? '',
       garmin: null,
       updatedAt: new Date().toISOString(),

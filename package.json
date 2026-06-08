@@ -17,6 +17,7 @@
     "date-fns": "^4.4.0",
     "gray-matter": "^4.0.3",
     "next": "16.2.6",
+    "next-intl": "^4.13.0",
     "next-mdx-remote": "^6.0.0",
     "next-sitemap": "^4.2.3",
     "papaparse": "^5.5.3",

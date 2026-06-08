@@ -1,0 +1,34 @@
+{
+  "common": {
+    "siteName": "Lumen Log",
+    "siteDescription": "An ER doctor's system for surviving night shifts — health, assets, and time optimization",
+    "nav": {
+      "home": "Home",
+      "blog": "Blog",
+      "tools": "Tools",
+      "about": "About"
+    }
+  },
+  "tools": {
+    "health": "Health Dashboard",
+    "simulator": "Asset Simulator",
+    "portfolio": "Portfolio",
+    "oncall": "On-call Log"
+  },
+  "home": {
+    "tagline": "Lumen Log",
+    "hero": "An ER doctor's log of\ninvesting, assets, and health.",
+    "heroSub": "A night-shift doctor's primary record of optimizing assets, body, and time toward FIRE. Visualize personal data with tools, document thinking with blog.",
+    "now": "Now",
+    "stats": {
+      "restingHr": "Resting HR",
+      "sleep": "Sleep",
+      "weight": "Weight"
+    },
+    "nav": {
+      "blogDesc": "Investing, FIRE, medicine, old house. A record of thinking.",
+      "toolsDesc": "Health dashboard, asset simulator, on-call log.",
+      "aboutDesc": "About this site and its author."
+    }
+  }
+}

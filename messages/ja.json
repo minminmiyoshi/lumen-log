@@ -1,0 +1,34 @@
+{
+  "common": {
+    "siteName": "Lumen Log",
+    "siteDescription": "悶々とする救急医の、投資と資産と身体の記録",
+    "nav": {
+      "home": "ホーム",
+      "blog": "ブログ",
+      "tools": "ツール",
+      "about": "About"
+    }
+  },
+  "tools": {
+    "health": "健康ダッシュボード",
+    "simulator": "資産シミュレーター",
+    "portfolio": "ポートフォリオ",
+    "oncall": "当直ログ"
+  },
+  "home": {
+    "tagline": "Lumen Log",
+    "hero": "悶々とする救急医の、\n投資と資産と身体の記録。",
+    "heroSub": "夜勤医師がFIREを目指して資産・身体・時間を最適化していく一次記録。ツールで自分のデータを可視化し、ブログで思考を残す。",
+    "now": "Now",
+    "stats": {
+      "restingHr": "安静時心拍",
+      "sleep": "睡眠時間",
+      "weight": "体重"
+    },
+    "nav": {
+      "blogDesc": "投資・FIRE・医療・古民家。思考の記録。",
+      "toolsDesc": "健康ダッシュボード・資産シミュレーター・当直記録。",
+      "aboutDesc": "このサイトと運営者について。"
+    }
+  }
+}
