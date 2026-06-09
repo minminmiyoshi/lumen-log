@@ -1,15 +1,15 @@
 {
-  "updatedAt": "test\n",
+  "updatedAt": "2026-06-08",
   "restingHr": {
-    "value": 58,
-    "delta": 0.8
+    "value": 56,
+    "delta": 0.1
   },
   "sleep": {
-    "value": 3.4,
-    "delta": -1.2
+    "value": 2.1,
+    "delta": -2.8
   },
   "weight": {
-    "value": 69.1,
-    "delta": 0.2
+    "value": 69.4,
+    "delta": 0.3
   }
 }

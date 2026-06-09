@@ -1,0 +1,29 @@
+{
+  "summary": {
+    "count": 1,
+    "avg_hrv_change_pct": null,
+    "avg_body_battery_drain": null,
+    "avg_nap_h": 0.1,
+    "avg_delta_fatigue": 0,
+    "avg_sleepiness": 3,
+    "avg_fatigue_out": 3
+  },
+  "entries": [
+    {
+      "date": "2026-06-09",
+      "fatigueIn": 3,
+      "fatigueOut": 3,
+      "moodIn": 3,
+      "moodOut": 3,
+      "sleepiness": 3,
+      "workload": 3,
+      "nap_h": 0.1,
+      "delta_fatigue": 0,
+      "hrv_change_pct": null,
+      "body_battery_drain": null,
+      "prev_hrv": 29,
+      "prev_sleep_h": 2.13,
+      "prev_resting_hr": 56
+    }
+  ]
+}

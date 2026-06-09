@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import healthData from "@/data/health.json";
 
 export async function GET() {
-  const { garmin, scale, workout } = healthData as {
-    garmin:  Record<string, string>[];
-    scale:   Record<string, string>[];
-    workout: Record<string, string>[];
+  const { garmin, scale, workout, weeklyIntensity } = healthData as {
+    garmin:           Record<string, string>[];
+    scale:            Record<string, string>[];
+    workout:          Record<string, string>[];
+    weeklyIntensity:  { week: string; low: number; mid: number; high: number }[];
   };
 
   const cutoff = new Date();
@@ -17,8 +18,9 @@ export async function GET() {
       .sort((a, b) => a.date.localeCompare(b.date));
 
   return NextResponse.json({
-    garmin:  filterRecent(garmin),
-    scale:   filterRecent(scale),
-    workout: filterRecent(workout),
+    garmin:          filterRecent(garmin),
+    scale:           filterRecent(scale),
+    workout:         filterRecent(workout),
+    weeklyIntensity: weeklyIntensity ?? [],
   });
 }
