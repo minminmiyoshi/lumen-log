@@ -20,7 +20,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "36",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-04-28",
@@ -41,7 +42,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "33",
-        "intensity_minutes": "31"
+        "intensity_minutes": "31",
+        "vo2max": ""
       },
       {
         "date": "2026-04-29",
@@ -62,7 +64,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "31",
-        "intensity_minutes": "21"
+        "intensity_minutes": "21",
+        "vo2max": ""
       },
       {
         "date": "2026-04-30",
@@ -83,7 +86,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "39",
-        "intensity_minutes": "23"
+        "intensity_minutes": "23",
+        "vo2max": ""
       },
       {
         "date": "2026-05-01",
@@ -104,7 +108,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "47",
-        "intensity_minutes": "29"
+        "intensity_minutes": "29",
+        "vo2max": ""
       },
       {
         "date": "2026-05-02",
@@ -125,7 +130,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "34",
-        "intensity_minutes": "23"
+        "intensity_minutes": "23",
+        "vo2max": ""
       },
       {
         "date": "2026-05-03",
@@ -146,7 +152,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "27",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-04",
@@ -167,7 +174,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "27",
-        "intensity_minutes": "3"
+        "intensity_minutes": "3",
+        "vo2max": ""
       },
       {
         "date": "2026-05-05",
@@ -188,7 +196,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "25",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-06",
@@ -209,7 +218,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "26",
-        "intensity_minutes": "23"
+        "intensity_minutes": "23",
+        "vo2max": ""
       },
       {
         "date": "2026-05-07",
@@ -230,7 +240,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "28",
-        "intensity_minutes": "23"
+        "intensity_minutes": "23",
+        "vo2max": ""
       },
       {
         "date": "2026-05-08",
@@ -251,7 +262,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "43",
-        "intensity_minutes": "60"
+        "intensity_minutes": "60",
+        "vo2max": ""
       },
       {
         "date": "2026-05-09",
@@ -272,7 +284,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "26",
-        "intensity_minutes": "27"
+        "intensity_minutes": "27",
+        "vo2max": ""
       },
       {
         "date": "2026-05-10",
@@ -293,7 +306,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "30",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-11",
@@ -314,7 +328,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "26",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-12",
@@ -335,7 +350,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "31",
-        "intensity_minutes": "29"
+        "intensity_minutes": "29",
+        "vo2max": ""
       },
       {
         "date": "2026-05-13",
@@ -356,7 +372,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "33",
-        "intensity_minutes": "56"
+        "intensity_minutes": "56",
+        "vo2max": ""
       },
       {
         "date": "2026-05-14",
@@ -377,7 +394,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "27",
-        "intensity_minutes": "24"
+        "intensity_minutes": "24",
+        "vo2max": ""
       },
       {
         "date": "2026-05-15",
@@ -398,7 +416,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "30",
-        "intensity_minutes": "22"
+        "intensity_minutes": "22",
+        "vo2max": ""
       },
       {
         "date": "2026-05-16",
@@ -419,7 +438,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "27",
-        "intensity_minutes": "26"
+        "intensity_minutes": "26",
+        "vo2max": ""
       },
       {
         "date": "2026-05-17",
@@ -440,7 +460,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "28",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-18",
@@ -461,7 +482,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "25",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-19",
@@ -482,7 +504,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "28",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-05-20",
@@ -503,7 +526,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "28",
-        "intensity_minutes": "2"
+        "intensity_minutes": "2",
+        "vo2max": ""
       },
       {
         "date": "2026-05-21",
@@ -524,7 +548,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "31",
-        "intensity_minutes": "35"
+        "intensity_minutes": "35",
+        "vo2max": ""
       },
       {
         "date": "2026-05-22",
@@ -545,7 +570,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "26",
-        "intensity_minutes": "33"
+        "intensity_minutes": "33",
+        "vo2max": ""
       },
       {
         "date": "2026-05-23",
@@ -566,7 +592,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "27",
-        "intensity_minutes": "21"
+        "intensity_minutes": "21",
+        "vo2max": ""
       },
       {
         "date": "2026-05-24",
@@ -587,7 +614,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "24",
-        "intensity_minutes": "27"
+        "intensity_minutes": "27",
+        "vo2max": ""
       },
       {
         "date": "2026-05-25",
@@ -608,7 +636,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "26",
-        "intensity_minutes": "55"
+        "intensity_minutes": "55",
+        "vo2max": ""
       },
       {
         "date": "2026-05-26",
@@ -629,7 +658,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "28",
-        "intensity_minutes": "55"
+        "intensity_minutes": "55",
+        "vo2max": ""
       },
       {
         "date": "2026-05-27",
@@ -650,7 +680,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "24",
-        "intensity_minutes": "27"
+        "intensity_minutes": "27",
+        "vo2max": ""
       },
       {
         "date": "2026-05-28",
@@ -671,7 +702,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "29",
-        "intensity_minutes": "33"
+        "intensity_minutes": "33",
+        "vo2max": ""
       },
       {
         "date": "2026-05-29",
@@ -692,7 +724,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "35",
-        "intensity_minutes": "53"
+        "intensity_minutes": "53",
+        "vo2max": ""
       },
       {
         "date": "2026-05-30",
@@ -713,7 +746,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "28",
-        "intensity_minutes": "76"
+        "intensity_minutes": "76",
+        "vo2max": ""
       },
       {
         "date": "2026-05-31",
@@ -734,7 +768,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "22",
-        "intensity_minutes": "29"
+        "intensity_minutes": "29",
+        "vo2max": ""
       },
       {
         "date": "2026-06-01",
@@ -755,7 +790,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "26",
-        "intensity_minutes": "54"
+        "intensity_minutes": "54",
+        "vo2max": ""
       },
       {
         "date": "2026-06-02",
@@ -776,7 +812,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "29",
-        "intensity_minutes": "52"
+        "intensity_minutes": "52",
+        "vo2max": ""
       },
       {
         "date": "2026-06-03",
@@ -797,7 +834,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "23",
-        "intensity_minutes": "20"
+        "intensity_minutes": "20",
+        "vo2max": ""
       },
       {
         "date": "2026-06-04",
@@ -818,7 +856,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "21",
-        "intensity_minutes": "23"
+        "intensity_minutes": "23",
+        "vo2max": ""
       },
       {
         "date": "2026-06-05",
@@ -839,7 +878,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "29",
-        "intensity_minutes": "55"
+        "intensity_minutes": "55",
+        "vo2max": ""
       },
       {
         "date": "2026-06-06",
@@ -860,7 +900,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "23",
-        "intensity_minutes": "0"
+        "intensity_minutes": "0",
+        "vo2max": ""
       },
       {
         "date": "2026-06-07",
@@ -881,7 +922,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "24",
-        "intensity_minutes": "21"
+        "intensity_minutes": "21",
+        "vo2max": ""
       },
       {
         "date": "2026-06-08",
@@ -902,7 +944,8 @@
         "body_battery_max": "",
         "body_battery_min": "",
         "stress_avg": "22",
-        "intensity_minutes": "22"
+        "intensity_minutes": "22",
+        "vo2max": "47.1"
       }
     ],
     "scale": [
