@@ -30,5 +30,45 @@
     "currency": "USD",
     "type": "us",
     "sector": "アルゼンチン石油"
+  },
+  {
+    "ticker": "APP",
+    "shares": 20.0,
+    "avgCost": 515.058,
+    "currency": "USD",
+    "type": "us",
+    "sector": "アドテク"
+  },
+  {
+    "ticker": "CPA",
+    "shares": 50.0,
+    "avgCost": 147.9106,
+    "currency": "USD",
+    "type": "us",
+    "sector": "航空"
+  },
+  {
+    "ticker": "FN",
+    "shares": 20.0,
+    "avgCost": 634.595,
+    "currency": "USD",
+    "type": "us",
+    "sector": "光学部品"
+  },
+  {
+    "ticker": "POWL",
+    "shares": 51.0,
+    "avgCost": 305.2664,
+    "currency": "USD",
+    "type": "us",
+    "sector": "電力インフラ"
+  },
+  {
+    "ticker": "RDDT",
+    "shares": 60.0,
+    "avgCost": 175.3246,
+    "currency": "USD",
+    "type": "us",
+    "sector": "SNS"
   }
 ]
