@@ -28,7 +28,7 @@ export default function PortfolioChart({ history }: { history: HistoryRow[] }) {
       <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
         <XAxis dataKey="date" tick={{ fontSize: 10 }} />
         <YAxis tick={{ fontSize: 10 }} unit="万" width={52} />
-        <Tooltip formatter={(v: number) => `${v.toLocaleString()}万円`} />
+        <Tooltip formatter={(v: unknown) => `${(v as number).toLocaleString()}万円`} />
         <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: "0.75rem" }} />
         <Line type="monotone" dataKey="総資産" stroke="#3B82F6" strokeWidth={2} dot={false} />
         <Line type="monotone" dataKey="楽天"   stroke="#F59E0B" strokeWidth={1.5} dot={false} strokeDasharray="4 2" />
