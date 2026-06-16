@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from "react";
+import analysisData from "@/data/analysis.json";
 
 type GarminRow = {
   date: string;
@@ -264,7 +265,7 @@ export default function HealthPage() {
   const [data, setData] = useState<HealthData | null>(null);
   const [oncall, setOncall] = useState<OncallData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<"health" | "oncall">("health");
+  const [tab, setTab] = useState<"health" | "oncall" | "analysis">("health");
 
   useEffect(() => {
     Promise.all([
@@ -321,6 +322,7 @@ export default function HealthPage() {
       <div style={{ display: "flex", borderBottom: "1px solid #E8E4DF", marginBottom: "40px" }}>
         <button style={tabStyle(tab === "health")} onClick={() => setTab("health")}>DAILY HEALTH</button>
         <button style={tabStyle(tab === "oncall")} onClick={() => setTab("oncall")}>NIGHT SHIFT</button>
+        <button style={tabStyle(tab === "analysis")} onClick={() => setTab("analysis")}>AI INSIGHT</button>
       </div>
 
       {/* ── DAILY HEALTH タブ ── */}
@@ -653,6 +655,33 @@ export default function HealthPage() {
           </section>
         </>
       )}
+      {/* ── AI INSIGHT タブ ── */}
+      {tab === "analysis" && (
+        <>
+          <section style={{ marginBottom: "48px" }}>
+            <h2 style={{ fontSize: "0.7rem", letterSpacing: "0.15em", color: muted, fontFamily: "monospace", marginBottom: "24px" }}>
+              AI INSIGHT · 統合パフォーマンス分析
+            </h2>
+            {(() => {
+              const analysis = (analysisData ?? {}) as { generated_at?: string; period?: string; public?: string };
+              return analysis.public ? (
+                <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", padding: "32px" }}>
+                  <div style={{ display: "flex", gap: "16px", marginBottom: "20px", flexWrap: "wrap" }}>
+                    <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: accent, letterSpacing: "0.1em" }}>{analysis.generated_at}</span>
+                    <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em" }}>{analysis.period}</span>
+                  </div>
+                  <p style={{ fontSize: "0.95rem", fontFamily: "sans-serif", lineHeight: "1.8", whiteSpace: "pre-wrap" }}>
+                    {analysis.public}
+                  </p>
+                </div>
+              ) : (
+                <p style={{ fontSize: "0.85rem", fontFamily: "sans-serif", color: muted }}>解析データがありません。Streamlitから解析を実行してください。</p>
+              );
+            })()}
+          </section>
+        </>
+      )}
+
 
       <div style={{ marginTop: "64px" }}>
         <a href="/tools" style={{ fontSize: "0.875rem", color: muted, fontFamily: "sans-serif" }}>← ツール一覧へ</a>
