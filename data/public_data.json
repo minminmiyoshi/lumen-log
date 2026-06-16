@@ -3031,15 +3031,33 @@
   },
   "oncall": {
     "summary": {
-      "count": 1,
+      "count": 2,
       "avg_hrv_change_pct": 0.0,
       "avg_body_battery_drain": 53.0,
-      "avg_nap_h": 0.1,
-      "avg_delta_fatigue": 0.0,
-      "avg_sleepiness": 3.0,
-      "avg_fatigue_out": 3.0
+      "avg_nap_h": 1.6,
+      "avg_delta_fatigue": 0.5,
+      "avg_sleepiness": 3.5,
+      "avg_fatigue_out": 3.5
     },
     "entries": [
+      {
+        "date": "2026-06-11",
+        "preNapQuality": 3,
+        "fatigueIn": 3,
+        "fatigueOut": 4,
+        "moodIn": 3,
+        "moodOut": 2,
+        "sleepiness": 4,
+        "workload": 5,
+        "nap_h": 3.0,
+        "pre_nap_h": 1.5,
+        "delta_fatigue": 1,
+        "hrv_change_pct": null,
+        "body_battery_drain": null,
+        "prev_hrv": 29.0,
+        "prev_sleep_h": 5.05,
+        "prev_resting_hr": 54.0
+      },
       {
         "date": "2026-06-09",
         "fatigueIn": 3,
@@ -3055,6 +3073,67 @@
         "prev_hrv": 29.0,
         "prev_sleep_h": 2.13,
         "prev_resting_hr": 56.0
+      }
+    ]
+  },
+  "portfolio": {
+    "updated_at": "2026-06-12",
+    "summary_text": "現物と信用の合計8銘柄を保有。ショートポジションは持たず、全銘柄を買い方向で構成しています。具体的なセクターや地域の傾向については記載がないため、現状は純粋なロング戦略のポートフォリオです。",
+    "holdings_count": 4,
+    "margin_long_count": 4,
+    "margin_short_count": 0,
+    "sector_breakdown": [
+      {
+        "sector": "リチウム",
+        "pct": 63.8
+      },
+      {
+        "sector": "アルゼンチン・ガスパイプライン",
+        "pct": 17.9
+      },
+      {
+        "sector": "アルゼンチン石油",
+        "pct": 10.7
+      },
+      {
+        "sector": "素材",
+        "pct": 7.6
+      }
+    ],
+    "public_holdings": [
+      {
+        "sector": "リチウム",
+        "gainLossPct": -6.27
+      },
+      {
+        "sector": "素材",
+        "gainLossPct": -7.09
+      },
+      {
+        "sector": "アルゼンチン・ガスパイプライン",
+        "gainLossPct": -15.22
+      },
+      {
+        "sector": "アルゼンチン石油",
+        "gainLossPct": 123.49
+      }
+    ],
+    "asset_summary": {
+      "total_jpy": 63715540,
+      "rakuten_jpy": 48715540,
+      "sbi_jpy": 15000000,
+      "holdings_jpy": 10729772,
+      "usd_cash_usd": 59652.08,
+      "usd_cash_jpy": 9574755,
+      "margin_collateral_jpy": 31351909,
+      "margin_pnl_jpy": -2742250
+    },
+    "history": [
+      {
+        "date": "2026-06-12",
+        "total_jpy": 63715540,
+        "rakuten_jpy": 48715540,
+        "sbi_jpy": 15000000
       }
     ]
   },
