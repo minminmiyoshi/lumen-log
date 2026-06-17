@@ -2,7 +2,14 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from "react";
-import analysisData from "@/data/analysis.json";
+import analysisDataRaw from "@/data/analysis.json";
+
+type AnalysisEntry = { generated_at?: string; period?: string; public?: string };
+const analysisData: AnalysisEntry[] = Array.isArray(analysisDataRaw)
+  ? (analysisDataRaw as AnalysisEntry[])
+  : analysisDataRaw && Object.keys(analysisDataRaw).length > 0
+  ? [analysisDataRaw as AnalysisEntry]
+  : [];
 
 type GarminRow = {
   date: string;
@@ -662,22 +669,42 @@ export default function HealthPage() {
             <h2 style={{ fontSize: "0.7rem", letterSpacing: "0.15em", color: muted, fontFamily: "monospace", marginBottom: "24px" }}>
               AI INSIGHT · 統合パフォーマンス分析
             </h2>
-            {(() => {
-              const analysis = (analysisData ?? {}) as { generated_at?: string; period?: string; public?: string };
-              return analysis.public ? (
+            {analysisData.length > 0 ? (
+              <>
                 <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", padding: "32px" }}>
                   <div style={{ display: "flex", gap: "16px", marginBottom: "20px", flexWrap: "wrap" }}>
-                    <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: accent, letterSpacing: "0.1em" }}>{analysis.generated_at}</span>
-                    <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em" }}>{analysis.period}</span>
+                    <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: accent, letterSpacing: "0.1em" }}>{analysisData[0].generated_at}</span>
+                    <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em" }}>{analysisData[0].period}</span>
                   </div>
                   <p style={{ fontSize: "0.95rem", fontFamily: "sans-serif", lineHeight: "1.8", whiteSpace: "pre-wrap" }}>
-                    {analysis.public}
+                    {analysisData[0].public}
                   </p>
                 </div>
-              ) : (
-                <p style={{ fontSize: "0.85rem", fontFamily: "sans-serif", color: muted }}>解析データがありません。Streamlitから解析を実行してください。</p>
-              );
-            })()}
+
+                {analysisData.length > 1 && (
+                  <div style={{ marginTop: "32px" }}>
+                    <h3 style={{ fontSize: "0.7rem", letterSpacing: "0.15em", color: muted, fontFamily: "monospace", marginBottom: "16px" }}>
+                      過去の解析履歴（{analysisData.length - 1}件）
+                    </h3>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                      {analysisData.slice(1).map((item, i) => (
+                        <details key={i} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: "8px", padding: "16px 20px" }}>
+                          <summary style={{ cursor: "pointer", display: "flex", gap: "16px", flexWrap: "wrap", listStyle: "none" }}>
+                            <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: accent, letterSpacing: "0.1em" }}>{item.generated_at}</span>
+                            <span style={{ fontSize: "0.7rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em" }}>{item.period}</span>
+                          </summary>
+                          <p style={{ fontSize: "0.9rem", fontFamily: "sans-serif", lineHeight: "1.8", whiteSpace: "pre-wrap", marginTop: "16px" }}>
+                            {item.public}
+                          </p>
+                        </details>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <p style={{ fontSize: "0.85rem", fontFamily: "sans-serif", color: muted }}>解析データがありません。Streamlitから解析を実行してください。</p>
+            )}
           </section>
         </>
       )}
