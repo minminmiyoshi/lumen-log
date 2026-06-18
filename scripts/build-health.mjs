@@ -27,3 +27,9 @@ console.log(`✅ now.json生成完了`, pub.now);
 // oncall_public.json
 writeFileSync(ONCALL_OUT, JSON.stringify(pub.oncall, null, 2));
 console.log(`✅ oncall_public.json生成完了 (${pub.oncall.entries.length}件)`);
+// analysis.json
+const ANALYSIS_OUT = join(ROOT, "data/analysis.json");
+if (pub.analysis) {
+  writeFileSync(ANALYSIS_OUT, JSON.stringify(pub.analysis, null, 2));
+  console.log(`✅ analysis.json生成完了 (generated_at: ${pub.analysis.generated_at || pub.analysis[0]?.generated_at})`);
+}

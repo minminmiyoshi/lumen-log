@@ -2207,6 +2207,52 @@
       "stress_avg": "28",
       "intensity_minutes": "62",
       "vo2max": ""
+    },
+    {
+      "date": "2026-06-17",
+      "sleep_duration_h": "5.95",
+      "deep_sleep_h": "1.18",
+      "light_sleep_h": "3.92",
+      "rem_sleep_h": "0.85",
+      "awake_h": "0.82",
+      "avg_spo2": "97.0",
+      "avg_respiration": "16.0",
+      "hrv_weekly_avg": "27",
+      "hrv_last_night": "26",
+      "hrv_status": "BALANCED",
+      "resting_hr": "57",
+      "steps": "16768",
+      "calories_total": "2364.0",
+      "calories_active": "538.0",
+      "distance_km": "13.73",
+      "body_battery_max": "58",
+      "body_battery_min": "9",
+      "stress_avg": "24",
+      "intensity_minutes": "43",
+      "vo2max": "46.8"
+    },
+    {
+      "date": "2026-06-18",
+      "sleep_duration_h": "2.17",
+      "deep_sleep_h": "0.2",
+      "light_sleep_h": "1.38",
+      "rem_sleep_h": "0.58",
+      "awake_h": "0.0",
+      "avg_spo2": "98.0",
+      "avg_respiration": "17.7",
+      "hrv_weekly_avg": "28",
+      "hrv_last_night": "26",
+      "hrv_status": "BALANCED",
+      "resting_hr": "59",
+      "steps": "9967",
+      "calories_total": "1705.0",
+      "calories_active": "294.0",
+      "distance_km": "7.38",
+      "body_battery_max": "35",
+      "body_battery_min": "17",
+      "stress_avg": "26",
+      "intensity_minutes": "26",
+      "vo2max": "46.8"
     }
   ],
   "scale": [
@@ -4942,6 +4988,45 @@
       "max_hr": "161.0",
       "avg_pace": "0.0",
       "elevation_gain_m": ""
+    },
+    {
+      "date": "2026-06-17",
+      "activity_id": "23278925034",
+      "activity_type": "walking",
+      "start_time": "2026-06-17 15:46:19",
+      "duration_min": "24.5",
+      "distance_km": "3.05",
+      "calories": "126.0",
+      "avg_hr": "101.0",
+      "max_hr": "120.0",
+      "avg_pace": "2.071000099182129",
+      "elevation_gain_m": "33.35126876831055"
+    },
+    {
+      "date": "2026-06-17",
+      "activity_id": "23277252498",
+      "activity_type": "indoor_cardio",
+      "start_time": "2026-06-17 11:00:35",
+      "duration_min": "21.6",
+      "distance_km": "0.0",
+      "calories": "129.0",
+      "avg_hr": "108.0",
+      "max_hr": "128.0",
+      "avg_pace": "0.0",
+      "elevation_gain_m": ""
+    },
+    {
+      "date": "2026-06-18",
+      "activity_id": "23289584523",
+      "activity_type": "walking",
+      "start_time": "2026-06-18 10:49:43",
+      "duration_min": "33.0",
+      "distance_km": "2.23",
+      "calories": "149.0",
+      "avg_hr": "98.0",
+      "max_hr": "120.0",
+      "avg_pace": "1.1260000467300415",
+      "elevation_gain_m": "7.799999713897705"
     }
   ],
   "weeklyIntensity": [
@@ -5031,7 +5116,7 @@
     },
     {
       "week": "2026-06-15",
-      "low": 0,
+      "low": 79,
       "mid": 45,
       "high": 0
     }
