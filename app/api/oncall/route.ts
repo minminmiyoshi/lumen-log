@@ -15,7 +15,11 @@ export async function GET() {
     const kv = getKV()
     const raw = await kv.get(KV_KEY)
     const data = raw ? JSON.parse(raw) : []
-    return NextResponse.json(data)
+    return NextResponse.json(data, {
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=30",
+      },
+    })
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 })
   }

@@ -22,5 +22,9 @@ export async function GET() {
     scale:           filterRecent(scale),
     workout:         filterRecent(workout),
     weeklyIntensity: weeklyIntensity ?? [],
+  }, {
+    headers: {
+      "Cache-Control": "public, s-maxage=60, stale-while-revalidate=30",
+    },
   });
 }
