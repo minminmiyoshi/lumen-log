@@ -42,7 +42,7 @@ async function getUsPrices(tickers: string[]): Promise<Record<string, number>> {
   return prices;
 }
 
-async function getUsdJpy(): Promise<number> {
+export async function getUsdJpy(): Promise<number> {
   try {
     const res = await fetch(
       `https://api.twelvedata.com/price?symbol=USD/JPY&apikey=${process.env.TWELVE_DATA_API_KEY}`,

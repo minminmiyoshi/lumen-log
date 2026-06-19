@@ -1,5 +1,5 @@
 import publicData from "@/data/public_data.json";
-import { getPortfolioLive } from "@/lib/portfolio";
+import { getUsdJpy } from "@/lib/portfolio";
 import PortfolioChart from "@/app/components/PortfolioChart";
 
 export const revalidate = 300;
@@ -18,7 +18,7 @@ type HistoryRow      = { date: string; total_jpy: number; rakuten_jpy: number; s
 const COLORS = ["#3B82F6","#10B981","#F59E0B","#EF4444","#8B5CF6","#EC4899","#14B8A6","#F97316"];
 
 export default async function PortfolioPage() {
-  const { holdings, usdJpy, totalHoldingsJpy } = await getPortfolioLive();
+  const usdJpy = await getUsdJpy();
   const port         = (publicData as any).portfolio ?? {};
   const asset        = port.asset_summary ?? {};
   const history      = (port.history ?? []) as HistoryRow[];
@@ -33,11 +33,12 @@ export default async function PortfolioPage() {
   const usdCashJpy      = (asset.usd_cash_usd ?? 0) * usdJpy;
   const marginCollateral = asset.margin_collateral_jpy ?? 0;
   const sbiJpy          = asset.sbi_jpy ?? 0;
-  const realtimeTotal   = totalHoldingsJpy + usdCashJpy + marginCollateral + sbiJpy;
+  const holdingsJpy     = asset.holdings_jpy ?? 0;
+  const realtimeTotal   = holdingsJpy + usdCashJpy + marginCollateral + sbiJpy;
 
   // 資産内訳
   const breakdown = [
-    { label: "現物株式",   value: totalHoldingsJpy,  color: "#3B82F6" },
+    { label: "現物株式",   value: holdingsJpy,       color: "#3B82F6" },
     { label: "USD現金",    value: usdCashJpy,         color: "#10B981" },
     { label: "信用証拠金", value: marginCollateral,   color: "#F59E0B" },
     { label: "SBI(NISA)",  value: sbiJpy,             color: "#8B5CF6" },
