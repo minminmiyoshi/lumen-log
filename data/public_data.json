@@ -5530,62 +5530,108 @@
     ]
   },
   "portfolio": {
-    "updated_at": "2026-06-12",
-    "summary_text": "現物9銘柄・信用ロング5銘柄の合計14銘柄を保有。テック・インフラ・航空・SNSなど多セクターに分散。南米資源株と米国グロース株を組み合わせたロング戦略。",
-    "holdings_count": 4,
-    "margin_long_count": 4,
+    "updated_at": "2026-06-19",
+    "summary_text": "ポートフォリオは、計15銘柄で構成されています。現物と信用のロングのみを保有し、ショートは含まれません。特定のセクターや地域に関する記述がないため、銘柄構成に基づいた強気の姿勢が伺える内容です。",
+    "holdings_count": 9,
+    "margin_long_count": 6,
     "margin_short_count": 0,
     "sector_breakdown": [
       {
         "sector": "リチウム",
-        "pct": 63.8
+        "pct": 36.5
+      },
+      {
+        "sector": "電力・データセンターインフラ",
+        "pct": 12.1
       },
       {
         "sector": "アルゼンチン・ガスパイプライン",
-        "pct": 17.9
+        "pct": 10.1
+      },
+      {
+        "sector": "光学・データセンターインフラ",
+        "pct": 9.2
+      },
+      {
+        "sector": "SNSプラットフォーム",
+        "pct": 8.4
+      },
+      {
+        "sector": "AI広告テック",
+        "pct": 7.5
+      },
+      {
+        "sector": "航空・ラテンアメリカ",
+        "pct": 6.0
       },
       {
         "sector": "アルゼンチン石油",
-        "pct": 10.7
+        "pct": 5.5
       },
       {
         "sector": "素材",
-        "pct": 7.6
+        "pct": 4.6
       }
     ],
     "public_holdings": [
       {
+        "sector": "航空・ラテンアメリカ",
+        "gainLossPct": 2.64
+      },
+      {
+        "sector": "光学・データセンターインフラ",
+        "gainLossPct": -9.11
+      },
+      {
+        "sector": "電力・データセンターインフラ",
+        "gainLossPct": -2.13
+      },
+      {
         "sector": "リチウム",
-        "gainLossPct": -6.27
+        "gainLossPct": 0.69
+      },
+      {
+        "sector": "AI広告テック",
+        "gainLossPct": -8.33
       },
       {
         "sector": "素材",
-        "gainLossPct": -7.09
+        "gainLossPct": 4.26
       },
       {
         "sector": "アルゼンチン・ガスパイプライン",
-        "gainLossPct": -15.22
+        "gainLossPct": -9.88
       },
       {
         "sector": "アルゼンチン石油",
-        "gainLossPct": 123.49
+        "gainLossPct": 115.3
+      },
+      {
+        "sector": "SNSプラットフォーム",
+        "gainLossPct": 0.3
       }
     ],
     "asset_summary": {
-      "total_jpy": 63715540,
-      "rakuten_jpy": 48715540,
+      "total_jpy": 65028377,
+      "rakuten_jpy": 50028377,
       "sbi_jpy": 15000000,
-      "holdings_jpy": 10729772,
-      "usd_cash_usd": 59652.08,
-      "usd_cash_jpy": 9574755,
-      "margin_collateral_jpy": 31351909,
-      "margin_pnl_jpy": -2742250
+      "holdings_jpy": 20138582,
+      "usd_cash_usd": 2034.1,
+      "usd_cash_jpy": 328059,
+      "margin_collateral_jpy": 31502314,
+      "margin_pnl_jpy": -1940674
     },
     "history": [
       {
         "date": "2026-06-12",
         "total_jpy": 63715540,
         "rakuten_jpy": 48715540,
+        "sbi_jpy": 15000000
+      },
+      {
+        "date": "2026-06-19",
+        "total_jpy": 65028377,
+        "rakuten_jpy": 50028377,
         "sbi_jpy": 15000000
       }
     ]
