@@ -1,6 +1,6 @@
 // lib/mdx.ts
 import readingTime from 'reading-time'
-import type { Post, PostMeta, PostCategory } from '@/types/post'
+import type { Post, PostMeta, PostCategory, PostZone } from '@/types/post'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const postsData = require('../data/posts.json') as RawPost[]
@@ -11,6 +11,7 @@ interface RawPost {
   title: string
   date: string
   tags: string[]
+  zone: PostZone
   category: PostCategory
   published: boolean
   description?: string
@@ -26,6 +27,7 @@ function rawToPost(raw: RawPost): Post {
     title: raw.title,
     date: raw.date,
     tags: raw.tags ?? [],
+    zone: raw.zone ?? 'health',
     category: raw.category ?? '',
     published: raw.published ?? true,
     description: raw.description,
@@ -43,6 +45,13 @@ export function getPostBySlug(slug: string): Post | null {
   return rawToPost(raw)
 }
 
+export function getPostBySlugAndZone(slug: string, zone: PostZone): Post | null {
+  const raw = postsData.find((p) => p.slug === slug && p.zone === zone)
+  if (!raw) return null
+  if (!raw.published && process.env.NODE_ENV === 'production') return null
+  return rawToPost(raw)
+}
+
 export function getAllPostsMeta(): PostMeta[] {
   return postsData
     .filter((p) => p.published || process.env.NODE_ENV !== 'production')
@@ -51,6 +60,16 @@ export function getAllPostsMeta(): PostMeta[] {
       return meta as PostMeta
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+export function getPostsByZone(zone: PostZone): PostMeta[] {
+  return getAllPostsMeta().filter((p) => p.zone === zone)
+}
+
+export function getPostSlugsByZone(zone: PostZone): { slug: string }[] {
+  return postsData
+    .filter((p) => p.zone === zone)
+    .map((p) => ({ slug: p.slug }))
 }
 
 export function getAllPostSlugs(): { slug: string }[] {

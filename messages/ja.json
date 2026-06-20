@@ -4,8 +4,8 @@
     "siteDescription": "悶々とする救急医の、投資と資産と身体の記録",
     "nav": {
       "home": "ホーム",
-      "blog": "ブログ",
-      "tools": "ツール",
+      "health": "Health",
+      "money": "Money",
       "about": "About"
     }
   },

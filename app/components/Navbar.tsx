@@ -6,14 +6,16 @@ import { useTranslations } from "next-intl";
 
 const links = [
   { href: "/", key: "home" },
-  { href: "/blog", key: "blog" },
-  { href: "/tools", key: "tools" },
+  { href: "/health", key: "health" },
+  { href: "/money", key: "money" },
   { href: "/about", key: "about" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const t = useTranslations("common.nav");
+
+
 
   return (
     <header
@@ -79,7 +81,7 @@ export default function Navbar() {
             flexDirection: "column",
             gap: "5px",
           }}
-          aria-label={t("home")}
+          aria-label="menu"
         >
           <span style={{ display: "block", width: "22px", height: "2px", backgroundColor: "var(--foreground)", transition: "transform 0.2s", transform: open ? "translateY(7px) rotate(45deg)" : "none" }} />
           <span style={{ display: "block", width: "22px", height: "2px", backgroundColor: "var(--foreground)", transition: "opacity 0.2s", opacity: open ? 0 : 1 }} />
