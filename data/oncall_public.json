@@ -1,14 +1,32 @@
 {
   "summary": {
-    "count": 21,
-    "avg_hrv_change_pct": -3.1,
-    "avg_body_battery_drain": 47.5,
+    "count": 22,
+    "avg_hrv_change_pct": -3.4,
+    "avg_body_battery_drain": 47.8,
     "avg_nap_h": 3.5,
     "avg_delta_fatigue": 0.2,
-    "avg_sleepiness": 3,
+    "avg_sleepiness": 3.1,
     "avg_fatigue_out": 3.1
   },
   "entries": [
+    {
+      "date": "2026-06-19",
+      "preNapQuality": 2,
+      "fatigueIn": 3,
+      "fatigueOut": 3,
+      "moodIn": 3,
+      "moodOut": 4,
+      "sleepiness": 4,
+      "workload": 3,
+      "nap_h": 4.5,
+      "pre_nap_h": 2,
+      "delta_fatigue": 0,
+      "hrv_change_pct": -7.7,
+      "body_battery_drain": 54,
+      "prev_hrv": 28,
+      "prev_sleep_h": 6.1,
+      "prev_resting_hr": 55
+    },
     {
       "date": "2026-06-17",
       "preNapQuality": 3,
@@ -23,9 +41,9 @@
       "delta_fatigue": 2,
       "hrv_change_pct": -7.1,
       "body_battery_drain": 49,
-      "prev_hrv": 28,
-      "prev_sleep_h": 4.52,
-      "prev_resting_hr": 55
+      "prev_hrv": 26,
+      "prev_sleep_h": 5.95,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-06-13",
@@ -42,8 +60,8 @@
       "hrv_change_pct": -10,
       "body_battery_drain": 66,
       "prev_hrv": 30,
-      "prev_sleep_h": 5.15,
-      "prev_resting_hr": 54
+      "prev_sleep_h": 5.42,
+      "prev_resting_hr": 55
     },
     {
       "date": "2026-06-10",
@@ -59,9 +77,9 @@
       "delta_fatigue": 1,
       "hrv_change_pct": -32.3,
       "body_battery_drain": 41,
-      "prev_hrv": 31,
-      "prev_sleep_h": 4.95,
-      "prev_resting_hr": 56
+      "prev_hrv": 29,
+      "prev_sleep_h": 5.05,
+      "prev_resting_hr": 54
     },
     {
       "date": "2026-06-07",
@@ -77,9 +95,9 @@
       "delta_fatigue": 1,
       "hrv_change_pct": 3.6,
       "body_battery_drain": 46,
-      "prev_hrv": 28,
-      "prev_sleep_h": 6.34,
-      "prev_resting_hr": 54
+      "prev_hrv": 27,
+      "prev_sleep_h": 4.88,
+      "prev_resting_hr": 55
     },
     {
       "date": "2026-06-03",
@@ -95,9 +113,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 0,
       "body_battery_drain": 49,
-      "prev_hrv": 27,
-      "prev_sleep_h": 5.65,
-      "prev_resting_hr": 56
+      "prev_hrv": 24,
+      "prev_sleep_h": 5.98,
+      "prev_resting_hr": 58
     },
     {
       "date": "2026-05-30",
@@ -113,9 +131,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 0,
       "body_battery_drain": 43,
-      "prev_hrv": 27,
-      "prev_sleep_h": 4.78,
-      "prev_resting_hr": 58
+      "prev_hrv": 25,
+      "prev_sleep_h": 6.27,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-05-27",
@@ -131,9 +149,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 17.2,
       "body_battery_drain": 40,
-      "prev_hrv": 29,
-      "prev_sleep_h": 4.93,
-      "prev_resting_hr": 58
+      "prev_hrv": 31,
+      "prev_sleep_h": 4.42,
+      "prev_resting_hr": 55
     },
     {
       "date": "2026-05-23",
@@ -149,9 +167,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 3.2,
       "body_battery_drain": 52,
-      "prev_hrv": 31,
-      "prev_sleep_h": 6.72,
-      "prev_resting_hr": 57
+      "prev_hrv": 30,
+      "prev_sleep_h": 6.53,
+      "prev_resting_hr": 56
     },
     {
       "date": "2026-05-15",
@@ -167,9 +185,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": null,
       "body_battery_drain": 56,
-      "prev_hrv": 24,
-      "prev_sleep_h": 3.65,
-      "prev_resting_hr": 62
+      "prev_hrv": 33,
+      "prev_sleep_h": 5.4,
+      "prev_resting_hr": 56
     },
     {
       "date": "2026-05-13",
@@ -185,9 +203,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": -17.2,
       "body_battery_drain": 43,
-      "prev_hrv": 29,
-      "prev_sleep_h": 4.85,
-      "prev_resting_hr": 59
+      "prev_hrv": 26,
+      "prev_sleep_h": 4.78,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-05-08",
@@ -203,9 +221,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 3.3,
       "body_battery_drain": 49,
-      "prev_hrv": 30,
-      "prev_sleep_h": 2.42,
-      "prev_resting_hr": 56
+      "prev_hrv": 28,
+      "prev_sleep_h": 6.78,
+      "prev_resting_hr": 58
     },
     {
       "date": "2026-05-06",
@@ -221,9 +239,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 11.1,
       "body_battery_drain": 40,
-      "prev_hrv": 27,
-      "prev_sleep_h": 5.17,
-      "prev_resting_hr": 57
+      "prev_hrv": 29,
+      "prev_sleep_h": 3.22,
+      "prev_resting_hr": 55
     },
     {
       "date": "2026-05-01",
@@ -240,8 +258,8 @@
       "hrv_change_pct": null,
       "body_battery_drain": 16,
       "prev_hrv": 24,
-      "prev_sleep_h": 2.43,
-      "prev_resting_hr": 64
+      "prev_sleep_h": 4.85,
+      "prev_resting_hr": 62
     },
     {
       "date": "2026-04-29",
@@ -257,9 +275,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": -4,
       "body_battery_drain": 38,
-      "prev_hrv": 25,
-      "prev_sleep_h": 3.97,
-      "prev_resting_hr": 61
+      "prev_hrv": 28,
+      "prev_sleep_h": 6.64,
+      "prev_resting_hr": 59
     },
     {
       "date": "2026-04-24",
@@ -275,9 +293,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": -3.4,
       "body_battery_drain": 57,
-      "prev_hrv": 29,
-      "prev_sleep_h": 3.75,
-      "prev_resting_hr": 61
+      "prev_hrv": 33,
+      "prev_sleep_h": 6.07,
+      "prev_resting_hr": 58
     },
     {
       "date": "2026-04-22",
@@ -293,9 +311,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 3.6,
       "body_battery_drain": 54,
-      "prev_hrv": 28,
-      "prev_sleep_h": 5.4,
-      "prev_resting_hr": 55
+      "prev_hrv": 33,
+      "prev_sleep_h": 5.68,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-04-17",
@@ -311,9 +329,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": -20,
       "body_battery_drain": 52,
-      "prev_hrv": 30,
-      "prev_sleep_h": 5.53,
-      "prev_resting_hr": 55
+      "prev_hrv": 27,
+      "prev_sleep_h": 6.18,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-04-11",
@@ -329,9 +347,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": -8,
       "body_battery_drain": 54,
-      "prev_hrv": 25,
-      "prev_sleep_h": 7.28,
-      "prev_resting_hr": 59
+      "prev_hrv": 27,
+      "prev_sleep_h": 6.98,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-04-08",
@@ -347,9 +365,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": -7.4,
       "body_battery_drain": 43,
-      "prev_hrv": 27,
-      "prev_sleep_h": 6.28,
-      "prev_resting_hr": 56
+      "prev_hrv": 28,
+      "prev_sleep_h": 5.92,
+      "prev_resting_hr": 55
     },
     {
       "date": "2026-04-05",
@@ -365,9 +383,9 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 0,
       "body_battery_drain": 54,
-      "prev_hrv": 25,
-      "prev_sleep_h": 4.65,
-      "prev_resting_hr": 59
+      "prev_hrv": 26,
+      "prev_sleep_h": 5.15,
+      "prev_resting_hr": 57
     },
     {
       "date": "2026-04-01",
@@ -383,8 +401,8 @@
       "delta_fatigue": 0,
       "hrv_change_pct": 7.7,
       "body_battery_drain": 56,
-      "prev_hrv": 26,
-      "prev_sleep_h": 5.12,
+      "prev_hrv": 28,
+      "prev_sleep_h": 6.07,
       "prev_resting_hr": 58
     }
   ]
