@@ -5,9 +5,9 @@ import { getTranslations } from "next-intl/server";
 interface NavItem { href: string; label: string; badge?: string; descKey: string; }
 
 const navItems: NavItem[] = [
-  { href: "/blog",  label: "Blog",  badge: "12", descKey: "blogDesc" },
-  { href: "/tools", label: "Tools", badge: "3",  descKey: "toolsDesc" },
-  { href: "/about", label: "About",              descKey: "aboutDesc" },
+  { href: "/health", label: "Health", descKey: "healthDesc" },
+  { href: "/money",  label: "Money",  descKey: "moneyDesc" },
+  { href: "/about",  label: "About",  descKey: "aboutDesc" },
 ];
 
 function deltaStr(d: number | null, unit = "") {

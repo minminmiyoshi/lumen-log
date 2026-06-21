@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-06-18",
+  "updatedAt": "2026-06-20",
   "restingHr": {
-    "value": 59,
-    "delta": 3.3
+    "value": 57,
+    "delta": 0.9
   },
   "sleep": {
-    "value": 2.2,
-    "delta": -2.7
+    "value": 4.5,
+    "delta": -0.4
   },
   "weight": {
     "value": 67.8,
