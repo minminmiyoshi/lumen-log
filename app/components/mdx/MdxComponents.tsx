@@ -1,6 +1,7 @@
 // MDX内のHTML要素をカスタムコンポーネントで上書きする
 import type { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
+import { NightShiftChart } from './NightShiftChart'
 
 type CalloutType = 'info' | 'warn' | 'danger' | 'tip'
 
@@ -40,4 +41,5 @@ export const MDX_COMPONENTS: MDXComponents = {
   table: ({ children, ...props }) => <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}><table {...props}>{children}</table></div>,
   Callout,
   StockChart,
+  NightShiftChart,
 }

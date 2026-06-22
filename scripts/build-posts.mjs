@@ -1,14 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeHighlight from 'rehype-highlight'
-import rehypeStringify from 'rehype-stringify'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const postsDir = path.join(__dirname, '../posts')
@@ -39,25 +31,14 @@ function parseFrontmatter(raw) {
   return { frontmatter, content }
 }
 
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkGfm)
-  .use(remarkRehype)
-  .use(rehypeSlug)
-  .use(rehypeAutolinkHeadings, { behavior: 'wrap' })
-  .use(rehypeHighlight)
-  .use(rehypeStringify)
-
 const files = fs.readdirSync(postsDir).filter(f => /\.mdx?$/.test(f))
 
-const posts = await Promise.all(files.map(async f => {
+const posts = files.map(f => {
   const slug = f.replace(/\.mdx?$/, '')
   const raw = fs.readFileSync(path.join(postsDir, f), 'utf-8')
   const { frontmatter, content } = parseFrontmatter(raw)
-  const result = await processor.process(content)
-  const html = result.toString()
-  return { slug, content, html, ...frontmatter }
-}))
+  return { slug, content, ...frontmatter }
+})
 
 fs.writeFileSync(outputPath, JSON.stringify(posts, null, 2))
 console.log(`Built ${posts.length} posts -> data/posts.json`)

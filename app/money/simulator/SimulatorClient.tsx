@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
-import { Chart, registerables } from "chart.js";
-
-Chart.register(...registerables);
+import { useState, useMemo } from "react";
+import {
+  AreaChart, Area, XAxis, YAxis, Tooltip,
+  ResponsiveContainer, CartesianGrid,
+} from "recharts";
 
 // ─── 型定義 ───────────────────────────────────────────
 type WithdrawMode = "fixed" | "pct";
@@ -162,6 +163,11 @@ function fmt(v: number): string {
   return `${Math.round(v).toLocaleString()}万円`;
 }
 
+function fmtYAxis(v: number): string {
+  if (v >= 10000) return `${(v / 10000).toFixed(0)}億`;
+  return `${Math.round(v / 100) * 100}万`;
+}
+
 // ─── スライダー行コンポーネント ──────────────────────
 function SliderRow({
   label, value, min, max, step, display,
@@ -207,11 +213,15 @@ function StatCard({ label, value, danger }: { label: string; value: string; dang
   );
 }
 
+// ─── チャートの色定義 ────────────────────────────────
+const CHART_COLORS = {
+  合算: { stroke: "#185FA5", fill: "rgba(24,95,165,0.07)" },
+  個人: { stroke: "#0F6E56", fill: "rgba(15,110,86,0.07)" },
+  法人: { stroke: "#BA7517", fill: "rgba(186,117,23,0.07)" },
+} as const;
+
 // ─── メインコンポーネント ────────────────────────────
 export default function SimulatorClient() {
-  const chartRef = useRef<HTMLCanvasElement>(null);
-  const chartInstance = useRef<Chart | null>(null);
-
   // params
   const [age, setAge] = useState(38);
   const [fireAge, setFireAge] = useState(50);
@@ -269,74 +279,24 @@ export default function SimulatorClient() {
   ]);
 
   const { labels, pData, cData, tData, firePersonal, fireCorp, depleted } = result;
-  const fireIdx = Math.max(fireAge, age + 1) - age;
 
-  const getDatasets = useCallback(() => {
-    const all = [
-      { label: "合算", data: tData, borderColor: "#185FA5", backgroundColor: "rgba(24,95,165,0.07)", fill: true, tension: 0.3, pointRadius: 2 },
-      { label: "個人", data: pData, borderColor: "#0F6E56", backgroundColor: "rgba(15,110,86,0.07)", fill: true, tension: 0.3, pointRadius: 2 },
-      { label: "法人", data: cData, borderColor: "#BA7517", backgroundColor: "rgba(186,117,23,0.07)", fill: true, tension: 0.3, pointRadius: 2 },
-    ];
-    if (tab === "all") return [all[0]];
-    if (tab === "personal") return [all[1]];
-    if (tab === "corp") return [all[2]];
-    return all;
-  }, [tab, tData, pData, cData]);
+  // Recharts用データ変換
+  const chartData = useMemo(() =>
+    labels.map((label, i) => ({
+      label,
+      合算: tData[i],
+      個人: pData[i],
+      法人: cData[i],
+    })),
+    [labels, tData, pData, cData]
+  );
 
-  // Chart描画
-  useEffect(() => {
-    if (!chartRef.current) return;
-    const ctx = chartRef.current.getContext("2d");
-    if (!ctx) return;
-
-    if (chartInstance.current) {
-      chartInstance.current.data.labels = labels;
-      chartInstance.current.data.datasets = getDatasets();
-      chartInstance.current.update("none");
-      return;
-    }
-
-    chartInstance.current = new Chart(ctx, {
-      type: "line",
-      data: { labels, datasets: getDatasets() },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: {
-            ticks: { autoSkip: true, maxTicksLimit: 15, font: { size: 11 }, color: "#888780" },
-            grid: { color: "rgba(136,135,128,0.12)" },
-          },
-          y: {
-            ticks: {
-              font: { size: 11 }, color: "#888780",
-              callback: (v) => Number(v) >= 10000 ? `${(Number(v) / 10000).toFixed(0)}億` : `${Math.round(Number(v) / 100)}00万`,
-            },
-            grid: { color: "rgba(136,135,128,0.12)" },
-          },
-        },
-        // FIRE到達点の縦線（プラグイン不要・afterDrawで描画）
-        animation: false,
-      },
-    });
-
-    return () => {
-      chartInstance.current?.destroy();
-      chartInstance.current = null;
-    };
-  }, []);
-
-  // データ・タブ変更時に更新
-  useEffect(() => {
-    if (!chartInstance.current) return;
-    chartInstance.current.data.labels = labels;
-    chartInstance.current.data.datasets = getDatasets();
-    chartInstance.current.update("none");
-  }, [labels, getDatasets]);
-
-  const legendColors: Record<string, string> = { 合算: "#185FA5", 個人: "#0F6E56", 法人: "#BA7517" };
-  const activeLegend = tab === "all" ? ["合算"] : tab === "personal" ? ["個人"] : tab === "corp" ? ["法人"] : ["合算", "個人", "法人"];
+  const visibleSeries = useMemo(() => {
+    if (tab === "all") return ["合算"] as const;
+    if (tab === "personal") return ["個人"] as const;
+    if (tab === "corp") return ["法人"] as const;
+    return ["合算", "個人", "法人"] as const;
+  }, [tab]);
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
@@ -461,13 +421,45 @@ export default function SimulatorClient() {
             </button>
           ))}
         </div>
-        <div className="relative w-full h-64 mb-3">
-          <canvas ref={chartRef} role="img" aria-label="資産推移グラフ（個人・法人・合算）" />
+        <div className="w-full h-64 mb-3">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={chartData} margin={{ top: 8, right: 8, left: 8, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(136,135,128,0.12)" />
+              <XAxis
+                dataKey="label"
+                tick={{ fontSize: 11, fill: "#888780" }}
+                interval="preserveStartEnd"
+                minTickGap={40}
+              />
+              <YAxis
+                tick={{ fontSize: 11, fill: "#888780" }}
+                tickFormatter={fmtYAxis}
+                width={52}
+              />
+              <Tooltip
+                formatter={(value: unknown, name: string) => [fmt(value as number), name]}
+                labelStyle={{ fontSize: 12 }}
+                contentStyle={{ fontSize: 12 }}
+              />
+              {visibleSeries.map((name) => (
+                <Area
+                  key={name}
+                  type="monotone"
+                  dataKey={name}
+                  stroke={CHART_COLORS[name].stroke}
+                  fill={CHART_COLORS[name].fill}
+                  strokeWidth={2}
+                  dot={false}
+                  isAnimationActive={false}
+                />
+              ))}
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
         <div className="flex gap-4 flex-wrap">
-          {activeLegend.map((name) => (
+          {visibleSeries.map((name) => (
             <span key={name} className="flex items-center gap-1.5 text-xs text-zinc-500">
-              <span className="inline-block w-3 h-0.5" style={{ background: legendColors[name] }} />
+              <span className="inline-block w-3 h-0.5" style={{ background: CHART_COLORS[name].stroke }} />
               {name}
             </span>
           ))}

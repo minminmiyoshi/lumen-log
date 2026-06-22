@@ -10,6 +10,8 @@ import type { MDXRemoteProps } from 'next-mdx-remote/rsc'
 type SerializeOptions = NonNullable<MDXRemoteProps['options']>
 
 export const MDX_OPTIONS: SerializeOptions = {
+  // 自分自身が書いているMDXコンテンツのため、JS式属性（labels={...}等）を許可する
+  blockJS: false,
   mdxOptions: {
     remarkPlugins: [
       remarkGfm,  // テーブル・チェックボックス・取り消し線 etc.

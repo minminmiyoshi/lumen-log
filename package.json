@@ -13,7 +13,6 @@
     "@next/third-parties": "^16.2.7",
     "@swc/helpers": "^0.5.23",
     "@types/papaparse": "^5.5.2",
-    "chart.js": "^4.5.1",
     "csv-parse": "^6.2.1",
     "date-fns": "^4.4.0",
     "gray-matter": "^4.0.3",

@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPostBySlugAndZone, getPostSlugsByZone } from "@/lib/mdx";
+import { MDX_OPTIONS } from "@/lib/mdx-options";
+import { MDX_COMPONENTS } from "@/app/components/mdx/MdxComponents";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -32,10 +35,9 @@ export default async function MoneyPostPage({
           </span>
         ))}
       </div>
-      <article
-        style={{ lineHeight: 1.9, fontSize: "1rem" }}
-        dangerouslySetInnerHTML={{ __html: post.html ?? "" }}
-      />
+      <article style={{ lineHeight: 1.9, fontSize: "1rem" }}>
+        <MDXRemote source={post.content} options={MDX_OPTIONS} components={MDX_COMPONENTS} />
+      </article>
       <div style={{ marginTop: "64px" }}>
         <Link href="/money" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
           ← Money 一覧へ
