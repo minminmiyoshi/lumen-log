@@ -6,6 +6,8 @@ import {
   ResponsiveContainer, CartesianGrid,
 } from 'recharts'
 
+import type { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent'
+
 const COLORS = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6']
 
 type ChartType = 'bar' | 'line' | 'horizontalBar'
@@ -65,7 +67,7 @@ export function NightShiftChart(props: NightShiftChartProps) {
     ? { top: 8, right: 24, left: 8, bottom: 8 }
     : { top: 8, right: 8, left: 8, bottom: 8 }
 
-  const tooltipFormatter = (value: unknown, name: string) =>
+  const tooltipFormatter = (value?: ValueType, name?: NameType): [string, NameType | undefined] =>
     [`${value}${ySuffix}`, name]
 
   const legendProps = datasets.length > 1

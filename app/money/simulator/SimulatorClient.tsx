@@ -6,6 +6,8 @@ import {
   ResponsiveContainer, CartesianGrid,
 } from "recharts";
 
+import type { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
+
 // ─── 型定義 ───────────────────────────────────────────
 type WithdrawMode = "fixed" | "pct";
 type TabMode = "all" | "personal" | "corp" | "three";
@@ -437,7 +439,7 @@ export default function SimulatorClient() {
                 width={52}
               />
               <Tooltip
-                formatter={(value: unknown, name: string) => [fmt(value as number), name]}
+                formatter={(value?: ValueType, name?: NameType) => [fmt(value as number), name]}
                 labelStyle={{ fontSize: 12 }}
                 contentStyle={{ fontSize: 12 }}
               />
