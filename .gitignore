@@ -42,3 +42,7 @@ next-env.d.ts
 .open-next/
 data/health/
 app/page.tsx.bak
+
+# Cloudflare/wrangler build artifacts
+.wrangler/
+.open-next/
