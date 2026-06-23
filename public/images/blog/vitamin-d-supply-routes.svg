@@ -1,0 +1,94 @@
+<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', 'Hiragino Sans', sans-serif">
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="15" fill="#1B1B19" font-weight="600" letter-spacing="0.05em">夜勤者のビタミンD補給 ── 3つのルート</text>
+  <line x1="160" y1="44" x2="640" y2="44" stroke="#D8D2C5" stroke-width="1"/>
+
+  <!-- Column 1: Supplement -->
+  <rect x="40" y="70" width="220" height="260" rx="4" fill="none" stroke="#8B3A2C" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <rect x="40" y="70" width="220" height="44" rx="4" fill="#8B3A2C" fill-opacity="0.08"/>
+  <line x1="40" y1="114" x2="260" y2="114" stroke="#8B3A2C" stroke-width="0.5"/>
+  <text x="150" y="90" text-anchor="middle" font-size="14" fill="#8B3A2C" font-weight="600">① サプリメント</text>
+  <text x="150" y="106" text-anchor="middle" font-size="11" fill="#6E665B">最も確実</text>
+
+  <!-- Content -->
+  <text x="60" y="140" font-size="11" fill="#1B1B19" font-weight="500">推奨量</text>
+  <text x="60" y="158" font-size="12" fill="#8B3A2C" font-weight="600">2,000 IU / 日</text>
+  <text x="60" y="174" font-size="10" fill="#6E665B">（800〜2,000 IUの範囲）</text>
+
+  <line x1="60" y1="186" x2="240" y2="186" stroke="#D8D2C5" stroke-width="0.5"/>
+
+  <text x="60" y="204" font-size="11" fill="#1B1B19" font-weight="500">ポイント</text>
+  <text x="60" y="222" font-size="10" fill="#4A5859">• D3（コレカルシフェロール）を選ぶ</text>
+  <text x="60" y="240" font-size="10" fill="#4A5859">• 毎日の定量摂取が有効</text>
+  <text x="60" y="258" font-size="10" fill="#4A5859">• 食事と一緒に（脂溶性）</text>
+  <text x="60" y="276" font-size="10" fill="#4A5859">• 4,000 IU超は医師に相談</text>
+
+  <line x1="60" y1="290" x2="240" y2="290" stroke="#D8D2C5" stroke-width="0.5"/>
+
+  <!-- Feasibility bar -->
+  <text x="60" y="310" font-size="10" fill="#6E665B">夜勤者の実行可能性</text>
+  <rect x="60" y="316" width="180" height="6" rx="3" fill="#D8D2C5"/>
+  <rect x="60" y="316" width="170" height="6" rx="3" fill="#8B3A2C"/>
+
+  <!-- Column 2: Food -->
+  <rect x="290" y="70" width="220" height="260" rx="4" fill="none" stroke="#4A5859" stroke-width="1"/>
+
+  <!-- Header -->
+  <rect x="290" y="70" width="220" height="44" rx="4" fill="#4A5859" fill-opacity="0.06"/>
+  <line x1="290" y1="114" x2="510" y2="114" stroke="#4A5859" stroke-width="0.5"/>
+  <text x="400" y="90" text-anchor="middle" font-size="14" fill="#4A5859" font-weight="600">② 食事</text>
+  <text x="400" y="106" text-anchor="middle" font-size="11" fill="#6E665B">日常の底上げ</text>
+
+  <!-- Content -->
+  <text x="310" y="140" font-size="11" fill="#1B1B19" font-weight="500">高含有食品</text>
+  <text x="310" y="158" font-size="10" fill="#4A5859">• 鮭 1切れ ≒ 1日分</text>
+  <text x="310" y="176" font-size="10" fill="#4A5859">• しらす干し・いわし・さんま</text>
+  <text x="310" y="194" font-size="10" fill="#4A5859">• 干ししいたけ（生の約40倍）</text>
+  <text x="310" y="212" font-size="10" fill="#4A5859">• まいたけ・きくらげ</text>
+  <text x="310" y="230" font-size="10" fill="#4A5859">• 卵黄（1個 ≒ 2.2μg）</text>
+
+  <line x1="310" y1="244" x2="490" y2="244" stroke="#D8D2C5" stroke-width="0.5"/>
+
+  <text x="310" y="264" font-size="11" fill="#1B1B19" font-weight="500">コツ</text>
+  <text x="310" y="282" font-size="10" fill="#4A5859">肉 → 魚に変えるだけで改善</text>
+
+  <line x1="310" y1="290" x2="490" y2="290" stroke="#D8D2C5" stroke-width="0.5"/>
+
+  <!-- Feasibility bar -->
+  <text x="310" y="310" font-size="10" fill="#6E665B">夜勤者の実行可能性</text>
+  <rect x="310" y="316" width="180" height="6" rx="3" fill="#D8D2C5"/>
+  <rect x="310" y="316" width="108" height="6" rx="3" fill="#4A5859"/>
+
+  <!-- Column 3: Sunlight -->
+  <rect x="540" y="70" width="220" height="260" rx="4" fill="none" stroke="#D8D2C5" stroke-width="1"/>
+
+  <!-- Header -->
+  <rect x="540" y="70" width="220" height="44" rx="4" fill="#F4F0E8"/>
+  <line x1="540" y1="114" x2="760" y2="114" stroke="#D8D2C5" stroke-width="0.5"/>
+  <text x="650" y="90" text-anchor="middle" font-size="14" fill="#6E665B" font-weight="600">③ 日光</text>
+  <text x="650" y="106" text-anchor="middle" font-size="11" fill="#6E665B">最も自然だが最も困難</text>
+
+  <!-- Content -->
+  <text x="560" y="140" font-size="11" fill="#1B1B19" font-weight="500">必要条件</text>
+  <text x="560" y="158" font-size="10" fill="#4A5859">• 10:00〜15:00 の直射日光</text>
+  <text x="560" y="176" font-size="10" fill="#4A5859">• 顔・腕・脚を露出</text>
+  <text x="560" y="194" font-size="10" fill="#4A5859">• 10〜30分程度</text>
+  <text x="560" y="212" font-size="10" fill="#4A5859">• 日焼け止めなし</text>
+
+  <line x1="560" y1="226" x2="740" y2="226" stroke="#D8D2C5" stroke-width="0.5"/>
+
+  <text x="560" y="246" font-size="11" fill="#1B1B19" font-weight="500">夜勤者の壁</text>
+  <text x="560" y="264" font-size="10" fill="#8B3A2C">合成時間帯 ＝ 睡眠時間帯</text>
+  <text x="560" y="282" font-size="10" fill="#6E665B">→ 休日のみ現実的</text>
+
+  <line x1="560" y1="290" x2="740" y2="290" stroke="#D8D2C5" stroke-width="0.5"/>
+
+  <!-- Feasibility bar -->
+  <text x="560" y="310" font-size="10" fill="#6E665B">夜勤者の実行可能性</text>
+  <rect x="560" y="316" width="180" height="6" rx="3" fill="#D8D2C5"/>
+  <rect x="560" y="316" width="36" height="6" rx="3" fill="#6E665B"/>
+
+</svg>

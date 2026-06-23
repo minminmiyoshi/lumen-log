@@ -1,0 +1,70 @@
+<svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', 'Hiragino Sans', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 3.5 L 0 7" fill="none" stroke="#1B1B19" stroke-width="1"/>
+    </marker>
+    <marker id="arrow-accent" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 3.5 L 0 7" fill="none" stroke="#8B3A2C" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" font-size="15" fill="#1B1B19" font-weight="600" letter-spacing="0.05em">ビタミンD 合成経路</text>
+  <line x1="160" y1="46" x2="640" y2="46" stroke="#D8D2C5" stroke-width="1"/>
+
+  <!-- Step 1: UVB + Skin -->
+  <rect x="30" y="80" width="130" height="70" rx="4" fill="none" stroke="#8B3A2C" stroke-width="1.5"/>
+  <text x="95" y="108" text-anchor="middle" font-size="13" fill="#8B3A2C" font-weight="600">UVB</text>
+  <text x="95" y="128" text-anchor="middle" font-size="11" fill="#6E665B">290–315 nm</text>
+
+  <text x="95" y="175" text-anchor="middle" font-size="10" fill="#6E665B">日光の紫外線B波</text>
+
+  <!-- Arrow 1 -->
+  <line x1="160" y1="115" x2="200" y2="115" stroke="#1B1B19" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 7-DHC → Pre-D3 -->
+  <rect x="210" y="80" width="130" height="70" rx="4" fill="none" stroke="#4A5859" stroke-width="1"/>
+  <text x="275" y="105" text-anchor="middle" font-size="12" fill="#1B1B19" font-weight="500">7-DHC</text>
+  <text x="275" y="122" text-anchor="middle" font-size="11" fill="#6E665B">↓</text>
+  <text x="275" y="139" text-anchor="middle" font-size="12" fill="#1B1B19" font-weight="500">プレビタミンD3</text>
+
+  <text x="275" y="175" text-anchor="middle" font-size="10" fill="#6E665B">皮膚（表皮）</text>
+
+  <!-- Arrow 2 -->
+  <line x1="340" y1="115" x2="380" y2="115" stroke="#1B1B19" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="360" y="107" text-anchor="middle" font-size="9" fill="#6E665B">体温で</text>
+  <text x="360" y="118" text-anchor="middle" font-size="9" fill="#6E665B">異性化</text>
+
+  <!-- Step 3: D3 (blood) -->
+  <rect x="390" y="80" width="130" height="70" rx="4" fill="none" stroke="#4A5859" stroke-width="1"/>
+  <text x="455" y="108" text-anchor="middle" font-size="13" fill="#1B1B19" font-weight="600">ビタミンD3</text>
+  <text x="455" y="128" text-anchor="middle" font-size="11" fill="#6E665B">コレカルシフェロール</text>
+
+  <text x="455" y="175" text-anchor="middle" font-size="10" fill="#6E665B">血流へ</text>
+
+  <!-- Arrow 3 -->
+  <line x1="520" y1="115" x2="560" y2="115" stroke="#1B1B19" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: Liver -->
+  <rect x="570" y="80" width="100" height="70" rx="4" fill="none" stroke="#4A5859" stroke-width="1"/>
+  <text x="620" y="108" text-anchor="middle" font-size="13" fill="#1B1B19" font-weight="600">25(OH)D</text>
+  <text x="620" y="128" text-anchor="middle" font-size="11" fill="#6E665B">カルシジオール</text>
+
+  <text x="620" y="175" text-anchor="middle" font-size="10" fill="#6E665B">肝臓で変換</text>
+
+  <!-- Arrow 4: down to kidney -->
+  <line x1="620" y1="150" x2="620" y2="210" stroke="#1B1B19" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- Step 5: Kidney → Active form -->
+  <rect x="540" y="220" width="160" height="70" rx="4" fill="#8B3A2C" fill-opacity="0.08" stroke="#8B3A2C" stroke-width="1.5"/>
+  <text x="620" y="248" text-anchor="middle" font-size="13" fill="#8B3A2C" font-weight="600">1,25(OH)₂D</text>
+  <text x="620" y="268" text-anchor="middle" font-size="11" fill="#6E665B">カルシトリオール</text>
+
+  <text x="620" y="315" text-anchor="middle" font-size="10" fill="#6E665B">腎臓で活性化 → 全身へ</text>
+
+  <!-- Annotation: blood test marker -->
+  <line x1="670" y1="95" x2="750" y2="95" stroke="#D8D2C5" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="755" y="92" font-size="9" fill="#8B3A2C">← 血液検査で</text>
+  <text x="755" y="104" font-size="9" fill="#8B3A2C">   測定する値</text>
+
+</svg>

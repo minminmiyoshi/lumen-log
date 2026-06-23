@@ -1,0 +1,96 @@
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', 'Hiragino Sans', sans-serif">
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="15" fill="#1B1B19" font-weight="600" letter-spacing="0.05em">夜勤者の1日とビタミンD合成時間帯の衝突</text>
+  <line x1="120" y1="44" x2="680" y2="44" stroke="#D8D2C5" stroke-width="1"/>
+
+  <!-- Time axis labels -->
+  <text x="80" y="88" text-anchor="end" font-size="10" fill="#6E665B">時刻</text>
+
+  <!-- 24h timeline bar background -->
+  <!-- Each hour = 28px, starting at x=90, total 672px for 24h -->
+
+  <!-- Hour labels -->
+  <text x="90" y="88" text-anchor="middle" font-size="9" fill="#6E665B">0</text>
+  <text x="174" y="88" text-anchor="middle" font-size="9" fill="#6E665B">3</text>
+  <text x="258" y="88" text-anchor="middle" font-size="9" fill="#6E665B">6</text>
+  <text x="342" y="88" text-anchor="middle" font-size="9" fill="#6E665B">9</text>
+  <text x="398" y="88" text-anchor="middle" font-size="9" fill="#1B1B19" font-weight="600">12</text>
+  <text x="454" y="88" text-anchor="middle" font-size="9" fill="#6E665B">15</text>
+  <text x="538" y="88" text-anchor="middle" font-size="9" fill="#6E665B">18</text>
+  <text x="622" y="88" text-anchor="middle" font-size="9" fill="#6E665B">21</text>
+  <text x="706" y="88" text-anchor="middle" font-size="9" fill="#6E665B">24</text>
+
+  <!-- Tick marks -->
+  <line x1="90" y1="92" x2="90" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="174" y1="92" x2="174" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="258" y1="92" x2="258" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="342" y1="92" x2="342" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="398" y1="92" x2="398" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="454" y1="92" x2="454" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="538" y1="92" x2="538" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="622" y1="92" x2="622" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+  <line x1="706" y1="92" x2="706" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+
+  <!-- Axis line -->
+  <line x1="90" y1="96" x2="706" y2="96" stroke="#D8D2C5" stroke-width="1"/>
+
+  <!-- Row 1: UVB effective window (10:00-15:00) -->
+  <text x="80" y="124" text-anchor="end" font-size="11" fill="#8B3A2C" font-weight="500">UVB</text>
+  <text x="80" y="136" text-anchor="end" font-size="9" fill="#6E665B">有効時間帯</text>
+
+  <!-- Background bar (full day, very light) -->
+  <rect x="90" y="110" width="616" height="32" rx="2" fill="#F4F0E8"/>
+
+  <!-- UVB window: 10:00-15:00 = x: 90+(10*28)=370 to 90+(15*28)=510 -->
+  <rect x="370" y="110" width="140" height="32" rx="2" fill="#8B3A2C" fill-opacity="0.15" stroke="#8B3A2C" stroke-width="1"/>
+  <text x="440" y="130" text-anchor="middle" font-size="11" fill="#8B3A2C" font-weight="500">10:00 – 15:00</text>
+
+  <!-- Row 2: Day worker schedule -->
+  <text x="80" y="172" text-anchor="end" font-size="11" fill="#4A5859" font-weight="500">日勤者</text>
+
+  <!-- Background bar -->
+  <rect x="90" y="158" width="616" height="32" rx="2" fill="#F4F0E8"/>
+
+  <!-- Day worker sleep: 23:00-7:00 = x: 90+(23*28)=734→706(cap) + 90 to 90+(7*28)=286 -->
+  <rect x="90" y="158" width="196" height="32" rx="2" fill="#4A5859" fill-opacity="0.2"/>
+  <rect x="644" y="158" width="62" height="32" rx="2" fill="#4A5859" fill-opacity="0.2"/>
+  <text x="143" y="178" text-anchor="middle" font-size="9" fill="#4A5859">睡眠</text>
+  <text x="675" y="178" text-anchor="middle" font-size="9" fill="#4A5859">睡眠</text>
+
+  <!-- Day worker work: 8:00-17:00 = x: 90+(8*28)=314 to 90+(17*28)=566 -->
+  <rect x="314" y="158" width="252" height="32" rx="2" fill="#4A5859" fill-opacity="0.08" stroke="#4A5859" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="440" y="178" text-anchor="middle" font-size="9" fill="#4A5859">勤務（昼休みに日光浴可能）</text>
+
+  <!-- Row 3: Night shift worker schedule -->
+  <text x="80" y="220" text-anchor="end" font-size="11" fill="#1B1B19" font-weight="600">夜勤者</text>
+
+  <!-- Background bar -->
+  <rect x="90" y="206" width="616" height="32" rx="2" fill="#F4F0E8"/>
+
+  <!-- Night worker work: 22:00-7:00 = x: 90+(22*28)=706-62=706 cap → 90+(22*28)=706, and 90 to 90+(7*28)=286 -->
+  <rect x="90" y="206" width="196" height="32" rx="2" fill="#1B1B19" fill-opacity="0.08" stroke="#1B1B19" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <rect x="706" y="206" width="0" height="32" rx="2" fill="#1B1B19" fill-opacity="0.08"/>
+  <!-- Work block from 22:00 -->
+  <rect x="706" y="206" width="0" height="32" fill="#1B1B19" fill-opacity="0.08"/>
+  <rect x="650" y="206" width="56" height="32" rx="2" fill="#1B1B19" fill-opacity="0.08" stroke="#1B1B19" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="143" y="226" text-anchor="middle" font-size="9" fill="#1B1B19">勤務</text>
+  <text x="678" y="226" text-anchor="middle" font-size="9" fill="#1B1B19">勤務</text>
+
+  <!-- Night worker sleep: 8:00-16:00 = x: 90+(8*28)=314 to 90+(16*28)=538 -->
+  <rect x="314" y="206" width="224" height="32" rx="2" fill="#8B3A2C" fill-opacity="0.25" stroke="#8B3A2C" stroke-width="1.5"/>
+  <text x="426" y="226" text-anchor="middle" font-size="11" fill="#8B3A2C" font-weight="600">睡眠（8:00–16:00）</text>
+
+  <!-- Collision annotation -->
+  <line x1="370" y1="144" x2="370" y2="240" stroke="#8B3A2C" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="510" y1="144" x2="510" y2="240" stroke="#8B3A2C" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Bracket / annotation at bottom -->
+  <line x1="370" y1="252" x2="510" y2="252" stroke="#8B3A2C" stroke-width="1.5"/>
+  <line x1="370" y1="248" x2="370" y2="256" stroke="#8B3A2C" stroke-width="1.5"/>
+  <line x1="510" y1="248" x2="510" y2="256" stroke="#8B3A2C" stroke-width="1.5"/>
+
+  <text x="440" y="274" text-anchor="middle" font-size="12" fill="#8B3A2C" font-weight="600">完全に衝突</text>
+  <text x="440" y="290" text-anchor="middle" font-size="10" fill="#6E665B">UVB有効時間帯 ＝ 夜勤者の睡眠時間帯</text>
+
+</svg>
