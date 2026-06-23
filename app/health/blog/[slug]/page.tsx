@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPostBySlugAndZone, getPostSlugsByZone } from "@/lib/mdx";
-import { MDX_OPTIONS } from "@/lib/mdx-options";
-import { MDX_COMPONENTS } from "@/app/components/mdx/MdxComponents";
+import { MdxRenderer } from "@/app/components/mdx/MdxRenderer";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -36,7 +34,7 @@ export default async function HealthPostPage({
         ))}
       </div>
       <article style={{ lineHeight: 1.9, fontSize: "1rem" }}>
-        <MDXRemote source={post.content} options={MDX_OPTIONS} components={MDX_COMPONENTS} />
+        <MdxRenderer html={post.html ?? ""} components={post.components ?? []} />
       </article>
       <div style={{ marginTop: "64px" }}>
         <Link href="/health" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>

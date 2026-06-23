@@ -17,6 +17,7 @@ interface RawPost {
   description?: string
   featured?: boolean
   html?: string
+  components?: unknown[]
 }
 
 function rawToPost(raw: RawPost): Post {
@@ -35,6 +36,7 @@ function rawToPost(raw: RawPost): Post {
     readingTime: `${Math.ceil(rt.minutes)} min read`,
     readingTimeMinutes: Math.ceil(rt.minutes),
     html: raw.html,
+    components: (raw.components ?? []) as Post['components'],
   }
 }
 

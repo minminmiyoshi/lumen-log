@@ -30,9 +30,17 @@ export type PostMeta = PostFrontmatter & {
   readingTimeMinutes: number
 }
 
+export type MdxComponentData = {
+  id: string
+  name: string
+  props: Record<string, unknown>
+  children: string | null
+}
+
 export type Post = PostMeta & {
   content: string
   html?: string
+  components?: MdxComponentData[]
 }
 
 // カテゴリのメタデータ
