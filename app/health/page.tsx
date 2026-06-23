@@ -36,7 +36,8 @@ export default function HealthPage() {
         }}>
           Health Dashboard
         </Link>
-        <Link href="/health/oncall" style={{
+
+        <Link href="/health/tools" style={{
           fontSize: "0.8rem",
           fontFamily: "sans-serif",
           color: "var(--indigo)",
@@ -44,7 +45,7 @@ export default function HealthPage() {
           border: "1px solid #E8E4DF",
           borderRadius: "6px",
         }}>
-          Oncall Log
+          Tools
         </Link>
       </div>
 
