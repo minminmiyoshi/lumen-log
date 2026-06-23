@@ -4,10 +4,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  outputFileTracingIncludes: {
-    "/health/blog/[slug]": ["./node_modules/**/*"],
-    "/money/blog/[slug]": ["./node_modules/**/*"],
-  },
   async redirects() {
     return [
       // 旧ブログ → ゾーン別
