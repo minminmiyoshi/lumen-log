@@ -85,16 +85,28 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-4 mt-5">
-            {instruments.map((inst) => (
-              <div
-                key={inst.id}
-                className="p-5 border border-hairline rounded bg-washi-deep/40"
-              >
-                <div className="font-mono text-[10.5px] text-bengara mb-3">{inst.id}</div>
-                <div className="font-serif text-[17px] leading-[1.25] mb-2">{inst.title}</div>
-                <div className="font-mincho text-xs text-mist leading-relaxed">{inst.subtitle}</div>
-              </div>
-            ))}
+            {instruments.map((inst) =>
+              inst.href ? (
+                <Link
+                  key={inst.id}
+                  href={inst.href}
+                  className="p-5 border border-hairline rounded bg-washi-deep/40 hover:border-bengara transition-colors block"
+                >
+                  <div className="font-mono text-[10.5px] text-bengara mb-3">{inst.id}</div>
+                  <div className="font-serif text-[17px] leading-[1.25] mb-2">{inst.title}</div>
+                  <div className="font-mincho text-xs text-mist leading-relaxed">{inst.subtitle}</div>
+                </Link>
+              ) : (
+                <div
+                  key={inst.id}
+                  className="p-5 border border-hairline rounded bg-washi-deep/40 opacity-70"
+                >
+                  <div className="font-mono text-[10.5px] text-mist mb-3">{inst.id} · soon</div>
+                  <div className="font-serif text-[17px] leading-[1.25] mb-2">{inst.title}</div>
+                  <div className="font-mincho text-xs text-mist leading-relaxed">{inst.subtitle}</div>
+                </div>
+              )
+            )}
           </div>
         </section>
 
@@ -121,10 +133,10 @@ const selectedWorks = [
   },
   {
     num: '02',
-    title: 'Garmin × 当直、パフォーマンス計測',
+    title: '夜勤の身体データ、定点観測',
     category: 'data',
     year: '2025',
-    href: '/health',
+    href: '/health/dashboard',
   },
   {
     num: '03',
@@ -136,7 +148,7 @@ const selectedWorks = [
 ]
 
 const instruments = [
-  { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージ累積' },
-  { id: 'inst · 02', title: 'Shift cost calculator', subtitle: '機会費用試算' },
-  { id: 'inst · 03', title: 'Routine diagnostic', subtitle: '退勤後リカバリー' },
+  { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージ累積', href: '/health/tools/shift-damage-score' },
+  { id: 'inst · 02', title: 'Shift cost calculator', subtitle: '機会費用試算', href: null },
+  { id: 'inst · 03', title: 'Routine diagnostic', subtitle: '退勤後リカバリー', href: null },
 ]
