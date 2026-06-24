@@ -238,15 +238,15 @@ function CascadeDiagram() {
       </Box>
 
       {/* Gut-brain axis side branch */}
-      <ArrowPath d="M530 232 L600 232 L600 362 L585 362" color={C.pink} dashed />
-      <Label x={608} y={288} text="腸脳相関" size={11} fill={C.pink} anchor="start" />
-      <Label x={608} y={304} text="（迷走神経）" size={11} fill={C.pink} anchor="start" />
+      <ArrowPath d="M530 232 L620 232 L620 444" color={C.pink} dashed />
+      <Label x={628} y={320} text="腸脳相関" size={11} fill={C.pink} anchor="start" />
+      <Label x={628} y={336} text="（迷走神経）" size={11} fill={C.pink} anchor="start" />
     </svg>
   )
 }
 
 // ─── Main component ───
-const VARIANTS: Record<string, () => React.ReactElement> = {
+const VARIANTS: Record<string, () => JSX.Element> = {
   'three-pathways': ThreePathwayDiagram,
   'cascade': CascadeDiagram,
 }
