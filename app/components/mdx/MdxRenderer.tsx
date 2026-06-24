@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { NightShiftChart } from './NightShiftChart'
 import { Callout, StockChart } from './MdxComponents'
+import { ArticleDiagram } from './ArticleDiagram'
 
 export interface MdxComponentData {
   id: string
@@ -23,6 +24,8 @@ function renderComponent(c: MdxComponentData): ReactNode {
       return <NightShiftChart {...(c.props as React.ComponentProps<typeof NightShiftChart>)} />
     case 'Callout':
       return <Callout {...(c.props as React.ComponentProps<typeof Callout>)}>{c.children}</Callout>
+    case 'ArticleDiagram':
+      return <ArticleDiagram {...(c.props as React.ComponentProps<typeof ArticleDiagram>)} />
     case 'StockChart':
       return <StockChart {...(c.props as React.ComponentProps<typeof StockChart>)} />
     default:
