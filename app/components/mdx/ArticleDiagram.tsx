@@ -246,7 +246,7 @@ function CascadeDiagram() {
 }
 
 // ─── Main component ───
-const VARIANTS: Record<string, () => JSX.Element> = {
+const VARIANTS: Record<string, () => React.ReactElement> = {
   'three-pathways': ThreePathwayDiagram,
   'cascade': CascadeDiagram,
 }
