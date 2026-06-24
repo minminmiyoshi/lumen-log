@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getStoriesByZone } from "@/lib/mdx";
+import { HealthTabs } from "../HealthTabs";
 
 export const dynamic = "force-static";
 
@@ -21,19 +22,7 @@ export default function HealthStoriesPage() {
         夜勤を支える人たちの物語
       </p>
 
-      {/* Health 一覧へ戻る導線 */}
-      <div style={{ marginBottom: "48px" }}>
-        <Link href="/health" style={{
-          fontSize: "0.8rem",
-          fontFamily: "sans-serif",
-          color: "var(--indigo)",
-          padding: "8px 16px",
-          border: "1px solid #E8E4DF",
-          borderRadius: "6px",
-        }}>
-          ← Health 一覧
-        </Link>
-      </div>
+      <HealthTabs active="stories" />
 
       {stories.length === 0 ? (
         <p style={{ color: "var(--muted)" }}>エピソードはまだありません。</p>

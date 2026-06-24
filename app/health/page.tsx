@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPostsByZone } from "@/lib/mdx";
+import { HealthTabs } from "./HealthTabs";
 
 export const dynamic = "force-static";
 
@@ -48,6 +49,8 @@ export default function HealthPage() {
           Tools
         </Link>
       </div>
+
+      <HealthTabs active="articles" />
 
       {posts.length === 0 ? (
         <p style={{ color: "var(--muted)" }}>記事はまだありません。</p>
