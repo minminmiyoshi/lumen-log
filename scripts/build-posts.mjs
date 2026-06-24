@@ -83,6 +83,69 @@ function parseAttrs(attrsRaw) {
   return props
 }
 
+// Extract h2/h3 ids from processed HTML to ensure they match rehype-slug output.
+// Returns a map of heading text -> id.
+function extractIdsFromHtml(html) {
+  const map = new Map()
+  const re = /<h([23])\s+id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g
+  let m
+  while ((m = re.exec(html)) !== null) {
+    const id = m[2]
+    const text = m[3].replace(/<[^>]+>/g, '').trim()
+    map.set(text, id)
+  }
+  return map
+}
+
+// Extract h2/h3 headings from markdown content to build TOC.
+// Must be called BEFORE component extraction so the heading text is intact.
+function extractTocFromMarkdown(mdxContent) {
+  const toc = []
+  const lines = mdxContent.split('\n')
+  let inCodeBlock = false
+  for (const line of lines) {
+    if (line.startsWith('```')) {
+      inCodeBlock = !inCodeBlock
+      continue
+    }
+    if (inCodeBlock) continue
+    const m = line.match(/^(#{2,3})\s+(.+?)\s*$/)
+    if (m) {
+      const level = m[1].length
+      const text = m[2].trim()
+      toc.push({ level, text, id: '' })
+    }
+  }
+  return toc
+}
+
+// Wrap the references section in collapsible <details>.
+// Matches "## 参考文献" or "## References" and wraps everything that follows
+// (including a leading horizontal rule) until end of content.
+function wrapReferences(html) {
+  // The references heading becomes <h2 id="参考文献">参考文献</h2> after processing
+  const idx = html.search(/<h2[^>]*>(参考文献|References)<\/h2>/)
+  if (idx === -1) return html
+  const before = html.slice(0, idx)
+  // Remove a trailing <hr> from the before-section (the --- divider before references)
+  const beforeCleaned = before.replace(/<hr\s*\/?>(\s*)$/, '')
+  const after = html.slice(idx)
+  // Extract heading + body
+  const headingMatch = after.match(/<h2[^>]*>(参考文献|References)<\/h2>/)
+  if (!headingMatch) return html
+  const headingEndIdx = headingMatch.index + headingMatch[0].length
+  const headingHtml = after.slice(0, headingEndIdx)
+  const bodyHtml = after.slice(headingEndIdx).trim()
+  const headingText = headingMatch[1]
+  // Count references (rough count of <li>)
+  const refCount = (bodyHtml.match(/<li>/g) || []).length
+  const summary = refCount > 0
+    ? `${headingText}（${refCount}件）`
+    : headingText
+  const wrapped = `<details class="references-block"><summary>${summary}</summary><div class="references-body">${bodyHtml}</div></details>`
+  return beforeCleaned + wrapped
+}
+
 const processor = unified()
   .use(remarkParse)
   .use(remarkGfm)
@@ -97,10 +160,19 @@ const posts = await Promise.all(files.map(async f => {
   const slug = f.replace(/\.mdx?$/, '')
   const raw = fs.readFileSync(path.join(postsDir, f), 'utf-8')
   const { frontmatter, content } = parseFrontmatter(raw)
+  const toc = extractTocFromMarkdown(content)
   const { content: cleaned, components } = extractComponents(content)
-  const html = String(await processor.process(cleaned))
-  return { slug, content, html, components, ...frontmatter }
+  let html = String(await processor.process(cleaned))
+  // Fill in TOC ids from the processed HTML (rehype-slug output)
+  const idMap = extractIdsFromHtml(html)
+  for (const item of toc) {
+    item.id = idMap.get(item.text) || ''
+  }
+  // Filter out references heading from TOC since it'll be collapsed
+  const tocFiltered = toc.filter(item => item.text !== '参考文献' && item.text !== 'References')
+  html = wrapReferences(html)
+  return { slug, content, html, components, toc: tocFiltered, ...frontmatter }
 }))
 
 fs.writeFileSync(outputPath, JSON.stringify(posts, null, 2))
-console.log(`Built ${posts.length} posts -> data/posts.json (with html + components)`)
+console.log(`Built ${posts.length} posts -> data/posts.json (with html + components + toc)`)

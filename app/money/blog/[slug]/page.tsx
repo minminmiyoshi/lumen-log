@@ -34,7 +34,7 @@ export default async function MoneyPostPage({
         ))}
       </div>
       <article style={{ lineHeight: 1.9, fontSize: "1rem" }}>
-        <MdxRenderer html={post.html ?? ""} components={post.components ?? []} />
+        <MdxRenderer html={post.html ?? ""} components={post.components ?? []} toc={post.toc ?? []} />
       </article>
       <div style={{ marginTop: "64px" }}>
         <Link href="/money" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>

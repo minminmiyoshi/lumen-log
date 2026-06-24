@@ -1,6 +1,6 @@
 // lib/mdx.ts
 import readingTime from 'reading-time'
-import type { Post, PostMeta, PostCategory, PostZone } from '@/types/post'
+import type { Post, PostMeta, PostCategory, PostZone, TocItem } from '@/types/post'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const postsData = require('../data/posts.json') as RawPost[]
@@ -18,6 +18,7 @@ interface RawPost {
   featured?: boolean
   html?: string
   components?: unknown[]
+  toc?: TocItem[]
 }
 
 function rawToPost(raw: RawPost): Post {
@@ -37,6 +38,7 @@ function rawToPost(raw: RawPost): Post {
     readingTimeMinutes: Math.ceil(rt.minutes),
     html: raw.html,
     components: (raw.components ?? []) as Post['components'],
+    toc: raw.toc ?? [],
   }
 }
 

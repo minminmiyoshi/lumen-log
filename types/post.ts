@@ -37,10 +37,17 @@ export type MdxComponentData = {
   children: string | null
 }
 
+export type TocItem = {
+  level: number  // 2 or 3 (h2 or h3)
+  text: string
+  id: string
+}
+
 export type Post = PostMeta & {
   content: string
   html?: string
   components?: MdxComponentData[]
+  toc?: TocItem[]
 }
 
 // カテゴリのメタデータ
