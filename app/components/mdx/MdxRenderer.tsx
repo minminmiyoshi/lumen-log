@@ -179,6 +179,50 @@ export function MdxRenderer({ html, components, toc }: Props) {
             transition: none;
           }
         }
+        .mdx-content h2 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          line-height: 1.4;
+          margin: 64px 0 20px 0;
+          padding-bottom: 12px;
+          border-bottom: 1px solid var(--border, #D8D2C5);
+          color: var(--ink, #1B1B19);
+          letter-spacing: 0.01em;
+        }
+        .mdx-content h2:first-child {
+          margin-top: 0;
+        }
+        .mdx-content h3 {
+          font-size: 1.15rem;
+          font-weight: 600;
+          line-height: 1.5;
+          margin: 40px 0 16px 0;
+          color: var(--ink, #1B1B19);
+          position: relative;
+          padding-left: 14px;
+        }
+        .mdx-content h3::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0.4em;
+          bottom: 0.4em;
+          width: 3px;
+          background: var(--accent, #8B3A2C);
+          border-radius: 2px;
+        }
+        .mdx-content p {
+          margin: 0 0 20px 0;
+        }
+        .mdx-content strong {
+          font-weight: 600;
+          color: var(--ink, #1B1B19);
+        }
+        .mdx-content hr {
+          margin: 48px 0;
+          border: none;
+          border-top: 1px solid var(--border, #D8D2C5);
+        }
         .mdx-content details.references-block {
           margin-top: 48px;
           padding: 16px 20px;
