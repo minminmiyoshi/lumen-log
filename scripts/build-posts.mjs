@@ -11,6 +11,7 @@ import rehypeStringify from 'rehype-stringify'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const postsDir = path.join(__dirname, '../posts')
+const storiesDir = path.join(__dirname, '../stories')
 const outputPath = path.join(__dirname, '../data/posts.json')
 
 function parseFrontmatter(raw) {
@@ -154,12 +155,44 @@ const processor = unified()
   .use(rehypeHighlight)
   .use(rehypeStringify, { allowDangerousHtml: true })
 
-const files = fs.readdirSync(postsDir).filter(f => /\.mdx?$/.test(f))
+// posts/ と stories/ の両方を収集。stories/ 由来は origin='story' で印付け。
+function collectFiles(dir, origin) {
+  if (!fs.existsSync(dir)) return []
+  return fs.readdirSync(dir)
+    .filter(f => /\.mdx?$/.test(f))
+    .map(f => ({ file: f, dir, origin }))
+}
 
-const posts = await Promise.all(files.map(async f => {
+const fileEntries = [
+  ...collectFiles(postsDir, 'article'),
+  ...collectFiles(storiesDir, 'story'),
+]
+
+// story 必須フィールドのバリデーション（欠けていればビルド失敗）
+const STORY_REQUIRED = ['zone', 'episode', 'relatedArticles']
+const validationErrors = []
+
+const posts = await Promise.all(fileEntries.map(async ({ file: f, dir, origin }) => {
   const slug = f.replace(/\.mdx?$/, '')
-  const raw = fs.readFileSync(path.join(postsDir, f), 'utf-8')
+  const raw = fs.readFileSync(path.join(dir, f), 'utf-8')
   const { frontmatter, content } = parseFrontmatter(raw)
+
+  // stories/ 由来は type を 'story' にデフォルト適用（frontmatter で明示されていなければ）
+  if (origin === 'story' && !frontmatter.type) {
+    frontmatter.type = 'story'
+  }
+
+  // story のバリデーション
+  if (frontmatter.type === 'story') {
+    for (const key of STORY_REQUIRED) {
+      const v = frontmatter[key]
+      const missing = v === undefined || v === '' ||
+        (Array.isArray(v) && v.length === 0)
+      if (missing) {
+        validationErrors.push(`  [${f}] story に必須の "${key}" が欠落しています`)
+      }
+    }
+  }
   const toc = extractTocFromMarkdown(content)
   const { content: cleaned, components } = extractComponents(content)
   let html = String(await processor.process(cleaned))
@@ -171,8 +204,25 @@ const posts = await Promise.all(files.map(async f => {
   // Filter out references heading from TOC since it'll be collapsed
   const tocFiltered = toc.filter(item => item.text !== '参考文献' && item.text !== 'References')
   html = wrapReferences(html)
-  return { slug, content, html, components, toc: tocFiltered, ...frontmatter }
+
+  // story の場合、本文中の「## 第N話」を数えて公開済み話数を算出
+  let chapterCount = undefined
+  if (frontmatter.type === 'story') {
+    const matches = content.match(/^##\s*第.+?話/gm)
+    chapterCount = matches ? matches.length : 0
+  }
+
+  return { slug, content, html, components, toc: tocFiltered, chapterCount, ...frontmatter }
 }))
 
+if (validationErrors.length > 0) {
+  console.error('\n❌ frontmatter バリデーションエラー:')
+  console.error(validationErrors.join('\n'))
+  console.error('\nstory には zone / episode / relatedArticles が必須です。ビルドを中止しました。\n')
+  process.exit(1)
+}
+
 fs.writeFileSync(outputPath, JSON.stringify(posts, null, 2))
-console.log(`Built ${posts.length} posts -> data/posts.json (with html + components + toc)`)
+const storyCount = posts.filter(p => p.type === 'story').length
+const articleCount = posts.length - storyCount
+console.log(`Built ${posts.length} posts (${articleCount} articles + ${storyCount} stories) -> data/posts.json`)

@@ -5,6 +5,8 @@ import { createRoot } from 'react-dom/client'
 import { NightShiftChart } from './NightShiftChart'
 import { Callout, StockChart } from './MdxComponents'
 import { ArticleDiagram } from './ArticleDiagram'
+import { StoryToArticle } from './StoryToArticle'
+import { StoryEntry } from './StoryEntry'
 
 export interface MdxComponentData {
   id: string
@@ -35,6 +37,10 @@ function renderComponent(c: MdxComponentData): ReactNode {
       return <ArticleDiagram {...(c.props as React.ComponentProps<typeof ArticleDiagram>)} />
     case 'StockChart':
       return <StockChart {...(c.props as React.ComponentProps<typeof StockChart>)} />
+    case 'StoryToArticle':
+      return <StoryToArticle {...(c.props as unknown as React.ComponentProps<typeof StoryToArticle>)} />
+    case 'StoryEntry':
+      return <StoryEntry {...(c.props as unknown as React.ComponentProps<typeof StoryEntry>)} />
     default:
       return null
   }

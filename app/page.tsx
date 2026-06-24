@@ -123,7 +123,16 @@ export default function Home() {
   )
 }
 
-const selectedWorks = [
+// 連載小説枠。note 未公開のあいだは本番ビルドから除外する（dev でのみ表示）。
+const storyWork = {
+  num: '02',
+  title: '連載小説「Lumen」— 夜勤を支える人たちの物語',
+  category: 'fiction',
+  year: '2026',
+  href: '/health/stories',
+}
+
+const baseWorks = [
   {
     num: '01',
     title: '夜勤者に向けた、健康と最適化の発信',
@@ -146,6 +155,13 @@ const selectedWorks = [
     href: '/money',
   },
 ]
+
+// 本番では小説を出さない。dev では 2番目に差し込み、番号を振り直す。
+const selectedWorks = (
+  process.env.NODE_ENV === 'production'
+    ? baseWorks
+    : [baseWorks[0], storyWork, baseWorks[1], baseWorks[2]]
+).map((w, i) => ({ ...w, num: String(i + 1).padStart(2, '0') }))
 
 const instruments = [
   { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージ累積', href: '/health/tools/shift-damage-score' },

@@ -1,6 +1,6 @@
 // lib/mdx.ts
 import readingTime from 'reading-time'
-import type { Post, PostMeta, PostCategory, PostZone, TocItem } from '@/types/post'
+import type { Post, PostMeta, PostType, PostCategory, PostZone, TocItem } from '@/types/post'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const postsData = require('../data/posts.json') as RawPost[]
@@ -19,6 +19,11 @@ interface RawPost {
   html?: string
   components?: unknown[]
   toc?: TocItem[]
+  type?: PostType
+  episode?: number
+  mainTheme?: string
+  relatedArticles?: string[]
+  chapterCount?: number
 }
 
 function rawToPost(raw: RawPost): Post {
@@ -39,7 +44,17 @@ function rawToPost(raw: RawPost): Post {
     html: raw.html,
     components: (raw.components ?? []) as Post['components'],
     toc: raw.toc ?? [],
+    type: raw.type ?? 'article',
+    episode: raw.episode,
+    mainTheme: raw.mainTheme,
+    relatedArticles: raw.relatedArticles,
+    chapterCount: raw.chapterCount,
   }
+}
+
+// type 判定ヘルパー: type 未指定は 'article' 扱い
+function isStory(p: RawPost): boolean {
+  return p.type === 'story'
 }
 
 export function getPostBySlug(slug: string): Post | null {
@@ -67,7 +82,8 @@ export function getAllPostsMeta(): PostMeta[] {
 }
 
 export function getPostsByZone(zone: PostZone): PostMeta[] {
-  return getAllPostsMeta().filter((p) => p.zone === zone)
+  // 記事のみ（小説は除外）。type 未指定は記事扱い。
+  return getAllPostsMeta().filter((p) => p.zone === zone && p.type !== 'story')
 }
 
 export function getPostSlugsByZone(zone: PostZone): { slug: string }[] {
@@ -103,4 +119,33 @@ export function getAllTags(): { tag: string; count: number }[] {
   return Array.from(tagCount.entries())
     .map(([tag, count]) => ({ tag, count }))
     .sort((a, b) => b.count - a.count)
+}
+
+// ============================================================
+// 連載小説（story）専用の取得関数
+// ============================================================
+
+// zone 内の story を episode 昇順で返す
+export function getStoriesByZone(zone: PostZone): PostMeta[] {
+  return postsData
+    .filter((p) => p.zone === zone && isStory(p))
+    .filter((p) => p.published || process.env.NODE_ENV !== 'production')
+    .map((raw) => {
+      const { content: _content, ...meta } = rawToPost(raw)
+      return meta as PostMeta
+    })
+    .sort((a, b) => (a.episode ?? 0) - (b.episode ?? 0))
+}
+
+export function getStoryBySlugAndZone(slug: string, zone: PostZone): Post | null {
+  const raw = postsData.find((p) => p.slug === slug && p.zone === zone && isStory(p))
+  if (!raw) return null
+  if (!raw.published && process.env.NODE_ENV === 'production') return null
+  return rawToPost(raw)
+}
+
+export function getStorySlugsByZone(zone: PostZone): { slug: string }[] {
+  return postsData
+    .filter((p) => p.zone === zone && isStory(p))
+    .map((p) => ({ slug: p.slug }))
 }

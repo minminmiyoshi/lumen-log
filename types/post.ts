@@ -2,6 +2,9 @@
 
 export type PostZone = 'health' | 'money' | 'sangyoi'
 
+// コンテンツ種別: 記事 or 連載小説
+export type PostType = 'article' | 'story'
+
 export type PostCategory =
   | 'investment'    // 投資・資産形成
   | 'fire'          // FIRE戦略
@@ -22,6 +25,12 @@ export type PostFrontmatter = {
   published: boolean        // false = 下書き（ビルドには含まれない）
   featured?: boolean        // トップページ掲載フラグ
   ogImage?: string          // OGP画像パス（未指定はカテゴリ別デフォルト）
+  // --- 連載小説（story）用フィールド。type 未指定時は 'article' 扱い ---
+  type?: PostType           // 'article'（デフォルト） | 'story'
+  episode?: number          // story のときのエピソード番号
+  mainTheme?: string        // story の主たる健康テーマ
+  relatedArticles?: string[] // 連動するB記事の slug 配列
+  chapterCount?: number     // story の公開済み話数（本文から自動カウント）
 }
 
 export type PostMeta = PostFrontmatter & {
