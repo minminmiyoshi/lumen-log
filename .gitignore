@@ -50,3 +50,11 @@ app/page.tsx.bak
 # Cloudflare/wrangler build artifacts
 .wrangler/
 .open-next/
+
+# backup files
+*.bak
+*.bak2
+
+# accidental empty files (debug)
+/General
+/Login

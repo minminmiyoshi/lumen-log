@@ -7,6 +7,7 @@ import { Callout, StockChart } from './MdxComponents'
 import { ArticleDiagram } from './ArticleDiagram'
 import { StoryToArticle } from './StoryToArticle'
 import { StoryEntry } from './StoryEntry'
+import { StoryTips } from './StoryTips'
 
 export interface MdxComponentData {
   id: string
@@ -41,6 +42,8 @@ function renderComponent(c: MdxComponentData): ReactNode {
       return <StoryToArticle {...(c.props as unknown as React.ComponentProps<typeof StoryToArticle>)} />
     case 'StoryEntry':
       return <StoryEntry {...(c.props as unknown as React.ComponentProps<typeof StoryEntry>)} />
+    case 'StoryTips':
+      return <StoryTips {...(c.props as unknown as React.ComponentProps<typeof StoryTips>)} />
     default:
       return null
   }
@@ -114,24 +117,47 @@ function TableOfContents({ items }: { items: TocItem[] }) {
 export function MdxRenderer({ html, components, toc }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Mount React components into placeholders
+  // Mount React components into placeholders.
+  // StrictMode 対策: 同じ DOM ノードに createRoot を二度呼ばないよう
+  // WeakMap で既存 root を保持し、あれば render() を再実行する。
+  const rootMapRef = useRef<WeakMap<Element, ReturnType<typeof createRoot>>>(
+    new WeakMap()
+  )
+
   useEffect(() => {
     if (!containerRef.current) return
-    const roots: ReturnType<typeof createRoot>[] = []
+    const rootMap = rootMapRef.current
+    const usedNodes: Element[] = []
 
     for (const c of components) {
       const placeholder = containerRef.current.querySelector(
         `[data-mdx-placeholder="${c.id}"]`
       )
       if (placeholder) {
-        const root = createRoot(placeholder)
+        let root = rootMap.get(placeholder)
+        if (!root) {
+          root = createRoot(placeholder)
+          rootMap.set(placeholder, root)
+        }
         root.render(renderComponent(c))
-        roots.push(root)
+        usedNodes.push(placeholder)
       }
     }
 
     return () => {
-      setTimeout(() => roots.forEach((r) => r.unmount()), 0)
+      // ノードが DOM から外れたタイミングで unmount。
+      // setTimeout 経由でないと StrictMode の二重実行で警告が出るため遅延。
+      setTimeout(() => {
+        for (const node of usedNodes) {
+          if (!node.isConnected) {
+            const root = rootMap.get(node)
+            if (root) {
+              root.unmount()
+              rootMap.delete(node)
+            }
+          }
+        }
+      }, 0)
     }
   }, [components])
 

@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 /**
  * note で1話公開したら、Obsidian の元ファイルから該当話を切り出して
- * stories/ の MDX に追記する。本文の転記は一切せず機械的にコピーする。
+ * stories/ の MDX に追記する。
  *
  * 使い方:
  *   node scripts/append-episode-chapter.mjs <mdx名> <元ファイル名> [--final]
- * 例:
- *   node scripts/append-episode-chapter.mjs episode-1-nurse-sleep.mdx ep01_02_鏡の中の他人.md
- *   node scripts/append-episode-chapter.mjs episode-1-nurse-sleep.mdx ep01_10_灯.md --final
  *
- * --final: 最終話。追記後、末尾に StoryToArticle を付与する。
+ * 動作:
+ *   - 末尾に StoryToArticle があれば一旦外す（再実行時のため）
+ *   - 本話を追記
+ *   - <StoryTips episode={N} chapter={M} /> を追記
+ *   - --final なら最後に <StoryToArticle /> を追記
+ *
+ * 注意:
+ *   StoryTips の冪等性はない。同じ話を2回追記すると本文とStoryTipsが二重に入る。
+ *   再生成したい場合は MDX を frontmatter のみにリセットしてから10話を順次追記する。
  */
 import fs from 'fs'
 import path from 'path'
@@ -33,30 +38,52 @@ const srcPath = path.join(SRC_DIR, srcName)
 if (!fs.existsSync(mdxPath)) { console.error(`MDXが見つからない: ${mdxPath}`); process.exit(1) }
 if (!fs.existsSync(srcPath)) { console.error(`元ファイルが見つからない: ${srcPath}`); process.exit(1) }
 
-// 元ファイルから該当話を抽出（H1 と note フッターを除去）
+const chapterMatch = srcName.match(/^ep\d+_(\d+)_/)
+if (!chapterMatch) {
+  console.error(`元ファイル名から chapter 番号を抽出できない: ${srcName}`)
+  process.exit(1)
+}
+const chapterNum = parseInt(chapterMatch[1], 10)
+
 let chapter = fs.readFileSync(srcPath, 'utf-8')
 chapter = chapter.replace(/^#\s*連載小説.*$/m, '')
 chapter = chapter.replace(/\n>\s*🩺[\s\S]*$/, '\n')
 chapter = chapter.trim().replace(/\n-{3,}\s*$/, '').trim()
 
-// 既存MDXを読み、末尾の StoryToArticle があれば一旦外す
 let mdx = fs.readFileSync(mdxPath, 'utf-8')
+
+const episodeMatch = mdx.match(/^episode:\s*(\d+)/m)
+if (!episodeMatch) {
+  console.error(`MDX の frontmatter から episode 番号を抽出できない`)
+  process.exit(1)
+}
+const episodeNum = parseInt(episodeMatch[1], 10)
+
 const slugMatch = mdx.match(/relatedArticles:\s*\[\s*"([^"]+)"/)
 const relatedSlug = slugMatch ? slugMatch[1] : 'REPLACE_ME'
-mdx = mdx.replace(/\n*<StoryToArticle[^>]*\/>\s*$/g, '').replace(/\s*$/, '')
+
+// 末尾の空白除去
+mdx = mdx.replace(/\s*$/, '')
+
+// 末尾の StoryToArticle のみ外す（StoryTips は外さない）
+mdx = mdx.replace(/\s*<StoryToArticle[^>]*\/>\s*$/, '')
 
 // 話を追記
 mdx += '\n\n' + chapter + '\n'
 
+// StoryTips を付与
+mdx += `\n<StoryTips episode={${episodeNum}} chapter={${chapterNum}} />\n`
+
 // 最終話なら StoryToArticle を付与
 if (isFinal) {
-  mdx = mdx.replace(/\s*$/, '') + `\n\n<StoryToArticle slug="${relatedSlug}" />\n`
+  mdx += `\n<StoryToArticle slug="${relatedSlug}" />\n`
 }
 
 fs.writeFileSync(mdxPath, mdx)
 
 const chapterCount = (mdx.match(/^##\s*第.+?話/gm) || []).length
-console.log(`OK: ${srcName} を ${mdxName} に追記`)
-console.log(`現在の公開話数: 第${chapterCount}話まで`)
-if (isFinal) console.log(`StoryToArticle（slug="${relatedSlug}"）を末尾に付与`)
-console.log('\n次: node scripts/build-posts.mjs → ブラウザ確認 → commit/push')
+const tipsCount = (mdx.match(/<StoryTips\s/g) || []).length
+const articleCount = (mdx.match(/<StoryToArticle\s/g) || []).length
+
+console.log(`OK: ${srcName} → episode=${episodeNum}, chapter=${chapterNum}`)
+console.log(`  話数: ${chapterCount} / StoryTips: ${tipsCount} / StoryToArticle: ${articleCount}`)
