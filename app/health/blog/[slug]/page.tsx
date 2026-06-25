@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getPostBySlugAndZone, getPostSlugsByZone } from "@/lib/mdx";
 import { MdxRenderer } from "@/app/components/mdx/MdxRenderer";
+import ShareButtons from "@/components/ShareButtons";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -8,6 +10,39 @@ export async function generateStaticParams() {
 }
 
 export const dynamic = "force-static";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlugAndZone(slug, "health");
+  if (!post) return {};
+
+  const url = `https://lumen-log.com/health/${slug}`;
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description ?? "",
+      type: "article",
+      url,
+      publishedTime: post.date,
+      tags: post.tags,
+      images: [{ url: "/og-default.png", width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
 
 export default async function HealthPostPage({
   params,
@@ -36,6 +71,12 @@ export default async function HealthPostPage({
       <article style={{ lineHeight: 1.9, fontSize: "1rem" }}>
         <MdxRenderer html={post.html ?? ""} components={post.components ?? []} toc={post.toc ?? []} />
       </article>
+
+      <ShareButtons
+        title={post.title}
+        url={`https://lumen-log.com/health/${slug}`}
+      />
+
       <div style={{ marginTop: "64px" }}>
         <Link href="/health" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
           ← Health 一覧へ

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono, Shippori_Mincho_B1 } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import ScrollProgress from "../components/ScrollProgress";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -33,10 +34,41 @@ const shippori = Shippori_Mincho_B1({
 });
 
 export const metadata: Metadata = {
-  title: "Lumen Log",
-  description: "An ER doctor's system for surviving night shifts",
+  metadataBase: new URL("https://lumen-log.com"),
+  title: {
+    default: "lumen-log | 夜勤医師×投資家×セルフ最適化マニア",
+    template: "%s | lumen-log",
+  },
+  description:
+    "夜勤医師が投資・資産形成・Garminデータ・FIRE戦略を一次情報として発信するサイト",
   verification: {
     google: "ofLWHA1G4WgByzKoplxxt9k8xyAzXYO9ESRpI3IrnEA",
+  },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: "https://lumen-log.com",
+    siteName: "lumen-log",
+    images: [
+      {
+        url: "/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "lumen-log",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@yuruyuru_ER",     // ← Xのハンドルを確認して変更
+    creator: "@yuruyuru_ER",  // ← 同上
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: "lumen-log RSS Feed" },
+      ],
+    },
   },
 };
 
@@ -53,6 +85,7 @@ export default async function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} ${shippori.variable}`}
     >
       <body>
+        <ScrollProgress />
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           {children}
