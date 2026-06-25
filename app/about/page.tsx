@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About | Lumen Log",
-  description: "夜勤救急医・投資家・セルフ最適化マニアの自己紹介とサイトについて",
+  description: "夜勤救急医が自分の身体データを記録し、シフトワークと健康・資産・時間の関係を一次情報として残すサイトについて。",
 };
 
 export default function About() {
@@ -17,63 +17,78 @@ export default function About() {
         marginBottom: "3rem",
         color: "var(--foreground)",
       }}>
-        悶々とする救急医の、<br />
-        投資と資産と身体の記録。
+        夜勤医師が、自分の身体を<br />
+        データとして観測する記録。
       </h1>
 
       <section style={{ marginBottom: "3.5rem" }}>
         <SectionLabel>Who I am</SectionLabel>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", color: "var(--foreground)", lineHeight: 1.9 }}>
           <p>
-            救急医をしている。当直が多く、夜中に走り回りながら夜明けに米国市場が開くのを待つ、という生活をもう何年も続けている。
-            医師という職業は安定しているようで、時間だけは自由にならない。
-            その不自由さへの反発が、投資への関心とFIREへの志向につながった。
+            救急医をしている。当直が多く、不規則な夜勤を何年も続けてきた。
+            夜働き、昼に眠る生活は、身体に確実に負荷をかける。
+            その負荷が自分の身体に何を起こしているのか——それを「なんとなく」ではなく、データで知りたいと思ったのが、このサイトの出発点だ。
           </p>
           <p>
-            子が2人いる。妻もいる。家族との時間をもっと持ちたいと思い続けて、それが資産形成を急がせる。
-            完全リタイアには興味がない。ただ、「働かないと死ぬ」状態から抜け出したい——それだけだ。
+            Garminを着けて睡眠・心拍・身体活動を記録し、体組成を測り、当直のたびにコンディションの変化を追っている。
+            夜勤明けに心拍はどう乱れるのか、睡眠の質はどこまで落ちるのか、回復には何日かかるのか。
+            医師としての知識と、自分自身の長期データ。この2つが重なる場所に、たぶん価値がある。
           </p>
           <p>
-            Garminを着けて自分の身体データを記録し、ポートフォリオを眺め、当直の合間に古民家をどうするか悶々と考えている。
-            この生活自体が、このサイトのコンテンツになっている。
-          </p>
-        </div>
-      </section>
-
-      <section style={{ marginBottom: "3.5rem" }}>
-        <SectionLabel>Investment philosophy</SectionLabel>
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", color: "var(--foreground)", lineHeight: 1.9 }}>
-          <p>
-            マクロから入る。金利・地政学・エネルギー構造の変化を起点に、セクターと銘柄を選ぶ。
-            「ストーリーがある」「需給が変わる」「マクロ追い風がある」——この3つが重なったときだけ動く。
-          </p>
-          <p>
-            ロングだけでなくショートも使う。市場が間違えているときに逆を張るのは怖いが、
-            その怖さを乗り越えるための論拠を積み上げることが、投資思考の鍛錬だと思っている。
-          </p>
-          <p>
-            断定はしない。確率で考える。downside を常に見積もる。
-            医療の世界で「見逃してはいけない疾患から除外する」訓練を積んできたせいか、
-            投資でも「最悪シナリオから逆算する」癖がついている。
+            子が2人いて、妻がいる。家族との時間は有限で、だからこそ自分の身体と時間をどう守るかを真剣に考えるようになった。
+            この生活そのものが、このサイトのコンテンツになっている。
           </p>
         </div>
       </section>
 
       <section style={{ marginBottom: "3.5rem" }}>
-        <SectionLabel>Why this site</SectionLabel>
+        <SectionLabel>What this site is about</SectionLabel>
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", color: "var(--foreground)", lineHeight: 1.9 }}>
           <p>
-            noteとXで発信してきたが、プラットフォームに依存することへの漠然とした不安があった。
-            自分の思考と記録を、自分でコントロールできる場所に置きたかった。
+            このサイトの中心は、<strong>夜勤（シフトワーク）と健康データ</strong>だ。
+            夜勤が身体に与える影響を、医師の視点とウェアラブルの実データの両面から整理していく。
           </p>
           <p>
-            同時に、ツールを作りたかった。資産シミュレーター、健康ダッシュボード、当直記録——
-            既存のアプリでは「自分の文脈」が反映できない。医師の収入構造、夜勤と睡眠の関係、
-            FIRE目標から逆算した積立額。これらを一箇所で扱えるものが欲しかった。
+            既存の健康アプリは「平均的な人」を前提に作られている。
+            だが夜勤者の身体は、概日リズムが常に揺さぶられる特殊な環境にある。
+            一般論ではなく、夜勤当事者の文脈に合った記録と分析が必要だと感じている。
           </p>
           <p>
-            プログラミングはほぼできない。AIと対話しながら作っている。
-            その過程も含めて、このサイト自体がコンテンツだと思っている。
+            扱うのは、自分の身体で実際に起きたこと。
+            睡眠、心拍、体組成、当直パフォーマンス——それらを継続的に観測し、
+            再現性のある形に落とし込むことを目指している。
+          </p>
+        </div>
+      </section>
+
+      <section style={{ marginBottom: "3.5rem" }}>
+        <SectionLabel>How I think</SectionLabel>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", color: "var(--foreground)", lineHeight: 1.9 }}>
+          <p>
+            救急の現場では、不完全な情報の中で「何を優先するか」を瞬時に決める必要がある。
+            単なる暗記では対応できない。構造で考え、因果で整理し、優先順位をつける——
+            その思考の癖が、健康データの読み方にもそのまま出ている。
+          </p>
+          <p>
+            数値を眺めるだけでは意味がない。
+            「なぜこの変化が起きたのか」「次にどう動けば改善するのか」まで踏み込んで初めて、データは判断の材料になる。
+            断定はしない。確率で考え、最悪のシナリオから逆算する。これも現場で身についた習慣だ。
+          </p>
+        </div>
+      </section>
+
+      <section style={{ marginBottom: "3.5rem" }}>
+        <SectionLabel>Beyond health</SectionLabel>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", color: "var(--foreground)", lineHeight: 1.9 }}>
+          <p>
+            身体の最適化を突き詰めていくと、自然と「時間」と「お金」の話につながる。
+            夜勤の拘束から少しずつ自由になるための資産形成も、このサイトのもう一つのテーマとして扱っている。
+            ただし主役はあくまで身体データで、資産の話はその延長線上にある。
+          </p>
+          <p>
+            投資ではマクロ・需給・ストーリーを起点に判断する。
+            医療で培った「リスクから逆算する」思考を、そのまま資産運用にも持ち込んでいる。
+            このあたりの記録は <a href="/money" style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>Money</a> にまとめている。
           </p>
         </div>
       </section>
@@ -82,12 +97,12 @@ export default function About() {
         <SectionLabel>Topics</SectionLabel>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           {[
-            { label: "投資・資産形成", desc: "マクロ・個別株・ショート。思考の記録。" },
-            { label: "FIRE戦略", desc: "サイドFIREへの設計と実況中継。" },
-            { label: "健康管理", desc: "Garminデータ×当直パフォーマンスの記録。" },
+            { label: "夜勤と健康", desc: "シフトワークが身体に与える影響を医師目線で整理。" },
+            { label: "身体データ解析", desc: "Garmin×当直パフォーマンスの継続記録。" },
+            { label: "セルフ最適化", desc: "睡眠・心拍・体組成を観測し、改善につなげる。" },
             { label: "救急医療", desc: "現場の判断思考。医師目線の一次情報。" },
-            { label: "古民家・不動産", desc: "実家相続とAirbnb転換の悶々記録。" },
-            { label: "ツール自作", desc: "AIで作る自分専用の最適化ツール群。" },
+            { label: "資産形成", desc: "夜勤からの自由度を上げるための運用記録。" },
+            { label: "ツール自作", desc: "AIで作る自分専用の可視化・分析ツール群。" },
           ].map(({ label, desc }) => (
             <div key={label} style={{
               padding: "1rem 1.2rem",
@@ -107,7 +122,7 @@ export default function About() {
       </section>
 
       <section style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        <a href="/blog" style={{
+        <a href="/health" style={{
           padding: "0.75rem 1.75rem",
           background: "var(--foreground)",
           color: "var(--background)",
@@ -115,16 +130,16 @@ export default function About() {
           fontSize: "0.875rem",
           fontFamily: "sans-serif",
         }}>
-          ブログを読む
+          Health を見る
         </a>
-        <a href="/tools" style={{
+        <a href="/money" style={{
           padding: "0.75rem 1.75rem",
           border: "1px solid var(--foreground)",
           borderRadius: "9999px",
           fontSize: "0.875rem",
           fontFamily: "sans-serif",
         }}>
-          ツールを使う
+          Money を見る
         </a>
       </section>
 
