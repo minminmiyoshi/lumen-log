@@ -128,6 +128,17 @@ export default function About() {
         </a>
       </section>
 
+      <section style={{ marginTop: "4rem", paddingTop: "2rem", borderTop: "1px solid #E0DDD8" }}>
+        <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
+          <a href="/about/privacy" style={{ fontSize: "0.8rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
+            プライバシーポリシー
+          </a>
+          <a href="mailto:contact@lumen-log.com" style={{ fontSize: "0.8rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
+            お問い合わせ
+          </a>
+        </div>
+      </section>
+
     </main>
   );
 }
