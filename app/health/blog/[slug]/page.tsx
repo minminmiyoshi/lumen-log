@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlugAndZone, getPostSlugsByZone } from "@/lib/mdx";
+import { getPostBySlugAndZone, getPostSlugsByZone, getPostsByZone } from "@/lib/mdx";
 import { MdxRenderer } from "@/app/components/mdx/MdxRenderer";
 import ShareButtons from "@/components/ShareButtons";
+import RelatedPosts from "@/components/RelatedPosts";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
+import { ScrollToTop } from "@/components/ArticleUtils";
 import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -53,35 +56,45 @@ export default async function HealthPostPage({
   const post = getPostBySlugAndZone(slug, "health");
   if (!post) notFound();
 
+  const url = `https://lumen-log.com/health/${slug}`;
+  const zonePosts = getPostsByZone("health");
+
   return (
     <main style={{ maxWidth: "640px", margin: "0 auto", padding: "60px 24px" }}>
+      <ArticleJsonLd post={post} url={url} />
+
       <p style={{ fontSize: "0.8rem", color: "var(--muted)", marginBottom: "8px", fontFamily: "sans-serif" }}>
         {post.date} · {post.readingTime}
       </p>
       <h1 style={{ fontSize: "1.8rem", marginBottom: "12px", lineHeight: 1.4 }}>
         {post.title}
       </h1>
-      <div style={{ display: "flex", gap: "8px", marginBottom: "48px" }}>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "48px", flexWrap: "wrap" }}>
         {post.tags.map((tag) => (
-          <span key={tag} style={{ fontSize: "0.75rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
+          <Link
+            key={tag}
+            href={`/tags/${encodeURIComponent(tag)}`}
+            style={{ fontSize: "0.75rem", color: "var(--muted)", fontFamily: "sans-serif", textDecoration: "none" }}
+          >
             #{tag}
-          </span>
+          </Link>
         ))}
       </div>
       <article style={{ lineHeight: 1.9, fontSize: "1rem" }}>
         <MdxRenderer html={post.html ?? ""} components={post.components ?? []} toc={post.toc ?? []} />
       </article>
 
-      <ShareButtons
-        title={post.title}
-        url={`https://lumen-log.com/health/${slug}`}
-      />
+      <RelatedPosts current={post} candidates={zonePosts} />
+
+      <ShareButtons title={post.title} url={url} />
 
       <div style={{ marginTop: "40px" }}>
         <Link href="/health" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
           ← Health 一覧へ
         </Link>
       </div>
+
+      <ScrollToTop />
     </main>
   );
 }

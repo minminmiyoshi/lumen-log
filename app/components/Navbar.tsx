@@ -10,6 +10,15 @@ const links = [
   { href: "/about", key: "about" },
 ];
 
+function SearchIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const t = useTranslations("common.nav");
@@ -21,7 +30,7 @@ export default function Navbar() {
           Lumen-log <span className="text-bengara">©</span>
         </Link>
 
-        <nav className="hidden md:flex gap-7 font-mono text-[11px]">
+        <nav className="hidden md:flex gap-7 font-mono text-[11px] items-center">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -31,6 +40,13 @@ export default function Navbar() {
               {t(link.key)}
             </Link>
           ))}
+          <Link
+            href="/search"
+            aria-label="検索"
+            className="text-sumi hover:text-bengara transition-colors flex items-center"
+          >
+            <SearchIcon />
+          </Link>
         </nav>
 
         <button
@@ -56,6 +72,14 @@ export default function Navbar() {
               {t(link.key)}
             </Link>
           ))}
+          <Link
+            href="/search"
+            onClick={() => setOpen(false)}
+            className="font-mono text-sm text-sumi hover:text-bengara transition-colors flex items-center gap-2"
+          >
+            <SearchIcon />
+            Search
+          </Link>
         </div>
       )}
     </header>
