@@ -77,7 +77,7 @@ export default async function HealthPostPage({
         url={`https://lumen-log.com/health/${slug}`}
       />
 
-      <div style={{ marginTop: "64px" }}>
+      <div style={{ marginTop: "40px" }}>
         <Link href="/health" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
           ← Health 一覧へ
         </Link>

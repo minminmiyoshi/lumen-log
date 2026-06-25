@@ -77,7 +77,7 @@ export default async function MoneyPostPage({
         url={`https://lumen-log.com/money/${slug}`}
       />
 
-      <div style={{ marginTop: "64px" }}>
+      <div style={{ marginTop: "40px" }}>
         <Link href="/money" style={{ fontSize: "0.875rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
           ← Money 一覧へ
         </Link>
