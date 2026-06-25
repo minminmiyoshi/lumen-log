@@ -133,7 +133,7 @@ export default function About() {
           <a href="/about/privacy" style={{ fontSize: "0.8rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
             プライバシーポリシー
           </a>
-          <a href="mailto:contact@lumen-log.com" style={{ fontSize: "0.8rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
+          <a href="/about/contact" style={{ fontSize: "0.8rem", color: "var(--muted)", fontFamily: "sans-serif" }}>
             お問い合わせ
           </a>
         </div>
