@@ -53,8 +53,8 @@ Claude Code がこのリポジトリで作業する際の恒久的な前提。�
 
 - `/health/` — 夜勤労働者向けコンテンツ＋ツール。記事は `/health/blog/[slug]`
   - `/health/tools/shift-damage-score/` — シフトダメージスコアラー（完成。Canvas API で PNG DL＋X シェア）
-  - 健康管理ダッシュボード（Garmin・体組成・ワークアウト）、当直入力フォーム（`/tools/oncall`）
-- `/money/` — 資産形成・FIRE・ポートフォリオ・資産シミュレーター。記事は `/money/blog/[slug]`
+  - 健康管理ダッシュボード（Garmin・体組成・ワークアウト）、当直入力フォーム（`/health/oncall`。旧 `/tools/oncall` は `lib/redirects.ts` で 301 リダイレクト）
+- `/money/` — 資産形成・FIRE・ポートフォリオ・資産シミュレーター（`/money/simulator`。旧 `/tools/simulator` は同様にリダイレクト）。記事は `/money/blog/[slug]`
 - `/about/` — プロフィール / 世界観（`/about/privacy`、`/about/contact`）
 
 zone-based routing のため、記事の所属 zone（health/money）がそのまま URL に効く。
@@ -90,7 +90,7 @@ git add -A && git commit -m "post: [タイトル]" && git push origin main
 
 ## 7. カスタムMDXコンポーネント
 
-- `<NightShiftChart type="bar|horizontalBar|line" labels={...} datasets={...} caption="..." height={...} />`
+- `<NightShiftChart type="bar|horizontalBar|line" labels={...} datasets={...} caption="..." height={...} yLabel="..." ySuffix="%" />`（`yLabel`・`ySuffix` は任意。`ySuffix` はY軸目盛の単位整形に使う）
   **props はバッククォート記法必須**：`labels={`["A","B"]`}`。シングルクォートだとパーサーが拾わず components:0 になる
 - `<ArticleDiagram variant="..." caption="..." />` — 記事固有SVGフロー図。新 variant は `app/components/mdx/ArticleDiagram.tsx` に関数追加＋VARIANTS登録。型は `() => React.ReactElement`（React 19 で `JSX.Element` は不可）
 - `<Callout type="info|tip|warn|danger">...</Callout>` — 1記事1〜2個まで

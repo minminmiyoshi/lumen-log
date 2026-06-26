@@ -170,6 +170,9 @@ const fileEntries = [
 
 // story 必須フィールドのバリデーション（欠けていればビルド失敗）
 const STORY_REQUIRED = ['zone', 'episode', 'relatedArticles']
+// 全記事共通: zone は必須かつ health / money のみ（§4.7 をビルドで強制）
+// 欠落・不正値はランタイムでは 404 になるが、ここで前倒しして検出する。
+const VALID_ZONES = ['health', 'money']
 const validationErrors = []
 
 const posts = await Promise.all(fileEntries.map(async ({ file: f, dir, origin }) => {
@@ -180,6 +183,14 @@ const posts = await Promise.all(fileEntries.map(async ({ file: f, dir, origin })
   // stories/ 由来は type を 'story' にデフォルト適用（frontmatter で明示されていなければ）
   if (origin === 'story' && !frontmatter.type) {
     frontmatter.type = 'story'
+  }
+
+  // zone のバリデーション（全記事共通・§4.7）
+  // zone が無い／health・money 以外なら、ファイル名つきでビルドを失敗させる。
+  if (!VALID_ZONES.includes(frontmatter.zone)) {
+    validationErrors.push(
+      `  [${f}] zone が不正です（必須: "health" または "money"、実際: ${JSON.stringify(frontmatter.zone)}）`
+    )
   }
 
   // story のバリデーション
@@ -218,7 +229,7 @@ const posts = await Promise.all(fileEntries.map(async ({ file: f, dir, origin })
 if (validationErrors.length > 0) {
   console.error('\n❌ frontmatter バリデーションエラー:')
   console.error(validationErrors.join('\n'))
-  console.error('\nstory には zone / episode / relatedArticles が必須です。ビルドを中止しました。\n')
+  console.error('\n全記事に zone（health / money）が必須。story には加えて episode / relatedArticles が必須です。ビルドを中止しました。\n')
   process.exit(1)
 }
 

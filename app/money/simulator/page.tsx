@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FIREシミュレーター | Lumen Log",
     description: "個人資産・法人資産・副業収入を統合したFIREシミュレーター。",
-    url: "https://lumen-log.com/tools/simulator",
+    url: "https://lumen-log.com/money/simulator",
   },
 };
 
