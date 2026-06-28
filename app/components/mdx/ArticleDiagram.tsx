@@ -170,6 +170,75 @@ function ThreePathwayDiagram() {
   )
 }
 
+function SensorDistanceDiagram(): React.ReactElement {
+  const ink = '#3A352E'
+  const benigara = '#8B3A2C'
+  const kasumi = '#6E665B'
+  const keisen = '#D8D2C5'
+  const paper = '#FBF9F4'
+  const font = "'Shippori Mincho B1', 'Inter', sans-serif"
+
+  // チップ（指標ラベル）。x,w はラベル長に合わせて個別指定し、はみ出しを防ぐ。
+  const Chip = (
+    x: number,
+    y: number,
+    w: number,
+    label: string,
+    on = false,
+  ): React.ReactElement => (
+    <g key={`${label}-${x}-${y}`}>
+      <rect x={x} y={y} width={w} height={22} rx={11}
+        fill={on ? benigara : paper}
+        stroke={on ? benigara : keisen} strokeWidth={1.2} />
+      <text x={x + w / 2} y={y + 15} textAnchor="middle"
+        fill={on ? paper : ink} fontSize="12.5"
+        fontWeight={on ? 700 : 400}>{label}</text>
+    </g>
+  )
+
+  return (
+    <svg viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg"
+      style={{ width: '100%', height: 'auto', fontFamily: font }}>
+      <rect x="0" y="0" width="700" height="520" fill={paper} />
+
+      {/* 距離軸 */}
+      <text x="40" y="40" fill={kasumi} fontSize="13" fontWeight="700">
+        センサーからの距離（遠いほど信頼度が下がる）
+      </text>
+      <line x1="44" y1="64" x2="44" y2="476" stroke={keisen} strokeWidth="2" />
+      <polygon points="44,484 39,470 49,470" fill={kasumi} />
+
+      {/* TIER 1 */}
+      <rect x="70" y="64" width="600" height="124" rx="10" fill="#EFE7DC" stroke={keisen} strokeWidth="1.2" />
+      <text x="92" y="92" fill={kasumi} fontSize="13" fontWeight="700" letterSpacing="1">TIER 1</text>
+      <text x="92" y="120" fill={ink} fontSize="18" fontWeight="700">絶対値も信頼できる</text>
+      <text x="92" y="144" fill={kasumi} fontSize="13">距離が近い／変換が少ない</text>
+      {Chip(92, 156, 200, '安静時心拍数(RHR)')}
+      {Chip(304, 156, 120, '心拍数')}
+
+      {/* TIER 2（主役・強調） */}
+      <rect x="70" y="200" width="600" height="158" rx="10" fill="#F6EFE6" stroke={benigara} strokeWidth="2.4" />
+      <text x="92" y="228" fill={benigara} fontSize="13" fontWeight="700" letterSpacing="1">TIER 2</text>
+      <text x="92" y="256" fill={ink} fontSize="18" fontWeight="700">トレンド・逸脱のみ有効</text>
+      <text x="92" y="280" fill={kasumi} fontSize="13">絶対値や他人比較は使えない</text>
+      {Chip(92, 292, 120, 'HRV', true)}
+      {Chip(224, 292, 120, '睡眠時間')}
+      {Chip(356, 292, 120, '呼吸数')}
+      {Chip(92, 322, 120, 'SpO2')}
+      {Chip(224, 322, 120, 'VO2max')}
+
+      {/* TIER 3 */}
+      <rect x="70" y="370" width="600" height="124" rx="10" fill="#F2ECE2" stroke={keisen} strokeWidth="1.2" />
+      <text x="92" y="398" fill={kasumi} fontSize="13" fontWeight="700" letterSpacing="1">TIER 3</text>
+      <text x="92" y="426" fill={ink} fontSize="18" fontWeight="700">参考程度</text>
+      <text x="92" y="450" fill={kasumi} fontSize="13">各社独自の合成・推定（ブラックボックス）</text>
+      {Chip(92, 462, 150, '睡眠ステージ')}
+      {Chip(254, 462, 150, '消費カロリー')}
+      {Chip(416, 462, 210, '回復スコア/レディネス')}
+    </svg>
+  )
+}
+
 // ─── Diagram: Dysbiosis cascade ───
 function CascadeDiagram() {
   return (
@@ -249,6 +318,7 @@ function CascadeDiagram() {
 const VARIANTS: Record<string, () => React.ReactElement> = {
   'three-pathways': ThreePathwayDiagram,
   'cascade': CascadeDiagram,
+  'sensor-distance': SensorDistanceDiagram,
 }
 
 export function ArticleDiagram({ variant, caption }: { variant: string; caption?: string }) {
