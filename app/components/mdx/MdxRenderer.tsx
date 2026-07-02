@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { NightShiftChart } from './NightShiftChart'
+import NightShiftScatter from './NightShiftScatter'
 import { Callout, StockChart } from './MdxComponents'
 import { ArticleDiagram } from './ArticleDiagram'
 import { StoryToArticle } from './StoryToArticle'
@@ -32,6 +33,8 @@ function renderComponent(c: MdxComponentData): ReactNode {
   switch (c.name) {
     case 'NightShiftChart':
       return <NightShiftChart {...(c.props as React.ComponentProps<typeof NightShiftChart>)} />
+    case 'NightShiftScatter':
+      return <NightShiftScatter {...(c.props as unknown as React.ComponentProps<typeof NightShiftScatter>)} />
     case 'Callout':
       return <Callout {...(c.props as React.ComponentProps<typeof Callout>)}>{c.children}</Callout>
     case 'ArticleDiagram':

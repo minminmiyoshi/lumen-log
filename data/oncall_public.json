@@ -1,14 +1,32 @@
 {
   "summary": {
-    "count": 24,
+    "count": 25,
     "avg_hrv_change_pct": -2.1,
     "avg_body_battery_drain": 47.9,
-    "avg_nap_h": 3.2,
+    "avg_nap_h": 3.3,
     "avg_delta_fatigue": 0.2,
     "avg_sleepiness": 3.2,
     "avg_fatigue_out": 3.1
   },
   "entries": [
+    {
+      "date": "2026-07-01",
+      "preNapQuality": 2,
+      "fatigueIn": 3,
+      "fatigueOut": 3,
+      "moodIn": 3,
+      "moodOut": 3,
+      "sleepiness": 3,
+      "workload": 3,
+      "nap_h": 0,
+      "pre_nap_h": 1.4,
+      "delta_fatigue": 0,
+      "hrv_change_pct": null,
+      "body_battery_drain": 49,
+      "prev_hrv": 26,
+      "prev_sleep_h": 6.56,
+      "prev_resting_hr": 57
+    },
     {
       "date": "2026-06-26",
       "preNapQuality": 3,
@@ -18,7 +36,7 @@
       "moodOut": 4,
       "sleepiness": 4,
       "workload": 4,
-      "nap_h": 0,
+      "nap_h": 0.8,
       "pre_nap_h": 1.2,
       "delta_fatigue": 1,
       "hrv_change_pct": 13.8,
@@ -36,7 +54,7 @@
       "moodOut": 2,
       "sleepiness": 4,
       "workload": 2,
-      "nap_h": 0,
+      "nap_h": 5.4,
       "pre_nap_h": 1.4,
       "delta_fatigue": -1,
       "hrv_change_pct": 7.4,
