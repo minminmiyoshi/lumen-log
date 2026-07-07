@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" role="img" aria-labelledby="ttl desc" font-family="'Shippori Mincho B1', 'Noto Serif JP', serif">
+<title id="ttl">リザーブ次元 × 実測測定信頼性の二軸平面</title>
+<desc id="desc">横軸は著者のGarmin実測によるTE/SWC（小さいほど単日で意味ある変化を分解できる）、縦軸は時定数。TE/SWC=1に単日分解の境界線。RHR・HRV・睡眠・VO2maxを実測値とともに配置し、RHRが日々指標で最も左だがいずれも境界を越えていないことを示す。</desc>
+<style>
+  .ink{fill:#3A342C}.haze{fill:#6E665B}.benga{fill:#8B3A2C}
+  .t{font-size:15px}.ts{font-size:12.5px}.tb{font-size:15px;font-weight:600}
+  .rule{stroke:#D8D2C5}.guide{stroke:#E4DFD4}
+</style>
+<rect x="0" y="0" width="720" height="560" fill="#FAF7F1"/>
+
+<!-- y axis title -->
+<text class="ink tb" x="112" y="60" text-anchor="middle">時定数</text>
+<text class="haze ts" x="112" y="78" text-anchor="middle">枯渇・回復の速さ</text>
+
+<!-- axes -->
+<line x1="160" y1="95" x2="160" y2="400" class="rule" stroke-width="1"/>
+<line x1="160" y1="400" x2="672" y2="400" class="rule" stroke-width="1"/>
+
+<!-- time-constant guides -->
+<line x1="160" y1="150" x2="668" y2="150" class="guide" stroke-width="1" stroke-dasharray="2 4"/>
+<line x1="160" y1="258" x2="668" y2="258" class="guide" stroke-width="1" stroke-dasharray="2 4"/>
+<line x1="160" y1="352" x2="668" y2="352" class="guide" stroke-width="1" stroke-dasharray="2 4"/>
+<text class="haze ts" x="152" y="154" text-anchor="end">日単位</text>
+<text class="haze ts" x="152" y="262" text-anchor="end">週〜月</text>
+<text class="haze ts" x="152" y="356" text-anchor="end">年単位</text>
+
+<!-- threshold TE/SWC = 1 -->
+<line x1="320" y1="100" x2="320" y2="400" stroke="#8B3A2C" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.8"/>
+<text class="benga ts" x="320" y="419" text-anchor="middle">TE/SWC = 1</text>
+<text class="benga ts" x="320" y="435" text-anchor="middle">単日分解の境界</text>
+
+<text class="haze ts" x="210" y="419" text-anchor="middle">← 単日で読める</text>
+<text class="haze ts" x="500" y="419" text-anchor="middle">トレンドでしか読めない →</text>
+<text class="haze ts" x="416" y="463" text-anchor="middle">測定信頼性：実測 TE/SWC（著者のGarmin, 2026-03〜07・115日／夜勤16回）</text>
+
+<!-- scale: x = 160 + ratio*168 (ratio 0..3) -->
+<!-- VO2max ratio 0.27 -> 205 ; y year 352 -->
+<circle cx="205" cy="352" r="9" fill="#6B6086"/>
+<text class="ink tb" x="220" y="349" text-anchor="start">VO₂max</text>
+<text class="haze ts" x="220" y="366" text-anchor="start">0.27 ※平滑化・年で読む（105日 −2.7）</text>
+
+<!-- RHR ratio 1.47 -> 407 ; y between 日/週 198 ; emphasis -->
+<circle cx="407" cy="200" r="15" fill="none" stroke="#8B3A2C" stroke-width="1.4"/>
+<circle cx="407" cy="200" r="10" fill="#8B3A2C"/>
+<text class="ink tb" x="393" y="181" text-anchor="middle">RHR ◎</text>
+<text class="haze ts" x="407" y="228" text-anchor="middle">1.47 ／ 明けD+1 +0.44bpm・SNR0.27</text>
+
+<!-- HRV ratio 1.84 -> 469 ; y 日 150 -->
+<circle cx="469" cy="150" r="9" fill="#5C7A6B"/>
+<text class="ink tb" x="483" y="146" text-anchor="start">HRV</text>
+<text class="haze ts" x="483" y="163" text-anchor="start">1.84 ／ 明け −0.50ms・SNR0.15</text>
+
+<!-- Sleep ratio 2.25 -> 538 ; y 日 150 -->
+<circle cx="538" cy="150" r="8" fill="#6E665B"/>
+<text class="ink tb" x="538" y="130" text-anchor="middle">睡眠時間</text>
+<text class="haze ts" x="552" y="167" text-anchor="start">2.25（総時間のみ）</text>
+
+<!-- legend -->
+<circle cx="182" cy="500" r="6" fill="#5C7A6B"/><text class="haze ts" x="194" y="504" text-anchor="start">自律神経</text>
+<circle cx="286" cy="500" r="6" fill="#8B3A2C"/><text class="haze ts" x="298" y="504" text-anchor="start">免疫・循環</text>
+<circle cx="404" cy="500" r="6" fill="#6B6086"/><text class="haze ts" x="416" y="504" text-anchor="start">有酸素・構造</text>
+<circle cx="536" cy="500" r="6" fill="#6E665B"/><text class="haze ts" x="548" y="504" text-anchor="start">回復入力</text>
+<text class="haze ts" x="160" y="528" text-anchor="start">◎ RHRが日々指標で最も左（最良）。ただし全指標 TE/SWC＞1＝単日値では分解不能、トレンド読みが必須。</text>
+<text class="haze ts" x="160" y="546" text-anchor="start">色＝リザーブ次元／横位置＝実測ノイズ（typical error）と意味ある最小変化（SWC）の比。</text>
+</svg>

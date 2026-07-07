@@ -1,27 +1,27 @@
 {
   "summary": {
     "count": 25,
-    "avg_hrv_change_pct": -2.1,
+    "avg_hrv_change_pct": -3.1,
     "avg_body_battery_drain": 47.9,
     "avg_nap_h": 3.3,
     "avg_delta_fatigue": 0.2,
     "avg_sleepiness": 3.2,
-    "avg_fatigue_out": 3.1
+    "avg_fatigue_out": 3.2
   },
   "entries": [
     {
       "date": "2026-07-01",
       "preNapQuality": 2,
       "fatigueIn": 3,
-      "fatigueOut": 3,
+      "fatigueOut": 4,
       "moodIn": 3,
       "moodOut": 3,
       "sleepiness": 3,
       "workload": 3,
       "nap_h": 0,
       "pre_nap_h": 1.4,
-      "delta_fatigue": 0,
-      "hrv_change_pct": null,
+      "delta_fatigue": 1,
+      "hrv_change_pct": -24.2,
       "body_battery_drain": 49,
       "prev_hrv": 26,
       "prev_sleep_h": 6.56,
