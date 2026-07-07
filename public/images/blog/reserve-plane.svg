@@ -47,13 +47,13 @@
 
 <!-- HRV ratio 1.84 -> 469 ; y 日 150 -->
 <circle cx="469" cy="150" r="9" fill="#5C7A6B"/>
-<text class="ink tb" x="483" y="146" text-anchor="start">HRV</text>
-<text class="haze ts" x="483" y="163" text-anchor="start">1.84 ／ 明け −0.50ms・SNR0.15</text>
+<text class="ink tb" x="478" y="146" text-anchor="start">HRV</text>
+<text class="haze ts" x="478" y="174" text-anchor="start">1.84｜明け −0.50ms</text>
 
 <!-- Sleep ratio 2.25 -> 538 ; y 日 150 -->
 <circle cx="538" cy="150" r="8" fill="#6E665B"/>
-<text class="ink tb" x="538" y="130" text-anchor="middle">睡眠時間</text>
-<text class="haze ts" x="552" y="167" text-anchor="start">2.25（総時間のみ）</text>
+<text class="ink tb" x="538" y="128" text-anchor="middle">睡眠時間</text>
+<text class="haze ts" x="538" y="192" text-anchor="middle">2.25｜総時間のみ</text>
 
 <!-- legend -->
 <circle cx="182" cy="500" r="6" fill="#5C7A6B"/><text class="haze ts" x="194" y="504" text-anchor="start">自律神経</text>
