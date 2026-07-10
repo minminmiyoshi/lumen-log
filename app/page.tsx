@@ -156,12 +156,9 @@ const baseWorks = [
   },
 ]
 
-// 本番では小説を出さない。dev では 2番目に差し込み、番号を振り直す。
-const selectedWorks = (
-  process.env.NODE_ENV === 'production'
-    ? baseWorks
-    : [baseWorks[0], storyWork, baseWorks[1], baseWorks[2]]
-).map((w, i) => ({ ...w, num: String(i + 1).padStart(2, '0') }))
+// 小説枠を 2番目に差し込み、番号を振り直す。
+const selectedWorks = [baseWorks[0], storyWork, baseWorks[1], baseWorks[2]]
+  .map((w, i) => ({ ...w, num: String(i + 1).padStart(2, '0') }))
 
 const instruments = [
   { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージ累積', href: '/health/tools/shift-damage-score' },

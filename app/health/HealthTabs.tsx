@@ -3,16 +3,11 @@ import Link from "next/link";
 // /health 配下の「記事 / 物語」切り替えタブ。
 // active には "articles" か "stories" を渡す。
 export function HealthTabs({ active }: { active: "articles" | "stories" }) {
-  // note 未公開のあいだは本番で「物語」タブを隠す（dev では表示）。
-  // note 公開時にこの分岐を外す（運用手順書 初回公開時を参照）。
   const allTabs = [
     { key: "articles", label: "記事", href: "/health" },
     { key: "stories", label: "物語", href: "/health/stories" },
   ] as const;
-  const tabs =
-    process.env.NODE_ENV === "production"
-      ? allTabs.filter((t) => t.key !== "stories")
-      : allTabs;
+  const tabs = allTabs;
 
   // タブが1つだけなら表示しない（記事のみのとき）
   if (tabs.length <= 1) return null;
