@@ -316,6 +316,7 @@ function CascadeDiagram() {
 
 // ─── Main component ───
 const VARIANTS: Record<string, () => React.ReactElement> = {
+  'sleep-vs-recovery': SleepVsRecoveryDiagram,
   'three-pathways': ThreePathwayDiagram,
   'cascade': CascadeDiagram,
   'sensor-distance': SensorDistanceDiagram,
@@ -343,4 +344,74 @@ export function ArticleDiagram({ variant, caption }: { variant: string; caption?
       )}
     </figure>
   )
+}
+
+function SleepVsRecoveryDiagram(): React.ReactElement {
+  const ink = '#6E665B';      // 霞
+  const rule = '#D8D2C5';     // 罫線
+  const accent = '#8B3A2C';   // 弁柄
+  const font = "'Shippori Mincho B1', 'Inter', sans-serif";
+
+  return (
+    <svg
+      viewBox="0 0 720 420"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="睡眠判定とHRV回復判定は別系統で動くことを示す図"
+      style={{ width: '100%', height: 'auto', fontFamily: font }}
+    >
+      {/* 上段: 睡眠判定系統 */}
+      <text x="24" y="40" fontSize="17" fill={accent} fontFamily={font}>睡眠判定の系統</text>
+      <text x="24" y="62" fontSize="12" fill={ink} fontFamily={font}>加速度センサー ＋ 心拍パターン</text>
+
+      <rect x="24" y="78" width="150" height="52" rx="8" fill="none" stroke={rule} strokeWidth="1.5" />
+      <text x="99" y="102" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>体動が少ない</text>
+      <text x="99" y="120" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>心拍が安定</text>
+
+      <line x1="174" y1="104" x2="228" y2="104" stroke={rule} strokeWidth="1.5" markerEnd="url(#arrowGray)" />
+
+      <rect x="228" y="78" width="150" height="52" rx="8" fill="none" stroke={rule} strokeWidth="1.5" />
+      <text x="303" y="110" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>「睡眠中」と判定</text>
+
+      {/* 下段: HRV回復系統 */}
+      <text x="24" y="212" fontSize="17" fill={accent} fontFamily={font}>回復判定の系統</text>
+      <text x="24" y="234" fontSize="12" fill={ink} fontFamily={font}>HRV（RMSSD）の回復＝副交感神経優位</text>
+
+      <rect x="24" y="250" width="150" height="52" rx="8" fill="none" stroke={rule} strokeWidth="1.5" />
+      <text x="99" y="274" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>副交感神経が</text>
+      <text x="99" y="292" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>優位に切替</text>
+
+      <line x1="174" y1="276" x2="228" y2="276" stroke={rule} strokeWidth="1.5" markerEnd="url(#arrowGray)" />
+
+      <rect x="228" y="250" width="150" height="52" rx="8" fill="none" stroke={accent} strokeWidth="1.8" />
+      <text x="303" y="282" fontSize="13" fill={accent} textAnchor="middle" fontFamily={font}>充電が立ち上がる</text>
+
+      {/* 右側: 一致 / 乖離 の分岐 */}
+      <line x1="378" y1="104" x2="440" y2="180" stroke={rule} strokeWidth="1.5" />
+      <line x1="378" y1="276" x2="440" y2="200" stroke={rule} strokeWidth="1.5" />
+
+      <rect x="440" y="158" width="256" height="64" rx="8" fill="none" stroke={rule} strokeWidth="1.5" />
+      <text x="568" y="184" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>両系統が揃う → 回復（正常な夜）</text>
+      <text x="568" y="206" fontSize="13" fill={ink} textAnchor="middle" fontFamily={font}>睡眠判定は続くが回復系統が</text>
+
+      {/* 乖離ボックス（強調） */}
+      <rect x="440" y="238" width="256" height="120" rx="8" fill="none" stroke={accent} strokeWidth="1.8" strokeDasharray="5 4" />
+      <text x="568" y="266" fontSize="14" fill={accent} textAnchor="middle" fontFamily={font} fontWeight="600">乖離が起きるとき</text>
+      <text x="568" y="292" fontSize="12.5" fill={ink} textAnchor="middle" fontFamily={font}>感染・発熱でサイトカインが</text>
+      <text x="568" y="311" fontSize="12.5" fill={ink} textAnchor="middle" fontFamily={font}>HRVを抑制／徐波睡眠が分断</text>
+      <text x="568" y="336" fontSize="12.5" fill={accent} textAnchor="middle" fontFamily={font}>→「寝ているのに充電ゼロ」</text>
+
+      <line x1="568" y1="222" x2="568" y2="238" stroke={accent} strokeWidth="1.5" markerEnd="url(#arrowAccent)" />
+
+      {/* 矢印定義 */}
+      <defs>
+        <marker id="arrowGray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill={rule} />
+        </marker>
+        <marker id="arrowAccent" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill={accent} />
+        </marker>
+      </defs>
+    </svg>
+  );
 }
