@@ -88,6 +88,7 @@ export function getPostsByZone(zone: PostZone): PostMeta[] {
 
 export function getPostSlugsByZone(zone: PostZone): { slug: string }[] {
   return postsData
+    .filter((p) => p.published || process.env.NODE_ENV !== 'production')
     .filter((p) => p.zone === zone && p.type !== 'story')
     .map((p) => ({ slug: p.slug }))
 }

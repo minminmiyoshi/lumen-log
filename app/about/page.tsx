@@ -82,13 +82,12 @@ export default function About() {
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", color: "var(--foreground)", lineHeight: 1.9 }}>
           <p>
             身体の最適化を突き詰めていくと、自然と「時間」と「お金」の話につながる。
-            夜勤の拘束から少しずつ自由になるための資産形成も、このサイトのもう一つのテーマとして扱っている。
-            ただし主役はあくまで身体データで、資産の話はその延長線上にある。
+            夜勤の拘束から少しずつ自由になりたい——その動機の延長で、資産形成も個人的に続けている。
           </p>
           <p>
             投資ではマクロ・需給・ストーリーを起点に判断する。
             医療で培った「リスクから逆算する」思考を、そのまま資産運用にも持ち込んでいる。
-            このあたりの記録は <a href="/money" style={{ textDecoration: "underline", textUnderlineOffset: "2px" }}>Money</a> にまとめている。
+            ただ、それはあくまで個人的な実践であって、このサイトが記録するのは夜勤と健康、そしてセルフ最適化に絞っている。
           </p>
         </div>
       </section>
@@ -131,15 +130,6 @@ export default function About() {
           fontFamily: "sans-serif",
         }}>
           Health を見る
-        </a>
-        <a href="/money" style={{
-          padding: "0.75rem 1.75rem",
-          border: "1px solid var(--foreground)",
-          borderRadius: "9999px",
-          fontSize: "0.875rem",
-          fontFamily: "sans-serif",
-        }}>
-          Money を見る
         </a>
       </section>
 
