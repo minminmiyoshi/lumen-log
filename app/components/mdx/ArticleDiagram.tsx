@@ -314,12 +314,90 @@ function CascadeDiagram() {
   )
 }
 
+// ─── Diagram: Why night eating raises glucose (circadian) ───
+function GlucoseCircadianDiagram() {
+  return (
+    <svg
+      width="100%" viewBox="0 0 680 500"
+      role="img" aria-label="体内時計が夜の食後血糖を上げ、眠気と脂肪蓄積を招く機序"
+      style={{ maxWidth: 680, margin: '0 auto', display: 'block' }}
+    >
+      <defs>
+        <marker id="arrowhead" viewBox="0 0 10 10" refX={8} refY={5}
+          markerWidth={6} markerHeight={6} orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke"
+            strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+        </marker>
+      </defs>
+
+      {/* Title */}
+      <Label x={340} y={26} text="夜の食事が血糖を上げる — 体内時計が糖の処理を鈍らせる" size={15} weight={500} />
+
+      {/* Biological night */}
+      <Box x={190} y={46} w={300} h={48} fill={C.purpleBg} stroke={C.purple}>
+        <Label x={340} y={64} text="生物学的な夜（体内時計・SCN）" weight={500} fill={C.purple} />
+        <Label x={340} y={82} text="活動を止め休息へ向かうフェーズ" size={11} fill={C.muted} />
+      </Box>
+
+      {/* Two arrows down */}
+      <Arrow x1={300} y1={94} x2={190} y2={132} color={C.purple} />
+      <Arrow x1={380} y1={94} x2={490} y2={132} color={C.coral} />
+
+      {/* Left: melatonin → insulin secretion down */}
+      <Box x={55} y={134} w={260} h={58} fill={C.purpleBg} stroke={C.purple}>
+        <Label x={185} y={154} text="メラトニン分泌 ↑" weight={500} fill={C.purple} />
+        <Label x={185} y={174} text="膵β細胞のインスリン分泌を抑制（MTNR1B）" size={10.5} fill={C.muted} />
+      </Box>
+
+      {/* Right: peripheral insulin resistance up */}
+      <Box x={365} y={134} w={260} h={58} fill={C.coralBg} stroke={C.coral}>
+        <Label x={495} y={154} text="末梢のインスリン抵抗性 ↑" weight={500} fill={C.coral} />
+        <Label x={495} y={174} text="骨格筋・肝の糖取り込み ↓" size={10.5} fill={C.muted} />
+      </Box>
+
+      {/* Converge to postprandial glucose */}
+      <Arrow x1={185} y1={192} x2={270} y2={232} color={C.purple} />
+      <Arrow x1={495} y1={192} x2={410} y2={232} color={C.coral} />
+
+      <Box x={195} y={234} w={290} h={56} fill={C.redBg} stroke={C.red} rx={12} strokeWidth={1}>
+        <Label x={340} y={254} text="同じ食事でも食後血糖が大きく上がる" weight={500} fill={C.red} />
+        <Label x={340} y={274} text="夜は耐糖能（糖を捌く力）が低下している" size={11} fill={C.muted} />
+      </Box>
+
+      {/* Split to two outcomes */}
+      <Arrow x1={300} y1={290} x2={185} y2={330} color={C.red} />
+      <Arrow x1={380} y1={290} x2={505} y2={330} color={C.red} />
+
+      {/* Left outcome: sleepiness */}
+      <Box x={45} y={332} w={280} h={58} fill={C.amberBg} stroke={C.amber}>
+        <Label x={185} y={352} text="血糖スパイク → インスリン過剰" weight={500} fill={C.amber} />
+        <Label x={185} y={372} text="反応性の血糖低下・オレキシン系の抑制" size={10.5} fill={C.muted} />
+      </Box>
+      <Arrow x1={185} y1={390} x2={185} y2={424} color={C.amber} />
+      <Box x={105} y={426} w={160} h={40} fill={C.amberBg} stroke={C.amber}>
+        <Label x={185} y={446} text="食後の強い眠気" weight={500} fill={C.amber} size={13} />
+      </Box>
+
+      {/* Right outcome: weight gain */}
+      <Box x={355} y={332} w={280} h={58} fill={C.grayBg} stroke={C.gray}>
+        <Label x={495} y={352} text="夜はエネルギー消費 ↓・脂質合成 ↑" weight={500} fill={C.gray} />
+        <Label x={495} y={372} text="余った糖・脂質が蓄積に回りやすい" size={10.5} fill={C.muted} />
+      </Box>
+      <Arrow x1={495} y1={390} x2={495} y2={424} color={C.gray} />
+      <Box x={415} y={426} w={160} h={40} fill={C.grayBg} stroke={C.gray}>
+        <Label x={495} y={446} text="体重増加・脂肪蓄積" weight={500} fill={C.gray} size={13} />
+      </Box>
+    </svg>
+  )
+}
+
 // ─── Main component ───
 const VARIANTS: Record<string, () => React.ReactElement> = {
   'sleep-vs-recovery': SleepVsRecoveryDiagram,
   'three-pathways': ThreePathwayDiagram,
   'cascade': CascadeDiagram,
   'sensor-distance': SensorDistanceDiagram,
+  'glucose-circadian': GlucoseCircadianDiagram,
 }
 
 export function ArticleDiagram({ variant, caption }: { variant: string; caption?: string }) {
