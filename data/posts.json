@@ -351,7 +351,7 @@
     ],
     "zone": "money",
     "category": "fire",
-    "published": true
+    "published": false
   },
   {
     "slug": "gut-microbiome-and-night-shift",
@@ -735,7 +735,7 @@
     ],
     "zone": "money",
     "category": "life-design",
-    "published": true
+    "published": false
   },
   {
     "slug": "night-eating-glucose-circadian",
@@ -1522,7 +1522,7 @@
     ],
     "zone": "money",
     "category": "fire",
-    "published": true
+    "published": false
   },
   {
     "slug": "reserve-frame-night-shift",

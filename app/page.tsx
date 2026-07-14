@@ -15,28 +15,28 @@ export default function Home() {
         <section className="mt-14 md:mt-24 grid grid-cols-[1fr_40px] md:grid-cols-[1fr_50px] gap-3 items-start">
           <h1 className="font-serif text-[44px] md:text-[64px] lg:text-[80px] leading-[1.05] font-normal tracking-tight m-0">
             Night-shift<br />
-            <span className="italic">physician,</span><br />
-            investor &amp;<br />
-            optimiser.
+            <span className="italic">physician</span> &amp;<br />
+            occupational-health<br />
+            researcher.
           </h1>
           <div
             className="font-mincho text-[13px] md:text-base text-mist pt-2 h-fit"
             style={{ writingMode: 'vertical-rl', letterSpacing: '0.5em' }}
           >
-            夜勤医師
+            夜勤を科学する
           </div>
         </section>
 
         {/* Subhead + role */}
         <div className="mt-9 md:mt-12 grid md:grid-cols-[1.5fr_1fr] gap-7 items-start">
           <p className="font-mincho text-[15px] md:text-base leading-[1.9] text-sumi-soft m-0">
-            身体、資本、そして時間を、<br />
-            不確実性のなかで最適化していく — 一医師の実験的記録。
+            夜勤という働き方を、身体と時間の両面から、<br />
+            科学と実測で最適化していく — 一医師の実験的記録。
           </p>
           <div className="font-mono text-[11px] text-mist leading-[1.95]">
             <div className="mb-1 text-sumi">role —</div>
             <div>physician</div>
-            <div>investor</div>
+            <div>researcher</div>
             <div>operator</div>
           </div>
         </div>
@@ -142,22 +142,24 @@ const baseWorks = [
   },
   {
     num: '02',
-    title: '夜勤の身体データ、定点観測',
+    title: '夜勤の身体データ、定点観測（n=1 実証）',
     category: 'data',
     year: '2025',
     href: '/health/dashboard',
   },
-  {
-    num: '03',
-    title: '投資判断の構造化、思考ログ',
-    category: 'journal',
-    year: '2025',
-    href: '/money',
-  },
 ]
 
+// 産業医サービス（秋公開予定）のティザー枠。
+const sangyoiWork = {
+  num: '03',
+  title: '産業医サービス — 交代勤務者の健康を分かる産業医',
+  category: 'service',
+  year: '2026 autumn',
+  href: '/sangyoi',
+}
+
 // 小説枠を 2番目に差し込み、番号を振り直す。
-const selectedWorks = [baseWorks[0], storyWork, baseWorks[1], baseWorks[2]]
+const selectedWorks = [baseWorks[0], storyWork, baseWorks[1], sangyoiWork]
   .map((w, i) => ({ ...w, num: String(i + 1).padStart(2, '0') }))
 
 const instruments = [
