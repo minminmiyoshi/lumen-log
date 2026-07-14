@@ -100,7 +100,7 @@ export default function About() {
             { label: "身体データ解析", desc: "Garmin×当直パフォーマンスの継続記録。" },
             { label: "セルフ最適化", desc: "睡眠・心拍・体組成を観測し、改善につなげる。" },
             { label: "救急医療", desc: "現場の判断思考。医師目線の一次情報。" },
-            { label: "資産形成", desc: "夜勤からの自由度を上げるための運用記録。" },
+            { label: "産業保健", desc: "交代勤務者の健康を、産業医の視点で支える。" },
             { label: "ツール自作", desc: "AIで作る自分専用の可視化・分析ツール群。" },
           ].map(({ label, desc }) => (
             <div key={label} style={{
