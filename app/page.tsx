@@ -166,6 +166,6 @@ const selectedWorks = [baseWorks[0], storyWork, baseWorks[1], sangyoiWork]
 
 const instruments = [
   { id: 'app · 01', title: 'Cozy Cal', subtitle: '夜勤シフトカレンダー（体験デモ）', href: '/tools/cozy-cal-demo' },
-  { id: 'app · 02', title: 'NOCT', subtitle: '夜勤 × 健康ダッシュボード', href: '/tools' },
+  { id: 'app · 02', title: 'NOCT', subtitle: '夜勤 × 健康ダッシュボード（体験デモ）', href: '/tools/noct-demo' },
   { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージをスコア化', href: '/health/tools/shift-damage-score' },
 ]

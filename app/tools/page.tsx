@@ -31,8 +31,9 @@ const apps: App[] = [
     id: "app · 02",
     name: "NOCT",
     tag: "夜勤 × 健康ダッシュボード",
-    desc: "睡眠・自律神経・回復を夜勤サイクルに重ねて可視化。このサイトの n=1 実証データを支えるエンジン。",
+    desc: "睡眠・自律神経・回復を夜勤サイクルに重ねて可視化し、AI解析レポートまで。このサイトの n=1 実証データを支えるエンジン。",
     appUrl: "https://noct.lumen-log.com",
+    demoHref: "/tools/noct-demo",
   },
   {
     id: "app · 03",
