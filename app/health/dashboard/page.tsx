@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from "react";
 import analysisDataRaw from "@/data/analysis.json";
+import conditionRaw from "@/data/condition.json";
 
 type AnalysisEntry = { generated_at?: string; period?: string; public?: string };
 const analysisData: AnalysisEntry[] = Array.isArray(analysisDataRaw)
@@ -111,6 +112,147 @@ const accentGreen = "#4fbc86";
 const accentRed = "#f74f4f";
 const accentOrange = "#f7a74f";
 const accentPurple = "#bc4fbc";
+
+// ── 「今の私」Current condition サマリー ──────────────────────
+type CondStat = { value: number | null; unit?: string; label: string; sub?: string;
+  delta_2w?: number | null; dev_pct?: number | null; trend_pct?: number | null;
+  recent?: number | null; unrecovered?: number };
+type CondBand = { key: string; title: string; en: string; level: number; label: string;
+  note: string; readings: { k: string; v: string }[] };
+type Condition = {
+  generated?: string;
+  overall: { line: string; alert_level: string; alert_text: string; alert_note: string | null };
+  stats: { resting_hr: CondStat; hrv: CondStat; vo2max: CondStat; recovery: CondStat };
+  bands: CondBand[];
+  ai_insight: string | null;
+  ai_date: string | null;
+};
+const condition = conditionRaw as unknown as Condition;
+
+const alertColor = (lv: string) =>
+  lv === "ok" ? accentGreen : lv === "tired" ? "#8fbf4f" : lv === "warn" ? accentOrange : accentRed;
+const bandColor = (lv: number) =>
+  lv <= 0 ? accentGreen : lv === 1 ? "#8fbf4f" : lv === 2 ? accentOrange : accentRed;
+
+function BandRow({ b }: { b: CondBand }) {
+  const c = bandColor(b.level);
+  return (
+    <div style={{ padding: "16px 0", borderBottom: border }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "8px" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
+          <span style={{ fontFamily: "Palatino, serif", fontSize: "1rem" }}>{b.title}</span>
+          <span style={{ fontSize: "0.62rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em", textTransform: "uppercase" }}>{b.en}</span>
+        </div>
+        <span style={{ fontSize: "0.85rem", fontFamily: "sans-serif", color: c, fontWeight: 600 }}>{b.label}</span>
+      </div>
+      {/* 良好→要注意 の4段階インジケータ（該当位置を点灯） */}
+      <div style={{ display: "flex", gap: "5px", marginBottom: "10px" }}>
+        {[0, 1, 2, 3].map(i => (
+          <span key={i} style={{
+            flex: 1, height: "4px", borderRadius: "2px",
+            backgroundColor: i === b.level ? c : "#E4E0DA",
+          }} />
+        ))}
+      </div>
+      <p style={{ fontSize: "0.75rem", fontFamily: "sans-serif", color: muted, marginBottom: "8px" }}>{b.note}</p>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 18px" }}>
+        {b.readings.map(r => (
+          <span key={r.k} style={{ fontSize: "0.7rem", fontFamily: "sans-serif", color: muted }}>
+            {r.k} <span style={{ color: "#1a1a1a", fontFamily: "Palatino, serif" }}>{r.v}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CondStatTile({ s }: { s: CondStat }) {
+  // 増減の色: RHR/dev/trend はマイナスが良い/悪いを個別解釈せず、単純に符号で色付け
+  const chips: { text: string; color: string }[] = [];
+  if (s.delta_2w != null) chips.push({ text: `2週 ${s.delta_2w > 0 ? "+" : ""}${s.delta_2w}`, color: s.delta_2w > 0 ? accentRed : accentGreen });
+  if (s.dev_pct != null) chips.push({ text: `${s.dev_pct > 0 ? "+" : ""}${s.dev_pct}%`, color: s.dev_pct >= -8 ? accentGreen : s.dev_pct <= -20 ? accentRed : accentOrange });
+  if (s.trend_pct != null) chips.push({ text: `${s.trend_pct > 0 ? "+" : ""}${s.trend_pct}%`, color: s.trend_pct >= 0 ? accentGreen : accentOrange });
+  if (s.recent != null) chips.push({ text: `直近 ${s.recent}`, color: muted });
+  return (
+    <div style={{ padding: "16px", backgroundColor: cardBg, borderRadius: "8px" }}>
+      <p style={{ fontSize: "0.65rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.08em", marginBottom: "6px" }}>{s.label}</p>
+      <p style={{ fontFamily: "Palatino, serif", fontSize: "1.5rem", marginBottom: "2px", lineHeight: 1.1 }}>
+        {s.value != null ? s.value : "—"}
+        {s.unit && <span style={{ fontSize: "0.72rem", fontFamily: "sans-serif", color: muted, marginLeft: "3px" }}>{s.unit}</span>}
+      </p>
+      {s.sub && <p style={{ fontSize: "0.62rem", fontFamily: "sans-serif", color: muted, marginBottom: "6px" }}>{s.sub}</p>}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px 10px" }}>
+        {chips.map((c, i) => (
+          <span key={i} style={{ fontSize: "0.68rem", fontFamily: "sans-serif", color: c.color }}>{c.text}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CurrentCondition() {
+  const c = condition;
+  if (!c || !c.overall) return null;
+  const ac = alertColor(c.overall.alert_level);
+  return (
+    <section style={{ marginBottom: "48px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
+        <h2 style={{ fontSize: "0.7rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.15em" }}>
+          今の私 · CURRENT CONDITION
+        </h2>
+        <span style={{ fontSize: "0.62rem", fontFamily: "monospace", color: muted }}>
+          {(c.generated ?? "").slice(0, 10)}
+        </span>
+      </div>
+
+      {/* 総評の静かな1行 */}
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "24px" }}>
+        <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: ac, marginTop: "8px", flexShrink: 0 }} />
+        <div>
+          <p style={{ fontFamily: "Palatino, serif", fontSize: "1.15rem", lineHeight: 1.6 }}>{c.overall.line}</p>
+          <p style={{ fontSize: "0.72rem", fontFamily: "sans-serif", color: muted, marginTop: "4px" }}>
+            <span style={{ color: ac, fontWeight: 600 }}>{c.overall.alert_text}</span>
+            {c.overall.alert_note && <span> · {c.overall.alert_note}</span>}
+          </p>
+        </div>
+      </div>
+
+      {/* 主役の数値 */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "28px" }}>
+        <CondStatTile s={c.stats.resting_hr} />
+        <CondStatTile s={c.stats.hrv} />
+        <CondStatTile s={c.stats.vo2max} />
+        <CondStatTile s={c.stats.recovery} />
+      </div>
+
+      {/* NOCTの評価バンド（自律神経・概日リズム・回復力） */}
+      <div style={{ marginBottom: "20px" }}>
+        <p style={{ fontSize: "0.66rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.1em", marginBottom: "4px" }}>
+          自律神経・概日リズムの評価
+        </p>
+        {c.bands.map(b => <BandRow key={b.key} b={b} />)}
+      </div>
+
+      {/* AIインサイトの一言 */}
+      {c.ai_insight && (
+        <div style={{ backgroundColor: cardBg, borderRadius: "8px", padding: "18px 20px", marginBottom: "16px" }}>
+          <p style={{ fontSize: "0.64rem", fontFamily: "monospace", color: accent, letterSpacing: "0.1em", marginBottom: "8px" }}>
+            AI INSIGHT{c.ai_date ? ` · ${c.ai_date.slice(0, 10)}` : ""}
+          </p>
+          <p style={{ fontSize: "0.86rem", fontFamily: "sans-serif", lineHeight: 1.8 }}>{c.ai_insight}</p>
+        </div>
+      )}
+
+      {/* NOCT 導線 */}
+      <Link href="/tools/noct-demo" style={{
+        display: "inline-flex", alignItems: "center", gap: "6px",
+        fontSize: "0.75rem", fontFamily: "sans-serif", color: accent,
+      }}>
+        自律神経・概日リズムを NOCT で詳しく見る →
+      </Link>
+    </section>
+  );
+}
 
 function StatCard({ label, value, unit, sub }: {
   label: string; value: string; unit?: string; sub?: string;
@@ -296,12 +438,7 @@ export default function HealthPage() {
   const garmin = data?.garmin ?? [];
   const scale = data?.scale ?? [];
   const recent7 = garmin.slice(-7);
-  const latest = garmin[garmin.length - 1];
   const latestScale = scale[scale.length - 1];
-  const avgSleep = recent7.reduce((s, r) => s + val(r.sleep_duration_h), 0) / (recent7.length || 1);
-  const avgStress = recent7.reduce((s, r) => s + val(r.stress_avg), 0) / (recent7.length || 1);
-  const avgHRV = recent7.filter(r => val(r.hrv_weekly_avg) > 0).reduce((s, r) => s + val(r.hrv_weekly_avg), 0) /
-    (recent7.filter(r => val(r.hrv_weekly_avg) > 0).length || 1);
 
   const entries = (oncall?.entries ?? []).slice().sort((a, b) => a.date.localeCompare(b.date));
   const summary = oncall?.summary;
@@ -325,6 +462,9 @@ export default function HealthPage() {
         Garmin × AI Scale × 夜勤ログの統合記録
       </p>
 
+      {/* 今の私 — NOCTの評価から抜粋したサマリー */}
+      <CurrentCondition />
+
       {/* タブ切り替え */}
       <div style={{ display: "flex", borderBottom: "1px solid #E8E4DF", marginBottom: "40px" }}>
         <button style={tabStyle(tab === "health")} onClick={() => setTab("health")}>DAILY HEALTH</button>
@@ -335,22 +475,6 @@ export default function HealthPage() {
       {/* ── DAILY HEALTH タブ ── */}
       {tab === "health" && (
         <>
-          <section style={{ marginBottom: "48px" }}>
-            <h2 style={{ fontSize: "0.7rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.1em", marginBottom: "16px" }}>
-              OVERVIEW · 直近7日平均
-            </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-              <StatCard label="SLEEP" value={avgSleep.toFixed(1)} unit="h"
-                sub={`深睡眠 ${(recent7.reduce((s,r)=>s+val(r.deep_sleep_h),0)/recent7.length).toFixed(1)}h avg`} />
-              <StatCard label="STRESS" value={avgStress.toFixed(0)}
-                sub={latest ? `昨日 ${val(latest.stress_avg).toFixed(0)}` : ""} />
-              <StatCard label="HRV (weekly avg)" value={avgHRV > 0 ? avgHRV.toFixed(0) : "—"} unit="ms"
-                sub={latest?.hrv_status ?? ""} />
-              <StatCard label="RESTING HR" value={latest ? val(latest.resting_hr).toFixed(0) : "—"} unit="bpm" />
-            </div>
-          </section>
-
-
           <section style={{ marginBottom: "48px" }}>
             <h2 style={{ fontSize: "0.7rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.1em", marginBottom: "24px" }}>
               TRENDS · 直近30日

@@ -1,0 +1,106 @@
+{
+  "generated": "2026-07-14 03:49 UTC",
+  "overall": {
+    "line": "夜勤の波を受けつつ、自律神経とリズムは保てている。回復は速い。",
+    "alert_level": "tired",
+    "alert_text": "軽い疲労",
+    "alert_note": "直近7日で睡眠負債 17.1h 蓄積中"
+  },
+  "stats": {
+    "resting_hr": {
+      "value": 57,
+      "delta_2w": 1.7,
+      "unit": "bpm",
+      "label": "安静時心拍",
+      "sub": "7日平均"
+    },
+    "hrv": {
+      "value": 27,
+      "dev_pct": -5.1,
+      "unit": "ms",
+      "label": "HRV",
+      "sub": "7日平均・ベースライン比"
+    },
+    "vo2max": {
+      "value": 45.7,
+      "trend_pct": -2.0,
+      "unit": "",
+      "label": "VO2max",
+      "sub": "持久力"
+    },
+    "recovery": {
+      "value": 1.0,
+      "recent": 1.25,
+      "unrecovered": 1,
+      "unit": "日",
+      "label": "夜勤回復",
+      "sub": "中央値"
+    }
+  },
+  "bands": [
+    {
+      "key": "ans",
+      "title": "自律神経",
+      "en": "Autonomic",
+      "level": 0,
+      "label": "整っている",
+      "note": "副交感神経の切替は良好",
+      "readings": [
+        {
+          "k": "HRVベースライン乖離",
+          "v": "-5.1%"
+        },
+        {
+          "k": "入眠時HR低下",
+          "v": "-2.1 bpm/h"
+        },
+        {
+          "k": "夜間HR dip率",
+          "v": "30%"
+        }
+      ]
+    },
+    {
+      "key": "circadian",
+      "title": "概日リズム",
+      "en": "Circadian",
+      "level": 0,
+      "label": "安定",
+      "note": "睡眠位相のばらつきが小さい",
+      "readings": [
+        {
+          "k": "概日振幅トレンド",
+          "v": "上昇"
+        },
+        {
+          "k": "睡眠位相の不安定性",
+          "v": "0.74 h"
+        }
+      ]
+    },
+    {
+      "key": "recovery",
+      "title": "回復力",
+      "en": "Recovery",
+      "level": 0,
+      "label": "速い",
+      "note": "夜勤の負荷を1日前後で解消",
+      "readings": [
+        {
+          "k": "回復日数(中央値)",
+          "v": "1.0 日"
+        },
+        {
+          "k": "直近4回の平均",
+          "v": "1.25 日"
+        },
+        {
+          "k": "未回復(3日超)",
+          "v": "1 回"
+        }
+      ]
+    }
+  ],
+  "ai_insight": "最も強い相関が見られたのは「深夜帯の連続仮眠時間」とHRV回復の関係で、250分以上の中断なし仮眠ではHRVが平均+9%改善する一方、深夜に業務中断が入ると総仮眠時間が長くてもHRVは低下した。",
+  "ai_date": "2026-06-27 05:03"
+}
