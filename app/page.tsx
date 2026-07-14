@@ -81,7 +81,9 @@ export default function Home() {
             <h2 className="font-serif text-2xl font-normal m-0">
               Instruments <span className="font-mincho text-sm text-mist ml-2">— 道具</span>
             </h2>
-            <span className="font-mono text-[11px] text-mist">soon</span>
+            <Link href="/tools" className="font-mono text-[11px] text-mist hover:text-bengara transition-colors">
+              all —
+            </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4 mt-5">
@@ -163,7 +165,7 @@ const selectedWorks = [baseWorks[0], storyWork, baseWorks[1], sangyoiWork]
   .map((w, i) => ({ ...w, num: String(i + 1).padStart(2, '0') }))
 
 const instruments = [
-  { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージ累積', href: '/health/tools/shift-damage-score' },
-  { id: 'inst · 02', title: 'Shift cost calculator', subtitle: '機会費用試算', href: null },
-  { id: 'inst · 03', title: 'Routine diagnostic', subtitle: '退勤後リカバリー', href: null },
+  { id: 'app · 01', title: 'Cozy Cal', subtitle: '夜勤を塗るだけのカレンダー（体験デモ）', href: '/tools/cozy-cal-demo' },
+  { id: 'app · 02', title: 'NOCT', subtitle: '夜勤 × 健康ダッシュボード', href: '/tools' },
+  { id: 'inst · 01', title: 'Shift damage scorer', subtitle: '夜勤ダメージをスコア化', href: '/health/tools/shift-damage-score' },
 ]

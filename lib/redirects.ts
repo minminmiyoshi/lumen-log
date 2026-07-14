@@ -11,8 +11,7 @@ export const legacyRedirects = [
   { source: '/blog/passion-conditions-fire-purpose', destination: '/', permanent: true },
   // 旧一覧
   { source: '/blog', destination: '/health', permanent: true },
-  // 旧ツール
-  { source: '/tools', destination: '/health', permanent: true },
+  // 旧ツール（/tools 自体は道具ハブとして復活。サブパスの旧301は温存）
   { source: '/tools/health', destination: '/health/dashboard', permanent: true },
   { source: '/tools/oncall', destination: '/health/oncall', permanent: true },
   { source: '/tools/portfolio', destination: '/money/portfolio', permanent: true },
