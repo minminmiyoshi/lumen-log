@@ -27,8 +27,9 @@ type CondStat = { value: number | null; unit?: string; label: string; sub?: stri
   recent?: number | null; unrecovered?: number };
 type CondBand = { key: string; title: string; en: string; level: number; label: string;
   note: string; readings: { k: string; v: string }[] };
-type CondSeries = { title: string; en: string; label: string; unit: string;
-  zero: boolean; points: { x: string; y: number | null }[] };
+type CondChart = { t: string; unit: string; zero: boolean; ref?: number; ref_label?: string;
+  what: string; how: string; points: { x: string; y: number | null }[] };
+type CondPanel = { title: string; en: string; level: number; label: string; desc: string; charts: CondChart[] };
 type Condition = {
   generated?: string;
   overall: { line: string; alert_level: string; alert_text: string; alert_note: string | null };
@@ -36,20 +37,22 @@ type Condition = {
   bands: CondBand[];
   ai_insight: string | null;
   ai_date: string | null;
-  series: { ans: CondSeries; circadian: CondSeries };
+  panels: { ans: CondPanel; circadian: CondPanel };
 };
 const condition = conditionRaw as unknown as Condition;
 
-// ── NOCT風の推移グラフ（SVG折れ線・面塗り・侘び寂び） ──────────
-function TrendChart({ s, color }: { s: CondSeries; color: string }) {
-  const valid = s.points.filter(p => p.y !== null) as { x: string; y: number }[];
+// ── NOCT風の推移グラフ（SVG折れ線・面塗り・しきい値線・侘び寂び） ──────────
+let chartUid = 0;
+function TrendChart({ ch, color }: { ch: CondChart; color: string }) {
+  const valid = ch.points.filter(p => p.y !== null) as { x: string; y: number }[];
   if (valid.length < 2) {
     return <p style={{ fontSize: "0.75rem", fontFamily: "sans-serif", color: muted }}>データ蓄積中…</p>;
   }
-  const W = 640, H = 150, PAD_L = 36, PAD_R = 10, PAD_T = 12, PAD_B = 20;
+  const W = 640, H = 150, PAD_L = 34, PAD_R = 10, PAD_T = 12, PAD_B = 20;
   const ys = valid.map(p => p.y);
   let minY = Math.min(...ys), maxY = Math.max(...ys);
-  if (s.zero) { minY = Math.min(minY, 0); maxY = Math.max(maxY, 0); }
+  if (ch.zero) { minY = Math.min(minY, 0); maxY = Math.max(maxY, 0); }
+  if (ch.ref != null) { minY = Math.min(minY, ch.ref); maxY = Math.max(maxY, ch.ref); }
   const pad = (maxY - minY) * 0.12 || 1;
   minY -= pad; maxY += pad;
   const rangeY = maxY - minY || 1;
@@ -59,32 +62,70 @@ function TrendChart({ s, color }: { s: CondSeries; color: string }) {
   const areaPts = `${PAD_L},${(H - PAD_B).toFixed(1)} ${linePts} ${(W - PAD_R).toFixed(1)},${(H - PAD_B).toFixed(1)}`;
   const ticks = [maxY, (minY + maxY) / 2, minY];
   const last = valid[valid.length - 1];
-  const gid = `g-${s.en.replace(/\s/g, "")}`;
+  const gid = `g${chartUid++}`;
+  const fmtTick = (t: number) => (Math.abs(t) >= 10 ? Math.round(t).toString() : t.toFixed(1));
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", height: "auto" }} role="img" aria-label={s.label}>
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", height: "auto" }} role="img" aria-label={ch.t}>
       <defs>
         <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.16" />
           <stop offset="100%" stopColor={color} stopOpacity="0" />
         </linearGradient>
       </defs>
-      {/* 目盛り */}
       {ticks.map((t, i) => (
         <g key={i}>
-          <line x1={PAD_L} y1={toY(t)} x2={W - PAD_R} y2={toY(t)} stroke={line} strokeWidth="1"
-            strokeDasharray={s.zero && Math.abs(t) < 1e-6 ? undefined : "2,4"} />
-          <text x={PAD_L - 6} y={toY(t) + 3} textAnchor="end" fontSize="9" fill={muted} fontFamily="monospace">
-            {Math.abs(t) >= 10 ? Math.round(t) : t.toFixed(1)}
-          </text>
+          <line x1={PAD_L} y1={toY(t)} x2={W - PAD_R} y2={toY(t)} stroke={line} strokeWidth="1" strokeDasharray="2,4" />
+          <text x={PAD_L - 5} y={toY(t) + 3} textAnchor="end" fontSize="9" fill={muted} fontFamily="monospace">{fmtTick(t)}</text>
         </g>
       ))}
+      {/* しきい値線（NOCTの基準線） */}
+      {ch.ref != null && (
+        <g>
+          <line x1={PAD_L} y1={toY(ch.ref)} x2={W - PAD_R} y2={toY(ch.ref)} stroke={clay} strokeWidth="1" strokeDasharray="5,3" opacity="0.8" />
+          {ch.ref_label && (
+            <text x={W - PAD_R} y={toY(ch.ref) - 4} textAnchor="end" fontSize="8.5" fill={clay} fontFamily="monospace">{ch.ref_label}</text>
+          )}
+        </g>
+      )}
       <polygon points={areaPts} fill={`url(#${gid})`} />
       <polyline points={linePts} fill="none" stroke={color} strokeWidth="1.6" strokeLinejoin="round" strokeLinecap="round" />
       <circle cx={toX(valid.length - 1)} cy={toY(last.y)} r="3" fill={color} />
-      {/* x端ラベル */}
       <text x={PAD_L} y={H - 6} textAnchor="start" fontSize="9" fill={muted} fontFamily="monospace">{valid[0].x}</text>
       <text x={W - PAD_R} y={H - 6} textAnchor="end" fontSize="9" fill={muted} fontFamily="monospace">{last.x}</text>
     </svg>
+  );
+}
+
+// ── パネル（自律神経／概日リズム）: バンド見出し＋複数グラフ＋各意図 ──────────
+function MetricPanel({ p, color }: { p: CondPanel; color: string }) {
+  const c = bandColor(p.level);
+  return (
+    <section style={{ marginBottom: "44px" }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "4px" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
+          <h2 style={{ fontFamily: "Palatino, serif", fontSize: "1.15rem" }}>{p.title}</h2>
+          <span style={{ fontSize: "0.62rem", fontFamily: "monospace", color: muted, letterSpacing: "0.12em", textTransform: "uppercase" }}>{p.en}</span>
+        </div>
+        <span style={{ fontSize: "0.85rem", fontFamily: "sans-serif", color: c, fontWeight: 600 }}>{p.label}</span>
+      </div>
+      <p style={{ fontSize: "0.74rem", fontFamily: "sans-serif", color: muted, lineHeight: 1.7, marginBottom: "22px", paddingBottom: "14px", borderBottom: border }}>
+        {p.desc}
+      </p>
+      {p.charts.map((ch, i) => (
+        <div key={ch.t} style={{ marginBottom: i < p.charts.length - 1 ? "30px" : 0 }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "3px" }}>
+            <span style={{ fontFamily: "Palatino, serif", fontSize: "0.95rem" }}>{ch.t}</span>
+            {ch.unit && <span style={{ fontSize: "0.62rem", fontFamily: "monospace", color: muted }}>{ch.unit}</span>}
+          </div>
+          {/* NOCT風の「意図」: 何を見ているか / どう読むか */}
+          <p style={{ fontSize: "0.72rem", fontFamily: "sans-serif", color: muted, lineHeight: 1.7, marginBottom: "10px" }}>
+            {ch.what}<br />
+            <span style={{ color: ink, opacity: 0.75 }}>見方 — {ch.how}</span>
+          </p>
+          <TrendChart ch={ch} color={color} />
+        </div>
+      ))}
+    </section>
   );
 }
 
@@ -179,34 +220,14 @@ export default function HealthDashboardPage() {
         {c.bands.map(b => <BandRow key={b.key} b={b} />)}
       </section>
 
-      {/* 自律神経・概日リズムの推移グラフ（NOCTの表示を移植） */}
-      <section style={{ marginBottom: "44px" }}>
-        <h2 style={{ fontSize: "0.68rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.15em", marginBottom: "20px" }}>
-          TREND · 推移（直近70日）
+      {/* 自律神経・概日リズムの推移グラフ（NOCTのパネルを移植・各グラフに意図つき） */}
+      <div style={{ marginBottom: "8px" }}>
+        <h2 style={{ fontSize: "0.68rem", fontFamily: "sans-serif", color: muted, letterSpacing: "0.15em", marginBottom: "24px" }}>
+          TREND · 推移（直近70日・7日移動平均）
         </h2>
-
-        <div style={{ marginBottom: "36px" }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "2px" }}>
-            <span style={{ fontFamily: "Palatino, serif", fontSize: "1rem" }}>{c.series.ans.title}</span>
-            <span style={{ fontSize: "0.62rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em", textTransform: "uppercase" }}>{c.series.ans.en}</span>
-          </div>
-          <p style={{ fontSize: "0.7rem", fontFamily: "sans-serif", color: muted, marginBottom: "8px" }}>
-            {c.series.ans.label} — 0 付近が平常、下振れは副交感神経の戻りの鈍さ
-          </p>
-          <TrendChart s={c.series.ans} color={aiBlue} />
-        </div>
-
-        <div>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "8px", marginBottom: "2px" }}>
-            <span style={{ fontFamily: "Palatino, serif", fontSize: "1rem" }}>{c.series.circadian.title}</span>
-            <span style={{ fontSize: "0.62rem", fontFamily: "monospace", color: muted, letterSpacing: "0.1em", textTransform: "uppercase" }}>{c.series.circadian.en}</span>
-          </div>
-          <p style={{ fontSize: "0.7rem", fontFamily: "sans-serif", color: muted, marginBottom: "8px" }}>
-            {c.series.circadian.label} — 高いほど昼夜のメリハリ（リズム）が保たれている
-          </p>
-          <TrendChart s={c.series.circadian} color={bengara} />
-        </div>
-      </section>
+        <MetricPanel p={c.panels.ans} color={aiBlue} />
+        <MetricPanel p={c.panels.circadian} color={bengara} />
+      </div>
 
       {/* AIインサイトの一言 */}
       {c.ai_insight && (
