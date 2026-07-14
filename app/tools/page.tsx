@@ -23,7 +23,7 @@ const apps: App[] = [
     id: "app · 01",
     name: "Cozy Cal",
     tag: "夜勤シフトカレンダー",
-    desc: "夜勤を“塗るだけ”で家の段取りが自動で立ち上がる、シフト勤務者のためのカレンダー。夜勤が一級市民。",
+    desc: "夜勤を入り→明けの帯で一目に。プリセットで複数日まとめて登録、Googleカレンダー双方向連携、持ち主色で夫婦の予定を分担。",
     appUrl: "https://cal.lumen-log.com",
     demoHref: "/tools/cozy-cal-demo",
   },
