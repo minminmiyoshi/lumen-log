@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 const links = [
+  { href: "/sangyoi", key: "sangyoi" },
   { href: "/health", key: "health" },
   { href: "/about", key: "about" },
 ];

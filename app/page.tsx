@@ -30,8 +30,9 @@ export default function Home() {
         {/* Subhead + role */}
         <div className="mt-9 md:mt-12 grid md:grid-cols-[1.5fr_1fr] gap-7 items-start">
           <p className="font-mincho text-[15px] md:text-base leading-[1.9] text-sumi-soft m-0">
-            夜勤という働き方を、身体と時間の両面から、<br />
-            科学と実測で最適化していく — 一医師の実験的記録。
+            交代勤務者の健康を、当事者の視点と実測で支える。<br />
+            夜勤を続ける救急医が、身体と時間の両面から<br />
+            科学と実測で最適化していく記録。
           </p>
           <div className="font-mono text-[11px] text-mist leading-[1.95]">
             <div className="mb-1 text-sumi">role —</div>
@@ -160,8 +161,9 @@ const sangyoiWork = {
   href: '/sangyoi',
 }
 
-// 小説枠を 2番目に差し込み、番号を振り直す。
-const selectedWorks = [baseWorks[0], storyWork, baseWorks[1], sangyoiWork]
+// 並び順は「企業担当者・社労士が最初に見るもの」を優先する。
+// 産業医サービス → 発信 → データ → 小説。番号は並び順から振り直す。
+const selectedWorks = [sangyoiWork, baseWorks[0], baseWorks[1], storyWork]
   .map((w, i) => ({ ...w, num: String(i + 1).padStart(2, '0') }))
 
 const instruments = [

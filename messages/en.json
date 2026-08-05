@@ -4,6 +4,7 @@
     "siteDescription": "An ER doctor's system for surviving night shifts — health, assets, and time optimization",
     "nav": {
       "home": "Home",
+      "sangyoi": "Occupational Health",
       "health": "Health",
       "money": "Money",
       "about": "About"
