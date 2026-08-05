@@ -36,11 +36,11 @@ const shippori = Shippori_Mincho_B1({
 export const metadata: Metadata = {
   metadataBase: new URL("https://lumen-log.com"),
   title: {
-    default: "lumen-log | 夜勤医師×投資家×セルフ最適化マニア",
+    default: "lumen-log | 夜勤を科学する — 交代勤務者の健康と産業保健",
     template: "%s | lumen-log",
   },
   description:
-    "夜勤医師が投資・資産形成・Garminデータ・FIRE戦略を一次情報として発信するサイト",
+    "交代勤務者の健康を、夜勤当事者である医師が科学と実測で支えるサイト。夜勤と睡眠・概日リズム・栄養の一次情報と、産業保健の視点から書いた記事を公開しています。",
   verification: {
     google: "ofLWHA1G4WgByzKoplxxt9k8xyAzXYO9ESRpI3IrnEA",
   },
