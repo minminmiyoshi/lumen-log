@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: "NOCT 体験デモ — 夜勤×健康ダッシュボードとAI解析",
     description: "夜勤×健康の可視化とAI解析レポートを体験（合成サンプル）。",
   },
+  alternates: { canonical: "/tools/noct-demo" },
 };
 
 export default function Page() {

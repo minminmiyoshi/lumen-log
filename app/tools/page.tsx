@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "道具 — 夜勤者のためのアプリとツール | lumen-log",
   description:
     "夜勤・交代勤務の負荷を軽くするために自作したアプリとツール。夜勤対応カレンダー Cozy Cal、健康ダッシュボード NOCT、料理アシスタント Cozy Kitchen、セルフチェックツール群。",
+  alternates: { canonical: "/tools" },
 };
 
 type App = {

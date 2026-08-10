@@ -1,4 +1,15 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
+
+// ルートlayoutのalternatesはページ側で上書きされるため、RSSも併記しておく
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+    types: {
+      'application/rss+xml': [{ url: '/feed.xml', title: 'lumen-log RSS Feed' }],
+    },
+  },
+}
 
 export default function Home() {
   return (

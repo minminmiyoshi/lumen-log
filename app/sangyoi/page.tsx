@@ -6,6 +6,7 @@ export const metadata = {
   title: "産業医サービス（2026 autumn 開始予定） | Lumen-log",
   description:
     "夜勤・交代勤務のある職場の産業保健を支援する産業医サービス。夜勤医師自身の実測データと臨床経験に基づく、交代勤務者のための健康支援。2026年秋 開始予定。",
+  alternates: { canonical: "/sangyoi" },
 };
 
 export default function SangyoiPage() {

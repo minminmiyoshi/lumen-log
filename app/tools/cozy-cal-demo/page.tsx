@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     title: "Cozy Cal 体験デモ — シフト勤務者のためのカレンダー入力",
     description: "プリセット→日をタップ→まとめて登録。夜勤は入り→明けの2日帯。",
   },
+  alternates: { canonical: "/tools/cozy-cal-demo" },
 };
 
 export default function Page() {

@@ -1,8 +1,16 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getStoriesByZone } from "@/lib/mdx";
 import { HealthTabs } from "../HealthTabs";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "物語 — 夜勤者たちの連載",
+  description:
+    "交代勤務者の睡眠と暮らしをテーマにした連載小説・ストーリーの一覧。",
+  alternates: { canonical: "/health/stories" },
+};
 
 export default function HealthStoriesPage() {
   const stories = getStoriesByZone("health");

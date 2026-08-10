@@ -23,7 +23,7 @@ export async function generateMetadata({
   const post = getPostBySlugAndZone(slug, "health");
   if (!post) return {};
 
-  const url = `https://lumen-log.com/health/${slug}`;
+  const url = `https://lumen-log.com/health/blog/${slug}`;
   return {
     title: post.title,
     description: post.description,
@@ -56,7 +56,7 @@ export default async function HealthPostPage({
   const post = getPostBySlugAndZone(slug, "health");
   if (!post) notFound();
 
-  const url = `https://lumen-log.com/health/${slug}`;
+  const url = `https://lumen-log.com/health/blog/${slug}`;
   const zonePosts = getPostsByZone("health");
 
   return (

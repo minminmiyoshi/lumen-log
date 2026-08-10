@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getStoryBySlugAndZone, getStorySlugsByZone } from "@/lib/mdx";
 import { MdxRenderer } from "@/app/components/mdx/MdxRenderer";
 import Link from "next/link";
@@ -8,6 +9,37 @@ export async function generateStaticParams() {
 }
 
 export const dynamic = "force-static";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const story = getStoryBySlugAndZone(slug, "health");
+  if (!story) return {};
+
+  const url = `https://lumen-log.com/health/stories/${slug}`;
+  return {
+    title: story.title,
+    description: story.description,
+    openGraph: {
+      title: story.title,
+      description: story.description ?? "",
+      type: "article",
+      url,
+      publishedTime: story.date,
+      tags: story.tags,
+      images: [{ url: "/og-default.png", width: 1200, height: 630, alt: story.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: story.title,
+      description: story.description,
+    },
+    alternates: { canonical: url },
+  };
+}
 
 export default async function HealthStoryPage({
   params,

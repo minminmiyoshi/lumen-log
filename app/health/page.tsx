@@ -1,8 +1,16 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getPostsByZone } from "@/lib/mdx";
 import { HealthTabs } from "./HealthTabs";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "健康 — 夜勤と睡眠・概日リズムの一次情報",
+  description:
+    "夜勤当事者である医師が、睡眠・概日リズム・栄養・自律神経のエビデンスと自身の実測データをもとに書いた記事の一覧。",
+  alternates: { canonical: "/health" },
+};
 
 export default function HealthPage() {
   const posts = getPostsByZone("health");

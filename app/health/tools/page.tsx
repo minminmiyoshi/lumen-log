@@ -1,6 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "セルフチェックツール — 夜勤負荷を測る",
+  description:
+    "夜勤・交代勤務の負荷をその場で可視化できるセルフチェックツールの一覧。",
+  alternates: { canonical: "/health/tools" },
+};
 
 const tools = [
   {

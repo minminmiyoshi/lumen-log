@@ -1,7 +1,15 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import conditionRaw from "@/data/condition.json";
 
 export const dynamic = "force-static";
+
+export const metadata: Metadata = {
+  title: "健康ダッシュボード — 夜勤医師の実測データ",
+  description:
+    "夜勤サイクルに睡眠・自律神経・体組成・回復スコアを重ねて公開している、夜勤当事者である医師自身の実測ダッシュボード。",
+  alternates: { canonical: "/health/dashboard" },
+};
 
 // ── 侘び寂びパレット ──────────────────────────────
 const ink = "#3a352e";      // 墨

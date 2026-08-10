@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     description: "個人資産・法人資産・副業収入を統合したFIREシミュレーター。",
     url: "https://lumen-log.com/money/simulator",
   },
+  alternates: { canonical: "/money/simulator" },
 };
 
 export default function SimulatorPage() {

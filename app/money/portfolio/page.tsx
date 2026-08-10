@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import publicData from "@/data/public_data.json";
 import { getUsdJpy } from "@/lib/portfolio";
 import PortfolioChart from "@/app/components/PortfolioChart";
 
 export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: "ポートフォリオ — 運用状況の公開記録",
+  description:
+    "資産構成と運用状況を定期的に公開している記録。数値は匿名化した比率ベースで掲載しています。",
+  alternates: { canonical: "/money/portfolio" },
+};
 
 function fmtJpy(v: number) {
   return new Intl.NumberFormat("ja-JP", { style: "currency", currency: "JPY", maximumFractionDigits: 0 }).format(v);

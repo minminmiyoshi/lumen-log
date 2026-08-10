@@ -23,7 +23,7 @@ export async function generateMetadata({
   const post = getPostBySlugAndZone(slug, "money");
   if (!post) return {};
 
-  const url = `https://lumen-log.com/money/${slug}`;
+  const url = `https://lumen-log.com/money/blog/${slug}`;
   return {
     title: post.title,
     description: post.description,
@@ -56,7 +56,7 @@ export default async function MoneyPostPage({
   const post = getPostBySlugAndZone(slug, "money");
   if (!post) notFound();
 
-  const url = `https://lumen-log.com/money/${slug}`;
+  const url = `https://lumen-log.com/money/blog/${slug}`;
   const zonePosts = getPostsByZone("money");
 
   return (

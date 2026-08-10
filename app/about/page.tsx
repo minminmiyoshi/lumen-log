@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About | Lumen Log",
   description: "夜勤救急医が自分の身体データを記録し、シフトワークと健康・資産・時間の関係を一次情報として残すサイトについて。",
+  alternates: { canonical: "/about" },
 };
 
 export default function About() {

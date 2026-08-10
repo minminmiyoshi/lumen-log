@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     description:
       "あなたの夜勤はどれくらい身体に負荷をかけている？ 6つの質問でスコア化。",
   },
+  alternates: { canonical: "/health/tools/shift-damage-score" },
 };
 
 export default function Page() {
