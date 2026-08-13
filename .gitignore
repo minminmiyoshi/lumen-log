@@ -58,3 +58,4 @@ app/page.tsx.bak
 # accidental empty files (debug)
 /General
 /Login
+.mulmoterminal.local.json
