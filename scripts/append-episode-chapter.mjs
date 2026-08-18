@@ -28,10 +28,37 @@ if (!mdxName || !srcName) {
   process.exit(1)
 }
 
-const SRC_DIR = path.join(
-  os.homedir(),
-  'マイドライブ/takahiro/obsidian/30_projects/サイト運営/小説/ep01_山岸詩織'
-)
+// 元テキストの置き場（2026-08-18 修正）。
+// 旧版は 'ep01_山岸詩織' 直書きだったので Episode 2 以降が通らなかった。
+// 加えて、原稿の置き場が2つある：Google Drive のミラーと mulmoclaude の vault。
+// Ep2 はまだ Drive に同期されていない（vault 側にしかない）ので、両方を順に探す。
+// note へ実際に公開しているのは vault 側（publish-lumen.mjs）なので、そこが正。
+const NOVEL_ROOTS = [
+  path.join(os.homedir(), 'マイドライブ/takahiro/obsidian/30_projects/サイト運営/小説'),
+  path.join(os.homedir(), 'mulmoclaude/data/vault/30_projects/サイト運営/小説'),
+]
+
+/** ファイル名 ep02_01_*.md の 'ep02' から、その話が入っているフォルダを探す */
+function resolveSrcDir(srcName) {
+  const m = srcName.match(/^(ep\d+)_/)
+  if (!m) return null
+  const prefix = m[1] + '_'
+  for (const root of NOVEL_ROOTS) {
+    if (!fs.existsSync(root)) continue
+    for (const d of fs.readdirSync(root).sort()) {
+      if (!d.startsWith(prefix)) continue
+      if (fs.existsSync(path.join(root, d, srcName))) return path.join(root, d)
+    }
+  }
+  return null
+}
+
+const SRC_DIR = resolveSrcDir(srcName)
+if (!SRC_DIR) {
+  console.error(`元ファイルの置き場が見つからない: ${srcName}`)
+  console.error(`探した場所:\n  ` + NOVEL_ROOTS.join('\n  '))
+  process.exit(1)
+}
 const mdxPath = path.join(process.cwd(), 'stories', mdxName)
 const srcPath = path.join(SRC_DIR, srcName)
 
